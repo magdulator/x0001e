@@ -1,14 +1,19 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const mongoose = require("mongoose");
 
 const dotenv = require("dotenv");
 dotenv.config();
 
 const app = express();
 
+//connect to database
+mongoose.connect(process.env.DB_CONNECT, {useNewUrlParser: true, useUnifiedTopology: true}, () =>
+console.log("Connected to database"));
+
 var corsOptions = {
-    origin: "http://localhost:3000"
+    origin: "http://localhost:5000"
   };
   
   app.use(cors(corsOptions));
