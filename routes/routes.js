@@ -9,4 +9,5 @@ router.get('/fibaro/getAll', (fibaro.getAll));
 
 //WIDEFIND ROUTES
 
+
  module.exports = router;
