@@ -31,9 +31,5 @@ const userSchema = new mongoose.Schema({
 })
 
 
-//handle roles
-
-
 var User = mongoose.model('User', userSchema)
-var neaw = new User({name: "hej", email: "hej@se", password: "hej", role: "user"});
 module.exports = User;

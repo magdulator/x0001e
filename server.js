@@ -32,6 +32,9 @@ var corsOptions = {
   const router = require('./routes/routes.js');
   app.use('/api', router);
 
+  const testRoute = require('./routes/test.js');
+  app.use('/test', testRoute);
+
   const authRoute = require('./routes/auth');
   app.use('/api/users', authRoute);
 
