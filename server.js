@@ -17,6 +17,7 @@ var corsOptions = {
   };
   
   app.use(cors(corsOptions));
+  app.use(express.json());
   
   // parse requests of content-type - application/json
   app.use(bodyParser.json());
@@ -29,8 +30,10 @@ var corsOptions = {
   });
   
   const router = require('./routes/routes.js');
-  app.use('/api', router)
+  app.use('/api', router);
 
+  const authRoute = require('./routes/auth');
+  app.use('/api/users', authRoute);
 
   // set port, listen for requests
   const PORT = process.env.PORT || 5000;
