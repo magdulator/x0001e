@@ -1,4 +1,3 @@
-
 const fibaro = require('../controllers/fibaro');
 var express = require('express');
 
@@ -13,6 +12,5 @@ router.get('/fibaro/nodes/:roomID', (fibaro.getRoomNodes));
 
 
 //WIDEFIND ROUTES
-
 
  module.exports = router;

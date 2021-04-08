@@ -8,7 +8,6 @@ dotenv.config();
 //Get info from a specific node
 exports.getNode = async (req,res) => {
 	var id = req.params.id;
-	console.log(process.env.FIB_URL);
     var request = require('request'),
     url = process.env.FIB_URL,
     auth = process.env.FIB_AUTH;
@@ -44,9 +43,7 @@ exports.getRoomNodes = async (req,res) => {
 	});
 }
 
-
 exports.getAll = async (req, res) => {
-    console.log(process.env.FIB_URL);
     var request = require('request'),
     url = process.env.FIB_URL,
     auth = process.env.FIB_AUTH;

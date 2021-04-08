@@ -24,12 +24,10 @@ router.post('/register', async(req, res) => {
         password: hashedPassword,
         role: req.body.role
     });
-
     try {
         const savedUser = await user.save();
-        res.send(savedUser);
-        
-    }catch(err) {
+        res.send(savedUser.username + " registered as a " + savedUser.role);
+    } catch(err) {
         res.status(400).send(err);
     }
 });
