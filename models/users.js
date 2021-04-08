@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const roles = require("mongoose-role");
 'use strict';
 const userSchema = new mongoose.Schema({
     username: {

@@ -38,6 +38,9 @@ var corsOptions = {
   const authRoute = require('./routes/auth');
   app.use('/api/users', authRoute);
 
+  const imageRoute = require('./routes/images.js');
+  app.use('/api/images', imageRoute);
+
   // set port, listen for requests
   const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => {
