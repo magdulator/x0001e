@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const users = require('../models/users')
 
 //checks if the token sent in header is a valid token
 const auth = async (req, res, next) => {
@@ -9,7 +10,6 @@ const auth = async (req, res, next) => {
     try {
         const verified = jwt.verify(token, process.env.JWT_SECRET);
         req.user = verified;
-        console.log(req.user)
         next();
     }
     catch(err) {
@@ -18,9 +18,16 @@ const auth = async (req, res, next) => {
     }
 }
 
-const isAdmin = async (req, res, next) => {
-    //hmmm måste hålla reda på vilken user
+const isAdmin = async (req,res,next) => {
+    const user = await users.findById(req.user._id);
+    if(user.role !== 'admin'){
+        res.status(401);
+        return res.send("not allowed, admin user needed");
+    }
+    next()
+    
 }
 
-module.exports.auth = auth;
-module.exports.isAdmin = isAdmin;
+module.exports = {
+    auth, isAdmin
+}

@@ -11,8 +11,10 @@ router.get('/fibaro/:id', (fibaro.getNode));
 
 router.get('/fibaro/nodes/:roomID', (fibaro.getRoomNodes));
 
+router.get('/admin',auth, isAdmin, (req, res) => {
+    res.send('admin page');
+})
 
 //WIDEFIND ROUTES
-
 
  module.exports = router;
