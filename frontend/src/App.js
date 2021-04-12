@@ -25,17 +25,19 @@ class App extends Component {
         
           <BrowserRouter>
           <div className="navbar-nav ml-auto">
+
+            {currentUser ? (
+
+              <li className="nav-item"> 
+                <a href="/login" className="nav-link" onClick={this.logOut}>
+                    Logga ut
+                </a>
+              </li> ):(
               <li className="nav-item">
                   <Link to={"/login"} className="nav-link">
-                      Login
+                      Logga in
                   </Link>
-              </li>
-             
-              <li className="nav-item">
-                  <a href="/login" className="nav-link" onClick={this.logOut}>
-                      Log Out
-                  </a>
-              </li>
+              </li>)}
           
           </div>
           <Switch>
