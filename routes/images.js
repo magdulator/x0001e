@@ -35,5 +35,7 @@ router.get('/', (req, res) => {
     })
 })
 
+router.post('/delete')
+
 
 module.exports = router;
