@@ -6,7 +6,7 @@ dotenv.config();
 //route to endpoint is defined in routes/routes.js and server.js
 
 //Get info from a specific node
-exports.getNode = async (req,res) => {
+const getNode = async (req,res) => {
 	var id = req.params.id;
     var request = require('request'),
     url = process.env.FIB_URL,
@@ -22,7 +22,7 @@ exports.getNode = async (req,res) => {
 	});
 };
 
-exports.getRoomNodes = async (req,res) => {
+const getRoomNodes = async (req,res) => {
 	var roomID = req.params.roomID;
     var request = require('request'),
     url = process.env.FIB_URL,
@@ -43,7 +43,7 @@ exports.getRoomNodes = async (req,res) => {
 	});
 }
 
-exports.getAll = async (req, res) => {
+const getAll = async (req, res) => {
     var request = require('request'),
     url = process.env.FIB_URL,
     auth = process.env.FIB_AUTH;
@@ -57,3 +57,6 @@ exports.getAll = async (req, res) => {
 		res.send(body);
 	});
 };
+module.exports = {
+    getNode, getAll, getRoomNodes
+}
