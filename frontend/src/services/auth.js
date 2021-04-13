@@ -10,13 +10,16 @@ class Auth {
     }
 
     login(email, password) {
+        
         return axios.post(apiURL + '/users/login', {
             email, password
         }).then(response => {
             if(response.data.token !== null) {
                 localStorage.setItem('currentUser', JSON.stringify(response.data))
+                console.log("hej")
+                console.log(email)
             }
-            return response.data;
+            //return response.data;
         }).catch((err) => {
             console.log(err)
         });

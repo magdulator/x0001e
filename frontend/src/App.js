@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Login from "./components/login.component";
+import LoginForm from "./components/login.component";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import auth from './services/auth';
 
@@ -20,7 +20,7 @@ class App extends Component {
       const {currentUser} = this.state;
       console.log(currentUser);
       return (
-      <div className="App">
+      <div className="container">
           <header className="App-header">
         
           <BrowserRouter>
@@ -41,7 +41,7 @@ class App extends Component {
           
           </div>
           <Switch>
-              <Route path = "/login" component={Login}/>
+              <Route path = "/login" component={LoginForm}/>
 
             </Switch>
           </BrowserRouter>

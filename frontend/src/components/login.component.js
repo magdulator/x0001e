@@ -1,68 +1,56 @@
 import React, { Component } from "react";
 import auth from '../services/auth';
-
-
-const required = value => {
-    if (!value) {
-      return (
-        <div className="alert alert-danger" role="alert">
-          This field is required!
-        </div>
-      );
-    }
-  };
+import { Formik, Field, Form, ErrorMessage, useFormik} from 'formik';
+import * as Yup from 'yup';
 
 export default class LoginForm extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: "",
-            password: ""
-        };
-        this.onChangeEmail = this.onChangeEmail.bind(this);
-        this.onChangePassword= this.onChangePassword.bind(this);
-    }
-
-    handleSubmit(e) { 
-
-        console.log(this.state.email)
-        console.log(this.state.password)
-        auth.login(this.state.email, this.state.password);
-        console.log(this.state);
-
-    }
-
-    onChangeEmail(e){
-        this.setState({
-            email: e.target.value
-        });
-    }
-    onChangePassword(e){
-        this.setState({
-            password: e.target.value
-        });
-    }
 
     render(){
     return(
-        <div className="wrapper fadeInDown">
-            <div id="formContent">
+        <Formik 
+            initialValues={{
+                email: '',
+                password: ''
+            }}
+            validationSchema ={Yup.object().shape( {
+                email: Yup.string().email('email invalid').required('Email is required'),
+                password: Yup.string().min(3, 'Password needs to be at least 6 characters').required('Password is required')
+            })}
+            onSubmit={ async values  => {
+                await auth.login(values.email, values.password)
+                window.location.reload();
+            }}
+            validator={() => ({})}>
+                { props => (
+                    <form onSubmit = {props.handleSubmit} >
 
-                <form >
-                    <input type="text" id="login" className="fadeIn second" name="login" placeholder="email"
-                    value={this.state.email}
-                    onChange={this.onChangeEmail}
-                    validations={[required]}/>
-                    <input type="text" id="password" className="fadeIn third" name="login" placeholder="password"
-                    value={this.state.password}
-                    onChange={this.onChangePassword}
-                    validations={[required]}/>
-                    <button type="button" onClick={this.handleSubmit.bind(this)} className ="btn btn-primary" > Log In</button>
+                    <div className="form-group mb-2">
+                        <label htmlFor="email" className= "col-sm-2 col-form-label">Email</label>
+                        <div className="col-sm-10">
+
+                            <input name="email" type="email" className = "form-control" value={props.values.email} onChange={props.handleChange} onBlur={props.handleBlur}  />
+                            <ErrorMessage name="email" />
+                        </div>
+                        <p>{props.values.email}</p>
+                    </div>
+                    <div className="form-group ">
+                        <label htmlFor="password" className= "col-sm-2 col-form-label" >Password</label>
+                        <div className="col-sm-10">
+
+                            <input name="password" type="password" className = "form-control" value={props.values.password} onChange={props.handleChange} onBlur={props.handleBlur}/>
+                            <ErrorMessage name="password" /> 
+                        </div>
+                    </div>                                 
+                    
+                    <input
+                        type="submit"
+                        value="Submit"
+                        disabled={props.isSubmitting}
+                        />
                 </form>
-
-            </div>    
-        </div>
-    )
-    }
+            )}
+        </Formik>
+        
+    )}
 }
