@@ -12,12 +12,9 @@ const app = express();
 mongoose.connect(process.env.DB_CONNECT, {useNewUrlParser: true, useUnifiedTopology: true}, () =>
 console.log("Connected to database"));
 
-var corsOptions = {
-    origin: "http://localhost:5000"
-  };
-  
-  app.use(cors(corsOptions));
+  app.use(cors());
   app.use(express.json());
+  app.use('/api/images',express.static('uploads'))
   
   // parse requests of content-type - application/json
   app.use(bodyParser.json());
@@ -38,7 +35,7 @@ var corsOptions = {
   const authRoute = require('./routes/auth');
   app.use('/api/users', authRoute);
 
-  const imageRoute = require('./routes/images.js');
+  const imageRoute = require('./routes/images');
   app.use('/api/images', imageRoute);
 
   // set port, listen for requests

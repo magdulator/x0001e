@@ -16,6 +16,9 @@ router.get('/admin',auth, isAdmin, (req, res) => {
     res.send('admin page');
 })
 
+router.get('/power', auth, (req,res)=> {
+    res.send('power');
+})
 //WIDEFIND ROUTES
 
  module.exports = router;
