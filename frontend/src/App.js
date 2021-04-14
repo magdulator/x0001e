@@ -4,6 +4,7 @@ import LoginForm from "./components/login.component";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import auth from './services/auth';
 import {Images} from './components/images.component';
+import RegisterForm from './components/register.component';
 
 class App extends Component {
     constructor(props) {
@@ -35,6 +36,11 @@ class App extends Component {
                 </a>
               </li> ):(
                 <div>
+                  <li className="nav-item">
+                  <Link to={"/register"} className="nav-link">
+                      regtstrer in
+                  </Link>
+              </li>
               <li className="nav-item">
                   <Link to={"/login"} className="nav-link">
                       Logga in
@@ -50,6 +56,7 @@ class App extends Component {
           </div>
           <Switch>
               <Route path = "/login" component={LoginForm}/>
+              <Route path = "/register" component={RegisterForm}/>
               <Route path = "/images" component = {Images}/>
 
             </Switch>
