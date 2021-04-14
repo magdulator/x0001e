@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import LoginForm from "./components/login.component";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import auth from './services/auth';
+import {Images} from './components/images.component';
 
 class App extends Component {
     constructor(props) {
@@ -33,15 +34,23 @@ class App extends Component {
                     Logga ut
                 </a>
               </li> ):(
+                <div>
               <li className="nav-item">
                   <Link to={"/login"} className="nav-link">
                       Logga in
                   </Link>
-              </li>)}
+              </li>
+              
+              <li className="nav-item">
+                  <Link to={"/images"} className="nav-link">
+                      Images
+                  </Link>
+              </li></div>)}
           
           </div>
           <Switch>
               <Route path = "/login" component={LoginForm}/>
+              <Route path = "/images" component = {Images}/>
 
             </Switch>
           </BrowserRouter>

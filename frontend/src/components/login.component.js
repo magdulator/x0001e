@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import auth from '../services/auth';
-import { Formik, Field, Form, ErrorMessage, useFormik} from 'formik';
+import { Formik,ErrorMessage} from 'formik';
 import * as Yup from 'yup';
 
 export default class LoginForm extends Component {
@@ -32,7 +32,6 @@ export default class LoginForm extends Component {
                             <input name="email" type="email" className = "form-control" value={props.values.email} onChange={props.handleChange} onBlur={props.handleBlur}  />
                             <ErrorMessage name="email" />
                         </div>
-                        <p>{props.values.email}</p>
                     </div>
                     <div className="form-group ">
                         <label htmlFor="password" className= "col-sm-2 col-form-label" >Password</label>
