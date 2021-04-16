@@ -17,9 +17,6 @@ exports.wide = (req, res) => {
         client.subscribe("#", mqtt_subscribe);
         console.log("connected flag  " + client.connected);
 
-        if (client.connected===true){
-            var timer_id=setInterval(function(){client.publish(topic,message,options);},5000);
-        }
     }
     
     function mqtt_subscribe(err, granted)  {
@@ -40,8 +37,8 @@ exports.wide = (req, res) => {
     }
 
     function mqtt_messageReceived(topic, message, packet) {
-	    console.log('message received: topic: ' +  topic + '  message: ' + message);
-        console.log(packet)
+        //jsonMess = JSON.parse(message)
+	    console.log('  message: ' + message);
     }
 
     function mqtt_close() {
