@@ -1,4 +1,3 @@
-
 exports.wide = (req, res) => {
     var mqtt = require('mqtt')
     var Topic = '#'; //all topics
@@ -9,8 +8,6 @@ exports.wide = (req, res) => {
     client.on('error', mqtt_error);
     client.on('message', mqtt_messageReceived);
     client.on('close', mqtt_close);
-    var message="test message";
-    var topic="test";
 
     function mqtt_connect(){
         console.log("Connecting MQTT");
@@ -37,8 +34,16 @@ exports.wide = (req, res) => {
     }
 
     function mqtt_messageReceived(topic, message, packet) {
-        //jsonMess = JSON.parse(message)
-	    console.log('  message: ' + message);
+        var buffer = Buffer.from((message));
+        var jsonMess = ""
+        jsonMess = buffer.toString();
+        if(jsonMess[0] === '{'){    //check for right format on message
+            jsonMess = JSON.parse(jsonMess)
+            if(jsonMess.message.includes('REPORT')) {
+                console.log(jsonMess.message);
+            }
+
+        }
     }
 
     function mqtt_close() {

@@ -13,7 +13,7 @@ mongoose.connect(process.env.DB_CONNECT, {useNewUrlParser: true, useUnifiedTopol
 console.log("Connected to database"));
 
   app.use(cors());
-  app.use(express.json());
+  //app.use(express.json());
   app.use('/api/images',express.static('uploads'))
   
   // parse requests of content-type - application/json
