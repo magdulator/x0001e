@@ -18,7 +18,7 @@ class Auth {
             if(response.data.token !== null) {
                 localStorage.setItem('currentUser', JSON.stringify(response.data))
                 console.log("hej")
-                console.log(email)
+                console.log(response.data)
             }
             return response.data;
         }).catch((err) => {

@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 import LoginForm from "./components/login.component";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import auth from './services/auth';
@@ -18,42 +19,48 @@ class App extends Component {
     logOut() {
       auth.logout();
     }
+    
     render() {
       const {currentUser} = this.state;
-      console.log(currentUser);
       return (
       <div className="container">
+        
+          <div className="navbar-nav ml-auto">
           <header className="App-header">
         
           <BrowserRouter>
-          <div className="navbar-nav ml-auto">
+          <nav className="navbar navbar-expand-lg fixed-bottom">
+            <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
+              {currentUser ? (
+              <li className="nav-item active">
 
-            {currentUser ? (
-
-              <li className="nav-item"> 
-                <a href="/login" className="nav-link" onClick={this.logOut}>
-                    Logga ut
-                </a>
-              </li> ):(
+              <a href="/login" className="nav-link" onClick={this.logOut}>
+                    Logga ut {currentUser.role}
+              </a> </li>):(
                 <div>
-                  <li className="nav-item">
-                  <Link to={"/register"} className="nav-link">
-                      regtstrer in
+              <li className="nav-item active">
+              <Link to={"/images"} className="nav-link">
+                      Hem
                   </Link>
+              </li>
+              
+              <li className="nav-item">
+                <Link to={"/register"} className="nav-link">
+                      regtstrer in
+                </Link>   
               </li>
               <li className="nav-item">
                   <Link to={"/login"} className="nav-link">
                       Logga in
                   </Link>
               </li>
-              
-              <li className="nav-item">
+              <li className = "nav-item">
                   <Link to={"/images"} className="nav-link">
                       Images
                   </Link>
               </li></div>)}
-          
-          </div>
+            </ul>
+          </nav>
           <Switch>
               <Route path = "/login" component={LoginForm}/>
               <Route path = "/register" component={RegisterForm}/>
@@ -62,7 +69,9 @@ class App extends Component {
             </Switch>
           </BrowserRouter>
           </header>
-      </div>)
+        </div>    
+      </div>
+      )
     }
 }
 
