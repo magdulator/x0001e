@@ -8,6 +8,7 @@ const ImageContainer = ({newImage}) => {
     const getImages = async () => {
         try{
             const res = await axios.get(apiURL + 'images/');
+            console.log("hej")
             if(!res.data.files) {
                 console.log("nja")
                 setFallback(res.data.message);
@@ -17,7 +18,7 @@ const ImageContainer = ({newImage}) => {
                 setImages(res.data.files);
             } 
         } catch(err) {
-            console.log(err);
+            console.log(err.message);
         }
     }
     useEffect(()=> {
@@ -25,20 +26,21 @@ const ImageContainer = ({newImage}) => {
     }, [newImage]);
 
 
-    const createImage = image => {
+    const configureImage = image => {
 
-        console.log (apiURL+image)
-        return  apiURL+image;
+        console.log (apiURL+ 'images/'+image)
+        return  apiURL +'images/' +image;
     }
     
     console.log( images);
 
     return (
         <div id = "hej">
+            
             {
-                images.map(image => {
-                    <img src = {createImage(image)} key={image} alt={image} width = "200px" className = 'image'/>
-                })
+                images.map(image => (
+                    <img src = {configureImage(image)} key={image} alt={image} width = "200px" className = 'image'/>
+                ))
                 
             }
              <p>Hej</p>
