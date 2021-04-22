@@ -14,7 +14,6 @@ console.log("Connected to database"));
 
   app.use(cors());
   //app.use(express.json());
-  app.use('/api/images',express.static('uploads'))
   
   // parse requests of content-type - application/json
   app.use(bodyParser.json());
@@ -36,7 +35,7 @@ console.log("Connected to database"));
   app.use('/api/users', authRoute);
 
   const imageRoute = require('./routes/images');
-  app.use('/api/images', imageRoute);
+  app.use('/api/images', imageRoute, express.static('uploads'));
 
   // set port, listen for requests
   const PORT = process.env.PORT || 5000;
