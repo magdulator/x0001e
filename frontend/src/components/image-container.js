@@ -36,7 +36,7 @@ const ImageContainer = ({newImage}) => {
 
     return (
         <div id = "hej">
-            
+            <img src = {apiURL + 'images/' + images[1]}/>
             {
                 images.map(image => (
                     <img src = {configureImage(image)} key={image} alt={image} width = "200px" className = 'image'/>

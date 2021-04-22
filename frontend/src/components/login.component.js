@@ -23,7 +23,11 @@ export default class LoginForm extends Component {
             }}
             validator={() => ({})}>
                 { props => (
-                    <form onSubmit = {props.handleSubmit} >
+                    <div class="container">
+                <div class="div-center">
+            <       div class="card">
+                     <h3>Logga in</h3><hr></hr>
+                    <form onSubmit =  {props.handleSubmit} >
 
                     <div className="form-group mb-2">
                         <label htmlFor="email" className= "col-sm-2 col-form-label">Email</label>
@@ -48,6 +52,9 @@ export default class LoginForm extends Component {
                         disabled={props.isSubmitting}
                         />
                 </form>
+                </div>
+                </div>
+                </div>
             )}
         </Formik>
         

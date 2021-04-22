@@ -10,6 +10,7 @@ const Images = () => {
     return ( 
         <div>
             <ImageContainer newImage = {newImage}></ImageContainer>
+            
         </div>
     )
 }
