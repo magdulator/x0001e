@@ -2,6 +2,9 @@
   background-color:#d1d1d1;
 }
 
-.navbar-brand{
-  
+.active-link {
+  background-color: rgb(148, 148, 148);
+  border-radius: 20px;
+  color: black;
 }
+
