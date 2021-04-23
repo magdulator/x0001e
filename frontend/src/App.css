@@ -8,3 +8,19 @@
   color: black;
 }
 
+.card {
+  width: 25rem;
+}
+
+.btn.btn-primary.btn-lg {
+  width: 100%;
+}
+
+#root {
+  background-color: gray;
+  height: 100%;
+}
+
+body, html {
+  height: 100%;
+}
