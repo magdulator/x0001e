@@ -2,7 +2,7 @@
     import auth from '../services/auth';
     import { Formik,ErrorMessage} from 'formik';
     import * as Yup from 'yup';
-    import {HouseDoor, PersonCircle} from 'react-bootstrap-icons';
+    import {ArrowLeftRight, HouseDoor, PersonCircle} from 'react-bootstrap-icons';
 
 
     export default class LoginForm extends Component {
@@ -20,14 +20,17 @@
                     password: Yup.string().min(3, 'Password needs to be at least 6 characters').required('Password is required')
                 })}
                 onSubmit={ async values  => {
-                    await auth.login(values.email, values.password)
-                    window.location.reload();
+                    if(await auth.login(values.email, values.password) === false) {
+                        alert('Wrong password or email')
+                    }
+                    
+                    else window.location.reload();
                 }}
                 validator={() => ({})}>
                     { props => (
-                    <div class="container py-4">
-                        <div class="card mx-auto">
-                            <div class="card-header text-center">
+                    <div className="container py-4">
+                        <div className="card mx-auto">
+                            <div className="card-header text-center">
                                 <h4>Logga in</h4>
                             </div>
                             <div className = "card-body text-center">
@@ -36,16 +39,16 @@
                                 <form onSubmit =  {props.handleSubmit} >
 
                                     <div className="form-group input-group-lg">
-                                        <label htmlFor="email" className= " col-form-label">Email</label>
-                                        <input name="email" type="email" className = "form-control" value={props.values.email} onChange={props.handleChange} onBlur={props.handleBlur}  />
+                                        <label htmlFor="email" className= " col-form-label"></label>
+                                        <input name="email" type="email" placeholder="Email adress" className = "form-control" value={props.values.email} onChange={props.handleChange} onBlur={props.handleBlur}  />
                                         <ErrorMessage name="email" />
                                     </div>
                                     <div className="form-group input-group-lg">
-                                        <label htmlFor="password" className= "col-form-label" >Password</label>
-                                        <input name="password" type="password" className = "form-control" value={props.values.password} onChange={props.handleChange} onBlur={props.handleBlur}/>
+                                        <label htmlFor="password" className= "col-form-label" ></label>
+                                        <input name="password" type="password" placeholder="Lösenord" className = "form-control" value={props.values.password} onChange={props.handleChange} onBlur={props.handleBlur}/>
                                         <ErrorMessage name="password" /> 
                                     </div>                                 
-                                    <div classname = "form-group">
+                                    <div className = "form-group">
                                         <button
                                         className = "btn btn-primary btn-lg mt-3 py-2"
                                         type="submit"

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import Carousel from 'react-bootstrap/Carousel'
 const apiURL = 'http://130.240.114.29:5000/api/';
 
 const ImageContainer = ({newImage}) => {
@@ -35,16 +36,42 @@ const ImageContainer = ({newImage}) => {
     console.log( images);
 
     return (
-        <div id = "hej">
-            <img src = {apiURL + 'images/' + images[1]}/>
-            {
-                images.map(image => (
-                    <img src = {configureImage(image)} key={image} alt={image} width = "200px" className = 'image'/>
-                ))
-                
-            }
-             <p>Hej</p>
-
+        <div className = "slider-container">
+        <Carousel >
+            <Carousel.Item>
+                <img
+                    className="h-100 d-inline-block"
+                    src = {apiURL + 'images/' + images[0]}
+                    alt="First slide"
+                />
+                <Carousel.Caption>
+                    <h3>First slide label</h3>
+                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+                <img
+                    className="h-100 d-inline-block"
+                    src = {apiURL + 'images/' + images[1]}
+                    alt="second slide"
+                />
+                <Carousel.Caption>
+                    <h3>First slide label</h3>
+                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item >
+                <img
+                    className=" d-inline-block"
+                    src = {apiURL + 'images/' + images[2]}
+                    alt="second slide"
+                />
+                <Carousel.Caption>
+                    <h3>First slide label</h3>
+                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                </Carousel.Caption>
+            </Carousel.Item>
+        </Carousel>
         </div>
     )
 }

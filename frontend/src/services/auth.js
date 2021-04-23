@@ -23,6 +23,7 @@ class Auth {
             return response.data;
         }).catch((err) => {
             console.log(err)
+            return false
         });
     }
 
