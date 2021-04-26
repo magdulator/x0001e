@@ -37,40 +37,25 @@ const ImageContainer = ({newImage}) => {
 
     return (
         <div className = "slider-container">
-        <Carousel >
-            <Carousel.Item>
+        <Carousel interval={null}>
+            {images.length > 0 ? (
+                images.map(image => (
+                <Carousel.Item>
+                <div className = "pic-cont">
                 <img
-                    className="h-100 d-inline-block"
-                    src = {apiURL + 'images/' + images[0]}
+                    className="h-100 d-inline-block mx-auto"
+                    src = {configureImage(image)}
                     alt="First slide"
-                />
+                /></div>
                 <Carousel.Caption>
                     <h3>First slide label</h3>
                     <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                 </Carousel.Caption>
+
             </Carousel.Item>
-            <Carousel.Item>
-                <img
-                    className="h-100 d-inline-block"
-                    src = {apiURL + 'images/' + images[1]}
-                    alt="second slide"
-                />
-                <Carousel.Caption>
-                    <h3>First slide label</h3>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item >
-                <img
-                    className=" d-inline-block"
-                    src = {apiURL + 'images/' + images[2]}
-                    alt="second slide"
-                />
-                <Carousel.Caption>
-                    <h3>First slide label</h3>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                </Carousel.Caption>
-            </Carousel.Item>
+            ))):
+            <p>No pictures</p>
+            }
         </Carousel>
         </div>
     )

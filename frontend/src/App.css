@@ -18,9 +18,19 @@
   width: 100%;
 }
 
-#root {
+#root, .body {
   background-color: gray;
-  height: 100vh;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body
+{
+  width:100%;
+  min-height:100%;
+  background:purple;
 }
 
 
@@ -50,14 +60,26 @@
   border-radius:50%;
 
 }
+.carousel-control-prev {
+  min-height: 110%;
+}
 
-.slider-container {
-  /* Add this */
-  position:fixed;
+
+.slider-container, .carousel-slide{
+  max-height: 100%;
+  width: 100%;
+  background-color: black;
+  margin: 0;
+  padding: 0;
+  background-size:cover;
+  position:absolute;
   top:0;
-  
-  }
+  left: 0;
 
-  .carousel-item {
-    height: 83vh;
-  }
+}
+
+.pic-cont {
+  height: 85vh;
+  width: 100%;
+  margin: auto;
+}
