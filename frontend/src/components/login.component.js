@@ -1,14 +1,16 @@
-    import React, { Component } from "react";
+    import React from "react";
     import auth from '../services/auth';
     import { Formik,ErrorMessage} from 'formik';
+    import { useHistory } from "react-router-dom";
+
     import * as Yup from 'yup';
-    import {ArrowLeftRight, HouseDoor, PersonCircle} from 'react-bootstrap-icons';
+    import {PersonCircle} from 'react-bootstrap-icons';
 
 
-    export default class LoginForm extends Component {
+   const LoginForm = () => {
 
+        let history = useHistory();
 
-        render(){
         return(
             <Formik 
                 initialValues={{
@@ -20,15 +22,16 @@
                     password: Yup.string().min(3, 'Password needs to be at least 6 characters').required('Password is required')
                 })}
                 onSubmit={ async values  => {
+
                     if(await auth.login(values.email, values.password) === false) {
                         alert('Wrong password or email')
                     }
+                    else history.push('/home')
                     
-                    else window.location.reload();
                 }}
                 validator={() => ({})}>
                     { props => (
-                    <div className="container py-4">
+                    <div className="container py-5">
                         <div className="card mx-auto">
                             <div className="card-header text-center">
                                 <h4>Logga in</h4>
@@ -63,4 +66,4 @@
             </Formik>
             
         )}
-    }
+    export{LoginForm}

@@ -5,17 +5,12 @@ const apiURL = 'http://130.240.114.29:5000/api/';
 
 const ImageContainer = ({newImage}) => {
     const [images, setImages] = useState([]);
-    const [fallbackImage, setFallback] = useState('');
     const getImages = async () => {
         try{
             const res = await axios.get(apiURL + 'images/');
-            console.log("hej")
             if(!res.data.files) {
-                console.log("nja")
-                setFallback(res.data.message);
                 return;
             } else {
-                console.log(res.data.files)
                 setImages(res.data.files);
             } 
         } catch(err) {
@@ -43,6 +38,7 @@ const ImageContainer = ({newImage}) => {
                 <Carousel.Item>
                 <div className = "pic-cont">
                 <img
+                    key = {image}
                     className="h-100 d-inline-block mx-auto"
                     src = {configureImage(image)}
                     alt="First slide"

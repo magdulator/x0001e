@@ -1,21 +1,24 @@
 import React, {Component} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import LoginForm from "./components/login.component";
-import { BrowserRouter, Switch, Route, Link, NavLink} from "react-router-dom";
+import {LoginForm} from "./components/login.component";
+import { BrowserRouter, Switch, Route, NavLink} from "react-router-dom";
 import auth from './services/auth';
-import {Images} from './components/images.component';
 import RegisterForm from './components/register.component';
 import {HouseDoor, PersonCircle} from 'react-bootstrap-icons';
+import {ImageContainer} from './components/image-container';
+import {ImageUpload} from './components/upload-image';
 
 class App extends Component {
     constructor(props) {
       super(props);
     
     this.state = {
-      currentUser: auth.getCurrentUser()
+      currentUser: auth.getCurrentUser(),
+      newImage: []
     };
   }
+
   
     logOut() {
       auth.logout();
@@ -34,7 +37,7 @@ class App extends Component {
                       {currentUser ? (
                       <>
                       <li className="nav-item ml-3 text-center">
-                          <NavLink to={"/images"} className="nav-link px-5" activeClassName="active-link">
+                          <NavLink to={"/home"} className="nav-link px-5" activeClassName="active-link">
                               <HouseDoor size = "50"></HouseDoor><br></br>
                               <h4>HEM</h4>        
                           </NavLink>
@@ -50,7 +53,7 @@ class App extends Component {
                       ):(
                       <>
                       <li className="nav-item ml-3 text-center ">
-                          <NavLink to={"/images"} className="nav-link px-5" activeClassName="active-link">
+                          <NavLink to={"/home"} className="nav-link px-5" activeClassName="active-link">
                               <HouseDoor size = "50"></HouseDoor><br></br>
                               <h4>HEM</h4>        
                           </NavLink>
@@ -74,7 +77,8 @@ class App extends Component {
           <Switch>
               <Route path = "/login" component={LoginForm}/>
               <Route path = "/register" component={RegisterForm}/>
-              <Route path = "/images" component = {Images}/>
+              <Route path = "/home" component = {ImageContainer}/>
+              <Route path = "/upload" component = {ImageUpload}/>
           </Switch>
           </BrowserRouter>
           </header>

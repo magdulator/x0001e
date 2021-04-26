@@ -18,23 +18,6 @@
   width: 100%;
 }
 
-#root, .body {
-  background-color: gray;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-}
-
-html,
-body
-{
-  width:100%;
-  min-height:100%;
-  background:purple;
-}
-
-
-
 .carousel-indicators li {
   background-color: gray; 
   height: 30px;
@@ -63,7 +46,6 @@ body
 .carousel-control-prev {
   min-height: 110%;
 }
-
 
 .slider-container, .carousel-slide{
   max-height: 100%;
