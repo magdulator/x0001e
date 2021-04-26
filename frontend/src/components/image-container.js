@@ -23,13 +23,9 @@ const ImageContainer = ({newImage}) => {
 
 
     const configureImage = image => {
-
-        console.log (apiURL+ 'images/'+image)
         return  apiURL +'images/' +image;
     }
     
-    console.log( images);
-
     return (
         <div className = "slider-container">
         <Carousel interval={null}>
