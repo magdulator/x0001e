@@ -37,7 +37,21 @@ router.get('/', (req, res) => {
     })
 })
 
-router.post('/delete')
+router.post('/delete/:imagename', async (req, res) => {
+    if (!req.params.imagename) {
+        console.log("No file received");
+        return res.status(500).json('error in delete');
+    
+    } else {
+        try {
+            fs.unlinkSync('uploads'+'/'+req.params.imagename+'.png');
+            return res.status(200).send('Successfully! Image has been Deleted');
+          } catch (err) {
+            return res.status(400).send(err);
+          }
+        
+    }
+})
 
 
 module.exports = router;

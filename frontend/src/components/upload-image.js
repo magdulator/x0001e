@@ -47,14 +47,31 @@ class ImageUpload extends Component {
             'Content-type' : 'form-data'
         }}).then(res => { 
             console.log(res.statusText)
-        }) 
+        }); 
+        window.location.reload(false);
     }
     
     render() {
         console.log(this.state.images)
     return ( 
-        <div className="row my-5">
-	        <div className="col-md-6">
+        <div className = "hej">
+	        
+            <div className = "image-container px-5">
+                <h4>Images already uploaded</h4><hr></hr>
+            {this.state.images.length > 0 ? (
+                this.state.images.map(image => (
+                <img
+                    key = {image}
+                    className = 'img-thumbnail mx-1 my-1'
+                    height = '100px'
+                    src = {apiURL +'images/' +image}
+                    alt="First slide"
+                />))):
+                 <p>No pictures</p>
+            }
+            </div>
+
+            <div className="card px-5 py-3">
                 <h4>Upload new picture</h4><hr></hr>
 	            <form method="post" action="#" id="#">  
               
@@ -63,7 +80,7 @@ class ImageUpload extends Component {
                 <input type="file" name="file" onChange={this.onChangeHandler} className="form-control-file"/>
                 {this.state.preview && (
                     <div>
-                        <img className="preview" src={this.state.preview} alt="" width = "400px" />
+                        <img className="preview" src={this.state.preview} alt="" width = "200px" />
                     </div>
                 )}
                 
@@ -72,21 +89,7 @@ class ImageUpload extends Component {
             
                 </form>
 	        </div><hr></hr>
-            <div className = "image-container">
-                <h4>Images already uploaded</h4><hr></hr>
-            {this.state.images.length > 0 ? (
-                this.state.images.map(image => (
-                <img
-                    key = {image}
-                    className = 'img-thumbnail mx-2 my-2'
-                    height = '100px'
-                    src = {apiURL +'images/' +image}
-                    alt="First slide"
-                />))):
-                 <p>No pictures</p>
-            }
-            </div>
-	   </div>
+       </div>
     )}
 }
 export {ImageUpload}
