@@ -14,6 +14,10 @@
   width: 25rem;
 }
 
+#root {
+  background-color: gray;
+}
+
 .btn.btn-primary.btn-lg {
   width: 100%;
 }
@@ -47,20 +51,34 @@
   min-height: 110%;
 }
 
-.slider-container, .carousel-slide{
-  max-height: 100%;
+.slider-container {
+  max-height: 85vh;
+  bottom: 0;
   width: 100%;
   background-color: black;
   margin: 0;
   padding: 0;
-  background-size:cover;
   position:absolute;
   top:0;
   left: 0;
+}
 
+.editPic {
+  position: absolute;
+  top: 3px;
+  right: 2px;
+  background-color: #555;
+  color: white;
+  font-size: 20px;
+  padding: 20px 30px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
 }
 
 .pic-cont {
+  position:relative;
   height: 85vh;
   width: 100%;
   margin: auto;

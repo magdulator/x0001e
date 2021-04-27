@@ -25,10 +25,30 @@ class Auth {
 
     logout() {
         localStorage.removeItem("currentUser");
+        console.log("log9ut")
+
     }
 
     getCurrentUser() {
+        console.log("getcurrent")
         return JSON.parse(localStorage.getItem('currentUser'));
+    }
+
+    isAuth() {
+        if (this.getCurrentUser()) {
+            return true;
+        }
+        return false;
+    }
+
+    isAdmin() {
+        const user = this.getCurrentUser();
+        if (user) {
+            if (user.role === "admin") {
+                return true;
+            }
+            return false;
+        }
     }
 }
 

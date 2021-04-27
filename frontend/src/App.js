@@ -8,29 +8,29 @@ import RegisterForm from './components/register.component';
 import {HouseDoor, PersonCircle} from 'react-bootstrap-icons';
 import {ImageContainer} from './components/image-container';
 import {ImageUpload} from './components/upload-image';
+import GuardedRoute from './services/guarded-route';
 
 class App extends Component {
     constructor(props) {
       super(props);
-    
-    this.state = {
+      this.logOut = this.logOut.bind(this);
+      this.state = {
       currentUser: auth.getCurrentUser(),
-      newImage: []
-    };
+    };  
   }
 
-  
     logOut() {
-      auth.logout();
+        auth.logout();
     }
     
     render() {
       const {currentUser} = this.state;
+      
       return (
       <div className="container">
           <header className="App-header">
         
-          <BrowserRouter>
+          <BrowserRouter forceRefresh = {true}>
             
               <nav className="navbar navbar-expand-lg fixed-bottom">
                   <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -76,9 +76,9 @@ class App extends Component {
           </nav>
           <Switch>
               <Route path = "/login" component={LoginForm}/>
-              <Route path = "/register" component={RegisterForm}/>
+              <Route path = "/register" component={RegisterForm} />
               <Route path = "/home" component = {ImageContainer}/>
-              <Route path = "/upload" component = {ImageUpload}/>
+              <GuardedRoute path = "/upload" component = {ImageUpload} auth = {auth.isAdmin()}/>
           </Switch>
           </BrowserRouter>
           </header>

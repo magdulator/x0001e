@@ -1,7 +1,8 @@
     import React from "react";
     import auth from '../services/auth';
     import { Formik,ErrorMessage} from 'formik';
-    import { useHistory } from "react-router-dom";
+    import { useHistory, withRouter } from "react-router-dom";
+    
 
     import * as Yup from 'yup';
     import {PersonCircle} from 'react-bootstrap-icons';
@@ -27,6 +28,7 @@
                         alert('Wrong password or email')
                     }
                     else history.push('/home')
+                    console.log("login")
                     
                 }}
                 validator={() => ({})}>
