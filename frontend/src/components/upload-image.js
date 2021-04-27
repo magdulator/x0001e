@@ -1,17 +1,36 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import {ImageContainer} from './image-container';
+const apiURL = 'http://130.240.114.29:5000/api/';
+
 
 class ImageUpload extends Component {
     constructor(props) {
         super(props);
           this.state = {
             selectedFile: null,
-            preview: null
+            preview: null,
+            images: []
           }
-       
+       this.getImages()
       }
 
+      getImages = async () => {
+        try{
+            const res = await axios.get(apiURL + 'images/');
+            if(!res.data.files) {
+                return;
+            } else {
+                this.setState({images: res.data.files});
+            } 
+        } catch(err) {
+            console.log(err.message);
+        }
+    }
+    
+
       onChangeHandler=event=>{
+        console.log(this.state.images)
         this.setState({
           selectedFile: event.target.files[0],
           preview: URL.createObjectURL(event.target.files[0]),
@@ -32,9 +51,11 @@ class ImageUpload extends Component {
     }
     
     render() {
+        console.log(this.state.images)
     return ( 
-        <div className="row">
+        <div className="row my-5">
 	        <div className="col-md-6">
+                <h4>Upload new picture</h4><hr></hr>
 	            <form method="post" action="#" id="#">  
               
                 <div className="form-group">
@@ -45,11 +66,26 @@ class ImageUpload extends Component {
                         <img className="preview" src={this.state.preview} alt="" width = "400px" />
                     </div>
                 )}
+                
                 </div>
                 <button type="button" className="btn btn-success btn-block" onClick={this.onClickHandler}>Upload</button>
             
                 </form>
-	        </div>
+	        </div><hr></hr>
+            <div className = "image-container">
+                <h4>Images already uploaded</h4><hr></hr>
+            {this.state.images.length > 0 ? (
+                this.state.images.map(image => (
+                <img
+                    key = {image}
+                    className = 'img-thumbnail mx-2 my-2'
+                    height = '100px'
+                    src = {apiURL +'images/' +image}
+                    alt="First slide"
+                />))):
+                 <p>No pictures</p>
+            }
+            </div>
 	   </div>
     )}
 }

@@ -47,9 +47,7 @@
   border-radius:50%;
 
 }
-.carousel-control-prev {
-  min-height: 110%;
-}
+
 
 .slider-container {
   max-height: 85vh;
@@ -66,7 +64,7 @@
 .editPic {
   position: absolute;
   top: 3px;
-  right: 2px;
+  left: 250px;
   background-color: #555;
   color: white;
   font-size: 20px;
@@ -82,4 +80,8 @@
   height: 85vh;
   width: 100%;
   margin: auto;
+}
+
+.img-thumbnail {
+  height: 100px;
 }

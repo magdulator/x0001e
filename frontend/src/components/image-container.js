@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from 'react';
+import { useHistory } from "react-router-dom";
+
 import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
 import auth from '../services/auth';
@@ -7,7 +9,11 @@ const apiURL = 'http://130.240.114.29:5000/api/';
 
 
 const ImageContainer = ({newImage}) => {
+
+    let history = useHistory();
+
     const [images, setImages] = useState([]);
+
     const getImages = async () => {
         try{
             const res = await axios.get(apiURL + 'images/');
@@ -30,13 +36,9 @@ const ImageContainer = ({newImage}) => {
     }
 
     const getRole = () => {
-        const user = auth.getCurrentUser();
-        if (user !== null) {
-            return user.role;
-        }
-        return user.role = 'public';
+        const isAdmin = auth.isAdmin();
+        return isAdmin
     }
-    const user = auth.getCurrentUser();
     return (
         <div className = "slider-container">
         <Carousel interval={null}>
@@ -50,8 +52,12 @@ const ImageContainer = ({newImage}) => {
                     src = {configureImage(image)}
                     alt="First slide"
                 />
-                {}
-                <button className = "editPic">REDIGERA BILDER</button>
+                {getRole() ? (
+                    <>
+                    <button onClick={() => history.push('/upload')} className = "editPic">REDIGERA BILDER</button>
+                    </>
+                ):
+                <></>}
                 </div>
                 <Carousel.Caption>
                     <h3>First slide label</h3>
