@@ -66,7 +66,7 @@ class ImageUpload extends Component {
                     src = {apiURL +'images/' +image}
                     alt="First slide"
                 />))):
-                 <p>Inga bilder har blivit uppladdade</p>
+                 <p>Inga bilder har blivit Uppladdade</p>
             }
             </div>
 
