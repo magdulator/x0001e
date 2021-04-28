@@ -27,8 +27,6 @@ class App extends Component {
       const {currentUser} = this.state;
       
       return (
-      <div className="container">
-          <header className="App-header">
         
           <BrowserRouter forceRefresh = {true}>
             
@@ -81,8 +79,8 @@ class App extends Component {
               <GuardedRoute path = "/upload" component = {ImageUpload} auth = {auth.isAdmin()}/>
           </Switch>
           </BrowserRouter>
-          </header>
-      </div> 
+
+          
       )
     }
 }

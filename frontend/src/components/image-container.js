@@ -66,7 +66,19 @@ const ImageContainer = ({newImage}) => {
 
             </Carousel.Item>
             ))):
-            <p>No pictures</p>
+            <Carousel.Item>
+                <div className= "pic-cont">
+                </div>
+                {getRole() ? (
+                    <>
+                    <button onClick={() => history.push('/upload')} className = "editPic">REDIGERA BILDER</button>
+                    </>
+                ):
+                <></>}
+                <Carousel.Caption className="mb-5">
+                    <h1>Inga bilder att visa</h1>
+                </Carousel.Caption>
+                </Carousel.Item>
             }
         </Carousel>
         </div>
