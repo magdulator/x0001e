@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {ImageContainer} from './image-container';
 const apiURL = 'http://130.240.114.29:5000/api/';
 
 

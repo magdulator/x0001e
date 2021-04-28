@@ -5,10 +5,11 @@ import {LoginForm} from "./components/login.component";
 import { BrowserRouter, Switch, Route, NavLink} from "react-router-dom";
 import auth from './services/auth';
 import RegisterForm from './components/register.component';
-import {HouseDoor, PersonCircle} from 'react-bootstrap-icons';
+import {HouseDoor, PersonCircle, CameraReelsFill} from 'react-bootstrap-icons';
 import {ImageContainer} from './components/image-container';
 import {ImageUpload} from './components/upload-image';
 import GuardedRoute from './services/guarded-route';
+import {System} from './components/system';
 
 class App extends Component {
     constructor(props) {
@@ -40,12 +41,19 @@ class App extends Component {
                               <h4>HEM</h4>        
                           </NavLink>
                       </li>
-                      <li className="nav-item ml-3 text-center">
-
-                          <a href="/login" className="nav-link pl-3" onClick={this.logOut}>
+                      
+                      <li className ="nav-item ml3 text-center">
+                            <a href="/system" className="nav-link pl-3" onClick={this.logOut}>
                               <PersonCircle size = "50"></PersonCircle><br></br>
                               <h4>LOGGA UT</h4>
                           </a> 
+                      </li>
+                      <li className="nav-item ml-3 text-center">
+
+                          <NavLink to={"/system"} className="nav-link px-4" activeClassName="active-link">
+                              <CameraReelsFill size = "50"></CameraReelsFill><br></br>
+                              <h4>SYSTEM</h4>
+                          </NavLink> 
                       </li>
                       </>
                       ):(
@@ -76,6 +84,7 @@ class App extends Component {
               <Route path = "/login" component={LoginForm}/>
               <Route path = "/register" component={RegisterForm} />
               <Route path = "/home" component = {ImageContainer}/>
+              <GuardedRoute path = "/system" component = {System} auth ={auth.isAuth()}/>
               <GuardedRoute path = "/upload" component = {ImageUpload} auth = {auth.isAdmin()}/>
           </Switch>
           </BrowserRouter>
