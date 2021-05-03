@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import auth from '../services/auth';
 import { Formik,ErrorMessage} from 'formik';
 import * as Yup from 'yup';
+import {PersonCircle} from 'react-bootstrap-icons';
 
 export default class RegisterForm extends Component {
 
@@ -24,24 +25,25 @@ export default class RegisterForm extends Component {
             }}
             validator={() => ({})}>
                 { props => (
+                    <div className = "container py-5">
+                        <div className="card mx-auto">
+                            <div className="card-header text-center">
+                                <h4>Registrera en ny användare</h4>
+                                </div>
+                                <div className = "card-body text-center">
+                                <PersonCircle size = "50"></PersonCircle>
                     <form onSubmit = {props.handleSubmit} >
 
-                    <div className="form-group mb-2">
-                        <h2>Registrera en ny användare</h2>
-                        <label htmlFor="email" className= "col-sm-2 col-form-label">Email</label>
-                        <div className="col-sm-10">
-
+                    <div className="form-group input-group-lg">
+                        <label htmlFor="email" className= "">Email</label>
                             <input name="email" type="email" className = "form-control" value={props.values.email} onChange={props.handleChange} onBlur={props.handleBlur}  />
-                            <ErrorMessage name="email" />
-                        </div>
+                            <ErrorMessage name="email" className="invalid-feedback"/>
                     </div>
-                    <div className="form-group ">
-                        <label htmlFor="password" className= "col-sm-2 col-form-label" >Password</label>
-                        <div className="col-sm-10">
-
+                    <div className="form-group input-group-lg ">
+                        <label htmlFor="password" className= "" >Password</label>
                             <input name="password" type="password" className = "form-control" value={props.values.password} onChange={props.handleChange} onBlur={props.handleBlur}/>
                             <ErrorMessage name="password" /> 
-                        </div>
+                            
                     </div>  
                     <div className = "form-check">
                         <input className = 'form-check-input' type="radio" name="picked" value="admin" onChange={props.handleChange} id = "1"/>
@@ -54,15 +56,20 @@ export default class RegisterForm extends Component {
                         <label className ="form-check-label" htmlFor="2">
                             Power-user
                         </label> 
-                    </div>                            
-                    <div>Picked: {props.values.picked}</div>
-
-                    <input
+                    </div>
+                    <div className = "form-group">
+                        <button
+                        className = "btn btn-primary btn-lg mt-3 py-2"
                         type="submit"
-                        value="Submit"
-                        disabled={props.isSubmitting}
-                        />
+                        disabled={props.isSubmitting}> <h4>REGISTRERA ANVÄNDARE</h4>
+                        </button>
+                    </div> 
+
                 </form>
+                </div>
+                </div>
+                </div>
+
             )}
         </Formik>
         

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useHistory } from "react-router-dom";
+import {PencilSquare} from 'react-bootstrap-icons';
 
 import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
@@ -54,7 +55,7 @@ const ImageContainer = ({newImage}) => {
                 />
                 {getRole() ? (
                     <>
-                    <button onClick={() => history.push('/upload')} className = "editPic">REDIGERA BILDER</button>
+                    <button onClick={() => history.push('/upload')} className = "editPic"><PencilSquare size="50"></PencilSquare></button>
                     </>
                 ):
                 <></>}
@@ -71,7 +72,7 @@ const ImageContainer = ({newImage}) => {
                 </div>
                 {getRole() ? (
                     <>
-                    <button onClick={() => history.push('/upload')} className = "editPic">REDIGERA BILDER</button>
+                    <button onClick={() => history.push('/upload')} className = "editPic"><PencilSquare size="50"></PencilSquare></button>
                     </>
                 ):
                 <></>}

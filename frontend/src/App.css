@@ -10,6 +10,7 @@
   background-color: rgb(148, 148, 148);
   border-radius: 20px;
   color: black;
+
 }
 
 .card.mx-auto {
@@ -68,15 +69,19 @@ body, html {
 .editPic {
   position: absolute;
   top: 3px;
-  left: 250px;
-  background-color: #555;
+  right: 250px;
+  background-color:rgba(104, 104, 104, 0.62);
   color: white;
   font-size: 20px;
-  padding: 20px 30px;
+  padding: 20px 25px;
   border: none;
   cursor: pointer;
   border-radius: 5px;
   text-align: center;
+  
+}
+.editPic:hover{
+  color:black;
 }
 
 .pic-cont {
@@ -117,3 +122,9 @@ body, html {
   top: 40%;
   left: 50%;
   transform: translate(-50%, -40%);}
+
+  input[type=radio] {
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+}
