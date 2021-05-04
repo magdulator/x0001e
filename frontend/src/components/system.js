@@ -4,7 +4,7 @@ const System = () => {
     return(
         <div className = "d-flex justify-content-center flex-wrap">
             <div className="card mx-2">
-                <a className="card-block stretched-link text-decoration-none" href ="google.com"></a>
+                <a className="card-block stretched-link text-decoration-none" href ="overview"></a>
                 <div className = "card-header py-0 pt-2 my-0 text-center"><h4>System överblick</h4><p>Mer information <ArrowRight></ArrowRight></p></div>
                 <div className = "card-body px-0">
                     <ul>
