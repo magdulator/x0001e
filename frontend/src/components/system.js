@@ -1,5 +1,5 @@
 import React from "react";
-import {ArrowRight, XOctagon} from 'react-bootstrap-icons'
+import {ArrowRight, XOctagon, RecordFill, Record} from 'react-bootstrap-icons'
 const System = () => {
     return(
         <div className = "d-flex justify-content-center flex-wrap">
@@ -18,6 +18,14 @@ const System = () => {
             <div className="card mx-2" >
                 <a className="card-block stretched-link text-decoration-none" href ="google.com"></a>
                 <div className = "card-header py-0 pt-2 my-0 text-center"><h4>System status</h4><p>Mer information <ArrowRight></ArrowRight></p></div>
+                <div className = "card-body px-0 py-1">
+                    <ul className = "list-unstyled pl-3">
+                        <li><RecordFill  className="mr-2" size="35" viewBox = "0 0 14 14" color="green"></RecordFill>    Widefind</li>
+                        <li><RecordFill size="35" viewBox = "0 0 14 14" color="green" className="mr-2"></RecordFill>   Fibaro Zwave</li>
+                        <li><RecordFill  className="mr-2" size="35"  viewBox = "0 0 14 14" color="green"></RecordFill>    Vayyar</li>
+                        <li><RecordFill  className="mr-2" size="35" viewBox = "0 0 14 14" color="red"></RecordFill>    Philips Hue</li>
+                    </ul>
+                </div>
             </div>
             <div className="card mx-2">
                 <a className="card-block stretched-link text-decoration-none" href ="google.com"></a>

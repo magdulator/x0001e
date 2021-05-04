@@ -19,7 +19,7 @@
 
 body, html {
   height: 100%;
-  background-color: gray;
+  background-color: #2c2f3d;
 
 }
 
@@ -28,30 +28,14 @@ body, html {
 }
 
 .carousel-indicators li {
-  background-color: gray; 
+  background-color: white; 
   height: 30px;
   width: 30px;
   border-radius: 50%;
   margin: 10px;
+  margin-bottom: 20px;
 }
 
-.carousel-control-next-icon{
-  background-color: gray;
-  color:black;
-  height: 65px;
-  width: 65px;
-  border-radius:50%;
-
-}
-
-.carousel-control-prev-icon{
-  background-color: gray;
-  color:black;
-  height: 65px;
-  width: 65px;
-  border-radius:50%;
-
-}
 
 
 .slider-container {
@@ -128,3 +112,4 @@ body, html {
     height: 15px;
     margin-right: 10px;
 }
+

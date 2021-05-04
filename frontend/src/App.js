@@ -21,7 +21,6 @@ class App extends Component {
       this.state = {
       currentUser: auth.getCurrentUser(),
       currentRole: auth.isAdmin(),
-      open: true,
     };  
   }
   handleClick() {
@@ -92,13 +91,13 @@ class App extends Component {
                         // Not logged in
                       <>
                       <li className="nav-item ml-3 text-center ">
-                          <NavLink to={"/home"} className="nav-link px-5" activeClassName="active-link">
+                          <NavLink to={"/home"} className="nav-link px-5 text-dark" activeClassName="active-link">
                               <HouseDoorFill size = "50"></HouseDoorFill><br></br>
                               <h4 className="pt-1">HEM</h4>        
                           </NavLink>
                       </li>
                       <li className="nav-item ml-3 text-center">
-                          <NavLink to={"/login"} className="nav-link px-4" activeClassName="active-link">
+                          <NavLink to={"/login"} className="nav-link px-4 text-dark " activeClassName="active-link">
                               <PersonCircle size = "50"></PersonCircle><br></br>
                               <h4 className="pt-1">LOGGA IN</h4>
                           </NavLink>

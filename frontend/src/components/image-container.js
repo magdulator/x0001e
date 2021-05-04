@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useHistory } from "react-router-dom";
-import {PencilSquare} from 'react-bootstrap-icons';
+import {PencilSquare, ChevronDoubleRight, ChevronDoubleLeft} from 'react-bootstrap-icons';
 
 import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
@@ -42,7 +42,7 @@ const ImageContainer = ({newImage}) => {
     }
     return (
         <div className = "slider-container">
-        <Carousel interval={null}>
+        <Carousel interval={null} prevIcon = {<ChevronDoubleLeft className="carousel-icons" size="130px" color="white" enableBackground="true"/>} nextIcon = {<ChevronDoubleRight className="carousel-icons" size="130px" color="white" enableBackground="true"></ChevronDoubleRight>}>
             {images.length > 0 ? (
                 images.map(image => (
                 <Carousel.Item>
@@ -60,10 +60,7 @@ const ImageContainer = ({newImage}) => {
                 ):
                 <></>}
                 </div>
-                <Carousel.Caption>
-                    <h3>First slide label</h3>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                </Carousel.Caption>
+           
 
             </Carousel.Item>
             ))):
