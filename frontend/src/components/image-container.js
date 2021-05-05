@@ -6,8 +6,6 @@ import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
 import auth from '../services/auth';
 
-const apiURL = 'http://130.240.114.29:5000/api/';
-
 
 const ImageContainer = ({newImage}) => {
 
@@ -17,7 +15,7 @@ const ImageContainer = ({newImage}) => {
 
     const getImages = async () => {
         try{
-            const res = await axios.get(apiURL + 'images/');
+            const res = await axios.get(process.env.REACT_APP_API_URL + '/images/');
             if(!res.data.files) {
                 return;
             } else {
@@ -33,7 +31,7 @@ const ImageContainer = ({newImage}) => {
 
 
     const configureImage = image => {
-        return  apiURL +'images/' +image;
+        return  process.env.REACT_APP_API_URL +'/images/' +image;
     }
 
     const getRole = () => {
@@ -45,10 +43,9 @@ const ImageContainer = ({newImage}) => {
         <Carousel interval={null} prevIcon = {<ChevronDoubleLeft className="carousel-icons" size="130px" color="white" enableBackground="true"/>} nextIcon = {<ChevronDoubleRight className="carousel-icons" size="130px" color="white" enableBackground="true"></ChevronDoubleRight>}>
             {images.length > 0 ? (
                 images.map(image => (
-                <Carousel.Item>
+                <Carousel.Item key = {image}>
                 <div className= "pic-cont">
                 <img
-                    key = {image}
                     className="h-100 mx-auto"
                     src = {configureImage(image)}
                     alt="First slide"

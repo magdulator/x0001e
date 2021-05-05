@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-const apiURL = 'http://130.240.114.29:5000/api/';
+
 
 
 class ImageUpload extends Component {
@@ -16,7 +16,7 @@ class ImageUpload extends Component {
 
       getImages = async () => {
         try{
-            const res = await axios.get(apiURL + 'images/');
+            const res = await axios.get(process.env.REACT_APP_API_URL + '/images/');
             if(!res.data.files) {
                 return;
             } else {
@@ -42,7 +42,7 @@ class ImageUpload extends Component {
         const data = new FormData() 
         
         data.append('image', this.state.selectedFile)
-        await axios.post('http://130.240.114.29:5000/api/images/upload/', data, {headers: {
+        await axios.post(process.env.REACT_APP_API_URL + '/images/upload/', data, {headers: {
             'Content-type' : 'form-data'
         }}).then(res => { 
             console.log(res.statusText)
@@ -51,8 +51,7 @@ class ImageUpload extends Component {
     }
     
     render() {
-        console.log(this.state.images)
-    return ( 
+        return ( 
         <div className = "hej pb-5 pt-5 mb-5">
 	        
             <div className = " px-5 col-7">
@@ -62,7 +61,7 @@ class ImageUpload extends Component {
                 <img
                     key = {image}
                     className = 'img-thumbnail mx-1 my-1'
-                    src = {apiURL +'images/' +image}
+                    src = {process.env.REACT_APP_API_URL +'/images/' +image}
                     alt="First slide"
                 />))):
                  <p>Inga bilder har blivit Uppladdade</p>

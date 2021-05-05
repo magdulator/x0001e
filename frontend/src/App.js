@@ -5,13 +5,12 @@ import {LoginForm} from "./components/login.component";
 import { BrowserRouter, Switch, Route, NavLink} from "react-router-dom";
 import auth from './services/auth';
 import RegisterForm from './components/register.component';
-import {HouseDoorFill, PersonCircle, CameraReelsFill, CaretRightFill, ChevronCompactRight, PersonPlus} from 'react-bootstrap-icons';
+import {HouseDoorFill, PersonCircle, CameraReelsFill, ChevronCompactRight, PersonPlus} from 'react-bootstrap-icons';
 import {ImageContainer} from './components/image-container';
 import {ImageUpload} from './components/upload-image';
 import GuardedRoute from './services/guarded-route';
 import {System} from './components/system';
 import {SystemOverview} from './components/system-overview';
-import{TreeMenu} from './components/tree-menu';
 
 class App extends Component {
     constructor(props) {
@@ -38,7 +37,7 @@ class App extends Component {
     
     render() {
       const {currentUser, currentRole } = this.state;
-      
+
       return (
         
           <BrowserRouter forceRefresh = {true}>

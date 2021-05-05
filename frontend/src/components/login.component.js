@@ -28,7 +28,6 @@
                         alert('Wrong password or email')
                     }
                     else history.push('/home')
-                    console.log("login")
                     
                 }}
                 validator={() => ({})}>

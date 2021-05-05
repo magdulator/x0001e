@@ -1,16 +1,15 @@
 import axios from 'axios';
-const apiURL = 'http://130.240.114.29:5000/api';
 
 class Auth {
     register(username,email, password, role) {
-        return axios.post(apiURL + '/users/register', {
+        return axios.post(process.env.REACT_APP_API_URL + '/users/register', {
             username, email, password, role
         })
     }
 
     login(email, password) {
         
-        return axios.post(apiURL + '/users/login', {
+        return axios.post(process.env.REACT_APP_API_URL + '/users/login', {
             email, password
         }).then(response => {
             if(response.data.token !== null) {
@@ -25,12 +24,10 @@ class Auth {
 
     logout() {
         localStorage.removeItem("currentUser");
-        console.log("log9ut")
 
     }
 
     getCurrentUser() {
-        console.log("getcurrent")
         return JSON.parse(localStorage.getItem('currentUser'));
     }
 
