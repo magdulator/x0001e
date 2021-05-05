@@ -11,41 +11,63 @@ import {ImageUpload} from './components/upload-image';
 import GuardedRoute from './services/guarded-route';
 import {System} from './components/system';
 import {SystemOverview} from './components/system-overview';
+import Screensaver from './components/screensaver.component';
+
+const screensaver_time = 30000; //milliseconds
 
 class App extends Component {
     constructor(props) {
-      super(props);
-      this.logOut = this.logOut.bind(this);
-      this.handleClick = this.handleClick.bind(this);
-      this.state = {
-      currentUser: auth.getCurrentUser(),
-      currentRole: auth.isAdmin(),
-    };  
-  }
-  handleClick() {
-      if(this.state.open) {
-        this.setState({open: false});
-      }
-        else {
-            this.setState({open: true})
+        super(props);
+        this.logOut = this.logOut.bind(this);
+        this.inactivateScreenSaver = this.inactivateScreenSaver.bind(this)
+        this.state = {
+        currentUser: auth.getCurrentUser(),
+        currentRole: auth.isAdmin(),
+        screensaverActive: false,
+        };  
+    }
+    componentDidMount() { 
+        this.timerID = setInterval(
+            () => this.activateScreenSaver(),      
+            screensaver_time      //Screen saver time 
+        );
+   }
+    componentWillUnmount() {
+        clearInterval(this.timerID)
+    }
+
+    activateScreenSaver() {
+        this.setState({screensaverActive: true,})
+        clearInterval(this.timerID)
+    }
+
+    inactivateScreenSaver() {
+        clearInterval(this.timerID)     
+        if(this.state.screensaverActive === true) {
+            this.setState({screensaverActive: false})
+            this.timerID = setInterval(
+                () => this.activateScreenSaver(),      
+            screensaver_time      //Screen saver time 
+            );
         }
-  }
+    }
 
     logOut() {
-        auth.logout();
+        auth.logout()
     }
     
     render() {
-      const {currentUser, currentRole } = this.state;
+        const {currentUser, currentRole, screensaverActive} = this.state;
 
-      return (
-        
-          <BrowserRouter forceRefresh = {true}>
+        return (
+            <div className = "App" onClick = {this.inactivateScreenSaver}>
+            {screensaverActive ? (<><Screensaver></Screensaver></>):(<>
+           
+            <BrowserRouter forceRefresh = {true}>
             
               <nav className="navbar navbar-expand-lg fixed-bottom justify-content-between">
                   <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
                       
-                    
                       {currentUser ? (
                     // Logged in user
                       <>
@@ -70,7 +92,6 @@ class App extends Component {
                           </NavLink> 
                       </li>
                       
-                      
                       {window.location.pathname === "/overview" && (
                           // if pathname = /overview we add to navbar
                           <>
@@ -81,11 +102,8 @@ class App extends Component {
                               <h4 className="pt-2">SYSTEM <br></br> ÖVERBLICK</h4>
                           </NavLink> 
                       </li>
+                      </>)}
                       </>
-                      )}
-                      
-                      </>
-                      
                       ):(
                         // Not logged in
                       <>
@@ -100,28 +118,25 @@ class App extends Component {
                               <PersonCircle size = "50"></PersonCircle><br></br>
                               <h4 className="pt-1">LOGGA IN</h4>
                           </NavLink>
-                      </li>
-                     
-                       
+                      </li>   
                       </>
                   )}
-                  
-              </ul>
+                </ul>
               {currentRole && (
                   // If it is admin you can also register new
-                          <>
-                          <ul className = "navbar-nav mr-5">
-                          <li className="nav-item ml-3 text-center">
+                <>
+                <ul className = "navbar-nav mr-5">
+                    <li className="nav-item ml-3 text-center">
 
-                            <NavLink to={"/register"} className="nav-link px-4 text-dark" activeClassName="active-link">
+                        <NavLink to={"/register"} className="nav-link px-4 text-dark" activeClassName="active-link">
                             <PersonPlus size = "50"></PersonPlus><br></br>
-                                <h4 className="pt-1">NY PROFIL</h4>
-                            </NavLink> 
-                        </li>
-                        </ul>
+                            <h4 className="pt-1">NY PROFIL</h4>
+                        </NavLink> 
+                    </li>
+                </ul>
 
-                          </>
-                        )}
+                </>
+                )}
                         
           </nav>
           <Switch>
@@ -134,8 +149,9 @@ class App extends Component {
               <GuardedRoute path = "/overview" component = {SystemOverview} auth = {auth.isAuth()}/>
           </Switch>
           </BrowserRouter>
+          </>)}
+        </div>
 
-          
       )
     }
 }
