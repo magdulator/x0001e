@@ -32,7 +32,8 @@
                 }}
                 validator={() => ({})}>
                     { props => (
-                    <div className="container py-5">
+                    <div className = "d-flex justify-content-center">
+
                         <div className="card mx-auto">
                             <div className="card-header text-center">
                                 <h4>Logga in</h4>
@@ -54,9 +55,9 @@
                                     </div>                                 
                                     <div className = "form-group">
                                         <button
-                                        className = "btn btn-primary btn-lg mt-3 py-2"
+                                        className = "btn btn-primary btn-lg mt-3 py-3"
                                         type="submit"
-                                        disabled={props.isSubmitting}> <h4>LOGGA IN</h4>
+                                        disabled={props.isSubmitting}> <h3>LOGGA IN</h3>
                                         </button>
                                     </div>
                                 </form>

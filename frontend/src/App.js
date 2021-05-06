@@ -1,17 +1,18 @@
 import React, {Component} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import {LoginForm} from "./components/login.component";
+import {LoginForm} from "./pages/login.component";
 import { BrowserRouter, Switch, Route, NavLink} from "react-router-dom";
 import auth from './services/auth';
-import RegisterForm from './components/register.component';
+import RegisterForm from './pages/register.component';
 import {HouseDoorFill, PersonCircle, CameraReelsFill, ChevronCompactRight, PersonPlus} from 'react-bootstrap-icons';
-import {ImageContainer} from './components/image-container';
-import {ImageUpload} from './components/upload-image';
+import {ImageContainer} from './pages/image-container';
+import {ImageUpload} from './pages/upload-image';
 import GuardedRoute from './services/guarded-route';
-import {System} from './components/system';
-import {SystemOverview} from './components/system-overview';
+import {System} from './pages/system';
+import {SystemOverview} from './pages/system-overview';
 import Screensaver from './components/screensaver.component';
+import {Test} from './pages/test'
 
 const screensaver_time = 30000; //milliseconds
 
@@ -37,7 +38,7 @@ class App extends Component {
     }
 
     activateScreenSaver() {
-        this.setState({screensaverActive: true,})
+        this.setState({screensaverActive: false,})
         clearInterval(this.timerID)
     }
 
@@ -60,19 +61,19 @@ class App extends Component {
         const {currentUser, currentRole, screensaverActive} = this.state;
 
         return (
-            <div className = "App" onClick = {this.inactivateScreenSaver}>
+            <div className = "App "  onClick = {this.inactivateScreenSaver}>
             {screensaverActive ? (<><Screensaver></Screensaver></>):(<>
            
             <BrowserRouter forceRefresh = {true}>
             
               <nav className="navbar navbar-expand-lg fixed-bottom justify-content-between">
-                  <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
+                  <ul className="navbar-nav mr-auto mt-2 mt-lg-0 py-2">
                       
                       {currentUser ? (
                     // Logged in user
                       <>
-                      <li className="nav-item ml-3 text-center text-secondary">
-                          <NavLink to={"/home"} className="nav-link px-5 text-dark" activeClassName="active-link">
+                      <li className="nav-item ml-3 text-center text-secondary ">
+                          <NavLink to={"/home"} className="nav-link px-5 text-dark py-auto" activeClassName="active-link">
                               <HouseDoorFill size = "50"></HouseDoorFill><br></br>
                               <h4 className="pt-1">HEM</h4>        
                           </NavLink>
@@ -147,6 +148,7 @@ class App extends Component {
               <GuardedRoute path = "/upload" component = {ImageUpload} auth = {auth.isAdmin()}/>
               <GuardedRoute path = "/register" component = {RegisterForm} auth = {auth.isAdmin()}/>
               <GuardedRoute path = "/overview" component = {SystemOverview} auth = {auth.isAuth()}/>
+              <Route path = "/test" component={Test}></Route>
           </Switch>
           </BrowserRouter>
           </>)}

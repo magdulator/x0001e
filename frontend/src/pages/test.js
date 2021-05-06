@@ -7,7 +7,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import auth from '../services/auth';
 
 
-const ImageContainer = ({newImage}) => {
+const Test = ({newImage}) => {
 
     let history = useHistory();
 
@@ -45,7 +45,7 @@ const ImageContainer = ({newImage}) => {
                 images.map(image => (
                 <Carousel.Item key = {image}>
                     <img
-                    className="h-100 mx-auto"
+                    className="mx-auto"
                     src = {configureImage(image)}
                     alt="First slide"
                     />           
@@ -71,4 +71,4 @@ const ImageContainer = ({newImage}) => {
     )
 }
 
-export {ImageContainer}
+export {Test}

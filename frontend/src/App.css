@@ -1,20 +1,13 @@
-.navbar {
-  background-color:#d1d1d1;
-  overflow: hidden;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
+
 
 .active-link {
   background-color: rgb(148, 148, 148);
   border-radius: 20px;
   color: black;
-
 }
 
 .card.mx-auto {
-  width:40%;
+  width: 600px;
 }
 
 body, html {
@@ -27,6 +20,7 @@ body, html {
   width: 100%;
 }
 
+
 .carousel-indicators li {
   background-color: white; 
   height: 30px;
@@ -35,19 +29,10 @@ body, html {
   margin: 10px;
   margin-bottom: 20px;
 }
-
-
-
-.slider-container {
-  max-height: 100vh;
-  bottom: 0;
-  width: 100%;
-  background-color: black;
-  margin: 0;
-  padding: 0;
-  position:absolute;
-  top:0;
-  left: 0;
+.d-flex.justify-content-center {
+  display: flex;
+  align-items: stretch;
+  top: 0;
 }
 
 .editPic {
@@ -66,19 +51,6 @@ body, html {
 }
 .editPic:hover{
   color:black;
-}
-
-.pic-cont {
-  position:relative;
-  height: 91vh;
-  width: 100%;
-  margin: auto;
-}
-
-.h-100.mx-auto {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .img-thumbnail {
@@ -103,7 +75,7 @@ body, html {
   width: 100%;
   margin: 0;
   position: absolute;
-  top: 40%;
+  top: 35%;
   left: 50%;
   transform: translate(-50%, -40%);}
 
@@ -113,10 +85,6 @@ body, html {
     margin-right: 10px;
 }
 
-.App {
-  height: 100vh;
-  width: 100%;
-}
 
 .screensaver-container {
   max-height: 100vh;
@@ -136,6 +104,41 @@ body, html {
   margin: auto;
 }
 
-.screensaver > .carousel-control-prev, .carousel-control-next {
+.screensaver > .carousel-control-prev, .screensaver >.carousel-control-next {
   display: none;
 }
+
+
+
+.navbar {
+  background-color:#d1d1d1;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin: 0;
+  height: 150px;
+}
+
+.carousel.slide {
+  position: absolute;
+    top: 0px;
+    bottom:150px;
+}
+
+.carousel-inner {
+  height: 100%;
+}
+
+.carousel-item {
+  height: 100%;
+}
+
+.mx-auto{
+  max-height: 100%;
+  max-width: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
