@@ -34,7 +34,7 @@ class Screensaver extends Component {
         const {images} = this.state
         return ( 
             <div className = "screensaver-container">
-            <Carousel>
+            <Carousel className = "screensaver">
                 {images.length > 0 ? (
                     images.map(image => (
                     <Carousel.Item key = {image}>

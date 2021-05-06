@@ -39,7 +39,7 @@ body, html {
 
 
 .slider-container {
-  max-height: 85vh;
+  max-height: 100vh;
   bottom: 0;
   width: 100%;
   background-color: black;
@@ -70,7 +70,7 @@ body, html {
 
 .pic-cont {
   position:relative;
-  height: 85vh;
+  height: 91vh;
   width: 100%;
   margin: auto;
 }
@@ -134,4 +134,8 @@ body, html {
   height: 100vh;
   width: 100%;
   margin: auto;
+}
+
+.screensaver > .carousel-control-prev, .carousel-control-next {
+  display: none;
 }
