@@ -93,6 +93,10 @@ body, html {
     margin-right: 10px;
 }
 
+/**
+  screensaver
+*/
+
 .screensaver.carousel.slide {
   position: absolute;
     top: 0px;
@@ -103,17 +107,22 @@ body, html {
   display: none;
 }
 
+/**
+  image-container
+*/
+
 .carousel.slide {
   position: absolute;
     top: 0px;
     bottom:150px;
+    width: 100%;
 }
 
 .carousel-inner {
   height: 100%;
 }
 
-.carousel-item {
+.carousel-item{
   height: 100%;
 }
 
@@ -124,6 +133,10 @@ body, html {
   margin-left: auto;
   margin-right: auto;
 }
+
+/**
+  system-overview
+*/
 
 .d-flex.justify-content-center.flex-wrap.overview {
   background-color: lightgray;
