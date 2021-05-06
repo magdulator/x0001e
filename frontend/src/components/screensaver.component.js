@@ -33,18 +33,15 @@ class Screensaver extends Component {
     render() {
         const {images} = this.state
         return ( 
-            <div className = "screensaver-container">
             <Carousel className = "screensaver">
                 {images.length > 0 ? (
                     images.map(image => (
                     <Carousel.Item key = {image}>
-                    <div className= "screen-pic-cont">
                     <img
-                        className="h-100 mx-auto"
+                        className="mx-auto"
                         src = {this.configureImage(image)}
                         alt="First slide"
                     />
-                    </div>
                 </Carousel.Item>
                 ))):
                 <Carousel.Item>
@@ -57,7 +54,6 @@ class Screensaver extends Component {
                     </Carousel.Item>
                 }
             </Carousel>
-            </div>
     )}
 }
 export default Screensaver;

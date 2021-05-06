@@ -38,7 +38,7 @@ class App extends Component {
     }
 
     activateScreenSaver() {
-        this.setState({screensaverActive: false,})
+        this.setState({screensaverActive: true,})
         clearInterval(this.timerID)
     }
 

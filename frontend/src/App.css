@@ -1,4 +1,12 @@
-
+.navbar {
+  background-color:#d1d1d1;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin: 0;
+  height: 150px;
+}
 
 .active-link {
   background-color: rgb(148, 148, 148);
@@ -85,39 +93,14 @@ body, html {
     margin-right: 10px;
 }
 
-
-.screensaver-container {
-  max-height: 100vh;
-  width: 100%;
-  background-color: black;
-  margin: 0;
-  padding: 0;
-  position:absolute;
-  top:0;
-  left: 0;
-}
-
-.screen-pic-cont {
-  position:relative;
-  height: 100vh;
-  width: 100%;
-  margin: auto;
+.screensaver.carousel.slide {
+  position: absolute;
+    top: 0px;
+    bottom:0px;
 }
 
 .screensaver > .carousel-control-prev, .screensaver >.carousel-control-next {
   display: none;
-}
-
-
-
-.navbar {
-  background-color:#d1d1d1;
-  overflow: hidden;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  margin: 0;
-  height: 150px;
 }
 
 .carousel.slide {
