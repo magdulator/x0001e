@@ -125,3 +125,11 @@ body, html {
   margin-right: auto;
 }
 
+.d-flex.justify-content-center.flex-wrap.overview {
+  background-color: lightgray;
+}
+
+.card.my-3.py-3 {
+  border-radius: 20px;
+}
+
