@@ -12,7 +12,7 @@ import GuardedRoute from './services/guarded-route';
 import {System} from './pages/system';
 import {SystemOverview} from './pages/system-overview';
 import Screensaver from './components/screensaver.component';
-import {Test} from './pages/test'
+import { OverviewWidefind } from "./pages/overview-widefind";
 
 const screensaver_time = 30000; //milliseconds
 
@@ -21,7 +21,7 @@ class App extends Component {
         super(props);
         this.logOut = this.logOut.bind(this);
         this.inactivateScreenSaver = this.inactivateScreenSaver.bind(this)
-        this.state = {
+        this.state = {  
         currentUser: auth.getCurrentUser(),
         currentRole: auth.isAdmin(),
         screensaverActive: false,
@@ -38,7 +38,7 @@ class App extends Component {
     }
 
     activateScreenSaver() {
-        this.setState({screensaverActive: true,})
+        this.setState({screensaverActive: false,})
         clearInterval(this.timerID)
     }
 
@@ -141,14 +141,14 @@ class App extends Component {
                         
           </nav>
           <Switch>
-              <Route path = "/login" component={LoginForm}/>
-              <Route path = "/register" component={RegisterForm} />
-              <Route path = "/home" component = {ImageContainer}/>
-              <GuardedRoute path = "/system" component = {System} auth ={auth.isAuth()}/>
-              <GuardedRoute path = "/upload" component = {ImageUpload} auth = {auth.isAdmin()}/>
-              <GuardedRoute path = "/register" component = {RegisterForm} auth = {auth.isAdmin()}/>
-              <GuardedRoute path = "/overview" component = {SystemOverview} auth = {auth.isAuth()}/>
-              <Route path = "/test" component={Test}></Route>
+                <Route path = "/login" component={LoginForm}/>
+                <Route path = "/register" component={RegisterForm} />
+                <Route path = "/home" component = {ImageContainer} />
+                <GuardedRoute path = "/system" component = {System} auth ={auth.isAuth()}/>
+                <GuardedRoute path = "/upload" component = {ImageUpload} auth = {auth.isAdmin()}/>
+                <GuardedRoute path = "/register" component = {RegisterForm} auth = {auth.isAdmin()}/>
+                <GuardedRoute exact path = "/overview" component = {SystemOverview} auth = {auth.isAuth()}/>
+                <GuardedRoute exact path = "/overview/widefind" component = {OverviewWidefind} auth = {auth.isAuth()}/>
           </Switch>
           </BrowserRouter>
           </>)}

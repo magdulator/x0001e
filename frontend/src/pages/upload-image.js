@@ -52,7 +52,7 @@ class ImageUpload extends Component {
     
     render() {
         return ( 
-        <div className = "hej pb-5 pt-5 mb-5">
+        <div className = "upload-container pb-5 pt-5 mb-5">
 	        
             <div className = " px-5 col-7">
                 <h4>Uppladdade bilder</h4><hr></hr>
