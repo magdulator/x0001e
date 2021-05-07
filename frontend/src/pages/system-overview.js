@@ -11,7 +11,7 @@ const SystemOverview = () => {
                 <div className="row">
                     <div className="col">
                         <div className="card my-3 py-3">
-                            <a className="card-block stretched-link text-decoration-none" href ="overview">
+                            <a className="card-block stretched-link text-decoration-none" href ="overview/fibaro">
                             <div className = "card-body text-center">
                                 <h2>Fibaro Zwave</h2>
                             </div></a>
@@ -28,7 +28,7 @@ const SystemOverview = () => {
                     <div className="w-100"></div>
                     <div className="col">
                         <div className="card my-3 py-3">
-                            <a className="card-block stretched-link text-decoration-none" href ="overview">
+                            <a className="card-block stretched-link text-decoration-none" href ="overview/philips">
                             <div className = "card-body text-center">
                                 <h2>Philips Hue</h2>
                             </div></a>
@@ -36,7 +36,7 @@ const SystemOverview = () => {
                     </div>
                     <div className="col">
                         <div className="card my-3 py-3">
-                            <a className="card-block stretched-link text-decoration-none" href ="overview">
+                            <a className="card-block stretched-link text-decoration-none" href ="overview/vayyar">
                             <div className = "card-body text-center">
                                 <h2>Vayyar</h2>
                             </div></a>

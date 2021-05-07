@@ -4,7 +4,7 @@ const System = () => {
     return(
         <div className = "system-container d-flex justify-content-center flex-wrap">
             <div className="system-card card">
-                <a className="card-block stretched-link text-decoration-none text-dark" href ="overview">
+                <a className="card-block stretched-link text-decoration-none text-dark" href ="system/overview">
                 <div className = "card-header py-0 pt-2 my-0 text-center" ><h4>System överblick</h4><p>Mer information <ArrowRight></ArrowRight></p></div>
                 <div className = "card-body px-0">
                     <ul>
@@ -16,7 +16,7 @@ const System = () => {
                 </div></a>
             </div>
             <div className="system-card card" >
-                <a className="card-block stretched-link text-decoration-none text-dark" href ="status">
+                <a className="card-block stretched-link text-decoration-none text-dark" href ="system/status">
                 <div className = "card-header py-0 pt-2 my-0 text-center"><h4>System status</h4><p>Mer information <ArrowRight></ArrowRight></p></div>
                 <div className = "card-body px-0">
                     <ul className = "list-unstyled pl-3 my-0">
@@ -28,11 +28,11 @@ const System = () => {
                 </div></a>
             </div>
             <div className="system-card card">
-                <a className="card-block stretched-link text-decoration-none text-dark" href ="scenario">
+                <a className="card-block stretched-link text-decoration-none text-dark" href ="system/scenario">
                 <div className = "card-header py-0 pt-2 my-0 text-center"><h4>Scenario</h4><p>Mer information <ArrowRight></ArrowRight></p></div></a>
             </div>
             <div className="system-card card">
-                <a className="card-block stretched-link text-decoration-none text-dark" href ="turnoff">
+                <a className="card-block stretched-link text-decoration-none text-dark" href ="system/turnoff">
                 <div className = "card-header py-0 pt-2 my-0 text-center"><h4>Stäng av allt</h4><p>"</p></div>
                 <div className = "card-body px-0 py-3 text-center">
                     <XOctagon className="stop-icon" size = "110" color="darkred"></XOctagon>

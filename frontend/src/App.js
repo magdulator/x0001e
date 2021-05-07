@@ -14,7 +14,9 @@ import {SystemOverview} from './pages/system-overview';
 import Screensaver from './components/screensaver.component';
 import { OverviewWidefind } from "./pages/overview-widefind";
 
-const screensaver_time = 30000; //milliseconds
+const screensaver_time = 30000; //milliseconds until screensaver is active
+const availableSystems = ['widefind', 'fibaro', 'philips', 'vayyar'];  // systems available for navbar
+
 
 class App extends Component {
     constructor(props) {
@@ -59,7 +61,7 @@ class App extends Component {
     
     render() {
         const {currentUser, currentRole, screensaverActive} = this.state;
-
+        const pathname = window.location.pathname.split('/');
         return (
             <div className = "App "  onClick = {this.inactivateScreenSaver}>
             {screensaverActive ? (<><Screensaver></Screensaver></>):(<>
@@ -87,23 +89,33 @@ class App extends Component {
                       </li>
                       <li className="nav-item ml-3 text-center  pl-3">
 
-                          <NavLink to={"/system"} className="nav-link px-4 text-dark" isActive ={() => ['/system', '/overview'].includes(window.location.pathname)} activeClassName="active-link" onClick = {this.handleClick}>
+                        <NavLink to={"/system"} className="nav-link px-4 text-dark" isActive ={() => pathname[1] === 'system'} activeClassName="active-link">
                               <CameraReelsFill size = "50"></CameraReelsFill><br></br>
                               <h4 className="pt-1">SYSTEM</h4>
                           </NavLink> 
                       </li>
                       
-                      {window.location.pathname === "/overview" && (
-                          // if pathname = /overview we add to navbar
+                      {(pathname[2] === 'overview' || pathname[2] === 'status') && (
+                          // if pathname = /overview
                           <>
-                          <ChevronCompactRight size = "40" className = "my-auto px-0 mx-0"></ChevronCompactRight>
-                        <li className="nav-item my-auto text-center">
-
-                          <NavLink to={"/overview"} className="nav-link px-2 py-2 text-dark" activeClassName="active-link">
-                              <h4 className="pt-2">SYSTEM <br></br> ÖVERBLICK</h4>
-                          </NavLink> 
-                      </li>
-                      </>)}
+                            <ChevronCompactRight size = "40" className = "my-auto"></ChevronCompactRight>
+                            <li className="nav-item my-auto text-center">
+                                <NavLink to={"/system/overview"} className="nav-link px-2 py-2 text-dark" activeClassName="active-link">
+                                    <h4 className="pt-2">SYSTEM <br></br> ÖVERBLICK</h4>
+                                </NavLink> 
+                            </li>
+                            {availableSystems.includes(pathname[3]) && (
+                            <>
+                                <ChevronCompactRight size = "40" className = "my-auto"></ChevronCompactRight>
+                                <li className="nav-item my-auto text-center">
+                                    <NavLink to={`/system/overview/${pathname[3]}`} className="nav-link px-2 py-2 text-dark" activeClassName="active-link">
+                                        <h4 className="pt-2">{pathname[3]}</h4>
+                                    </NavLink>
+                                </li>
+                            </>
+                            )}
+                        </>
+                      )} 
                       </>
                       ):(
                         // Not logged in
@@ -144,11 +156,11 @@ class App extends Component {
                 <Route path = "/login" component={LoginForm}/>
                 <Route path = "/register" component={RegisterForm} />
                 <Route path = "/home" component = {ImageContainer} />
-                <GuardedRoute path = "/system" component = {System} auth ={auth.isAuth()}/>
+                <GuardedRoute exact path = "/system" component = {System} auth ={auth.isAuth()}/>
                 <GuardedRoute path = "/upload" component = {ImageUpload} auth = {auth.isAdmin()}/>
                 <GuardedRoute path = "/register" component = {RegisterForm} auth = {auth.isAdmin()}/>
-                <GuardedRoute exact path = "/overview" component = {SystemOverview} auth = {auth.isAuth()}/>
-                <GuardedRoute exact path = "/overview/widefind" component = {OverviewWidefind} auth = {auth.isAuth()}/>
+                <GuardedRoute exact path = "/system/overview" component = {SystemOverview} auth = {auth.isAuth()}/>
+                <GuardedRoute exact path = "/system/overview/widefind" component = {OverviewWidefind} auth = {auth.isAuth()}/>
           </Switch>
           </BrowserRouter>
           </>)}
