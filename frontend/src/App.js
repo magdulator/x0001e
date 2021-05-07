@@ -5,7 +5,7 @@ import {LoginForm} from "./pages/login.component";
 import { BrowserRouter, Switch, Route, NavLink} from "react-router-dom";
 import auth from './services/auth';
 import RegisterForm from './pages/register.component';
-import {HouseDoorFill, PersonCircle, CameraReelsFill, ChevronCompactRight, PersonPlus} from 'react-bootstrap-icons';
+import {HouseDoorFill, PersonCircle, CameraReelsFill, ChevronCompactRight, PersonPlus, PencilSquare} from 'react-bootstrap-icons';
 import {ImageContainer} from './pages/image-container';
 import {ImageUpload} from './pages/upload-image';
 import GuardedRoute from './services/guarded-route';
@@ -98,7 +98,7 @@ class App extends Component {
                       {(pathname[2] === 'overview' || pathname[2] === 'status') && (
                           // if pathname = /overview
                           <>
-                            <ChevronCompactRight size = "40" className = "my-auto"></ChevronCompactRight>
+                            <ChevronCompactRight size = "40" color="gray" className = "my-auto"></ChevronCompactRight>
                             <li className="nav-item my-auto text-center">
                                 <NavLink to={"/system/overview"} className="nav-link px-2 py-2 text-dark" activeClassName="active-link">
                                     <h4 className="pt-2">SYSTEM <br></br> ÖVERBLICK</h4>
@@ -106,10 +106,10 @@ class App extends Component {
                             </li>
                             {availableSystems.includes(pathname[3]) && (
                             <>
-                                <ChevronCompactRight size = "40" className = "my-auto"></ChevronCompactRight>
+                                <ChevronCompactRight size = "40" color="gray" className = "my-auto"></ChevronCompactRight>
                                 <li className="nav-item my-auto text-center">
                                     <NavLink to={`/system/overview/${pathname[3]}`} className="nav-link px-2 py-2 text-dark" activeClassName="active-link">
-                                        <h4 className="pt-2">{pathname[3]}</h4>
+                                        <h4 className="overview-system-text">{pathname[3].toUpperCase()}</h4>
                                     </NavLink>
                                 </li>
                             </>
@@ -139,15 +139,25 @@ class App extends Component {
                   // If it is admin you can also register new
                 <>
                 <ul className = "navbar-nav mr-5">
-                    <li className="nav-item ml-3 text-center">
 
+                    {(pathname[1]==='home' || pathname[1] === 'upload') && (<>
+                        <li className="nav-item ml-3 text-center">
+                        
+                        <NavLink to={"/upload"} className="nav-link px-4 text-dark" activeClassName="active-link">
+                            <PencilSquare size = "50"></PencilSquare><br></br>
+                            <h4 className="pt-1">REDIGERA</h4>
+                        </NavLink> 
+                    </li>
+                    </>)}
+                    <li className="nav-item ml-3 text-center">
+                        
                         <NavLink to={"/register"} className="nav-link px-4 text-dark" activeClassName="active-link">
                             <PersonPlus size = "50"></PersonPlus><br></br>
                             <h4 className="pt-1">NY PROFIL</h4>
                         </NavLink> 
                     </li>
                 </ul>
-
+                
                 </>
                 )}
                         
