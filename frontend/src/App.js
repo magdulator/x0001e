@@ -12,11 +12,10 @@ import GuardedRoute from './services/guarded-route';
 import {System} from './pages/system';
 import {SystemOverview} from './pages/system-overview';
 import Screensaver from './components/screensaver.component';
-import { OverviewWidefind } from "./pages/overview-widefind";
+import Systems from "./services/systems";
 
 const screensaver_time = 30000; //milliseconds until screensaver is active
-const availableSystems = ['widefind', 'fibaro', 'philips', 'vayyar'];  // systems available for navbar
-
+const availableSystems = ["widefind", "fibaro"]
 
 class App extends Component {
     constructor(props) {
@@ -27,6 +26,7 @@ class App extends Component {
         currentUser: auth.getCurrentUser(),
         currentRole: auth.isAdmin(),
         screensaverActive: false,
+        availableSystems: availableSystems,
         };  
     }
     componentDidMount() { 
@@ -55,12 +55,13 @@ class App extends Component {
         }
     }
 
+
     logOut() {
         auth.logout()
     }
     
     render() {
-        const {currentUser, currentRole, screensaverActive} = this.state;
+        const {currentUser, currentRole, screensaverActive, availableSystems} = this.state;
         const pathname = window.location.pathname.split('/');
         return (
             <div className = "App "  onClick = {this.inactivateScreenSaver}>
@@ -170,7 +171,7 @@ class App extends Component {
                 <GuardedRoute path = "/upload" component = {ImageUpload} auth = {auth.isAdmin()}/>
                 <GuardedRoute path = "/register" component = {RegisterForm} auth = {auth.isAdmin()}/>
                 <GuardedRoute exact path = "/system/overview" component = {SystemOverview} auth = {auth.isAuth()}/>
-                <GuardedRoute exact path = "/system/overview/widefind" component = {OverviewWidefind} auth = {auth.isAuth()}/>
+                <GuardedRoute exact path = "/system/overview/:systemName" component = {Systems} auth = {auth.isAuth()}/>
           </Switch>
           </BrowserRouter>
           </>)}
