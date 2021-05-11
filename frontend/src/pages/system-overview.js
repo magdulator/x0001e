@@ -1,7 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
 const SystemOverview = () => {
-    console.log("hej")
     return(
         <div className = "d-flex justify-content-center flex-wrap overview text-center py-5">
             <h1 className="w-100">Klicka på ett system för att läsa mer om det</h1>

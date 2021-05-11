@@ -200,5 +200,9 @@ VYER SOM BEHÖVER:
     height: 40px;
   }
 
+  .widefind.card {
+    width: 30%;
+  }
+
 
  }
