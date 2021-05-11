@@ -2,7 +2,7 @@ import axios from 'axios';
 import React from 'react';
 const pathname = window.location.pathname.split('/');
 
-export default class Systems extends React.Component {
+export default class OverviewSpecific extends React.Component {
     state= {
         systems: [],
         system: pathname[3],

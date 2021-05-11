@@ -12,7 +12,7 @@ import GuardedRoute from './services/guarded-route';
 import {System} from './pages/system';
 import {SystemOverview} from './pages/system-overview';
 import Screensaver from './components/screensaver.component';
-import Systems from "./services/systems";
+import OverviewSpecific from "./services/overview-specific.component";
 
 const screensaver_time = 30000; //milliseconds until screensaver is active
 const availableSystems = ["widefind", "fibaro"]
@@ -171,7 +171,7 @@ class App extends Component {
                 <GuardedRoute path = "/upload" component = {ImageUpload} auth = {auth.isAdmin()}/>
                 <GuardedRoute path = "/register" component = {RegisterForm} auth = {auth.isAdmin()}/>
                 <GuardedRoute exact path = "/system/overview" component = {SystemOverview} auth = {auth.isAuth()}/>
-                <GuardedRoute exact path = "/system/overview/:systemName" component = {Systems} auth = {auth.isAuth()}/>
+                <GuardedRoute exact path = "/system/overview/:systemName" component = {OverviewSpecific} auth = {auth.isAuth()}/>
           </Switch>
           </BrowserRouter>
           </>)}
