@@ -47,6 +47,17 @@ class Auth {
             return false;
         }
     }
+
+    getSystems = async () => {
+        try {
+            const res = await axios.get(process.env.REACT_APP_API_URL+'/systems');
+            return res.data[0].systemName;
+        }
+        catch(e) {
+            console.log(e);
+        }
+    }
 }
+
 
 export default new Auth();

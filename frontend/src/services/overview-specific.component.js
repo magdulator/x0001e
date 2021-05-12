@@ -10,7 +10,16 @@ export default class OverviewSpecific extends React.Component {
 
     componentDidMount(){
         this.getSystemInfo();
+    }
 
+    getSystems = async () => {
+        try {
+            const res = await axios.get(process.env.REACT_APP_API_URL+'/systems');
+            return res.data;
+        }
+        catch(e) {
+            console.log(e);
+        }
     }
 
     getSystemInfo = async () => {
@@ -30,15 +39,16 @@ export default class OverviewSpecific extends React.Component {
             <div className = "widefind card">
                 <div className = "card-body mx-3">
                     {this.state.systems ? (
-                        <>
-                    <h2>{this.state.systems.title}</h2>
-                    <p className = "my-4">{this.state.systems.description}</p>
-                    <hr></hr>
-                        <p>Exempel data från systemet:</p>
-                    <p>{this.state.systems.img}</p>
-                    <p>{this.state.systems.exampleData}</p></>
+                    <>
+                        <h2>{this.state.systems.title}</h2>
+                        <p className = "my-4">{this.state.systems.description}</p>
+                        <hr></hr>
+                            <p>Exempel data från systemet:</p>
+                        <p>{this.state.systems.img}</p>
+                        <p>{this.state.systems.exampleData}</p>
+                    </>
                     ):(
-                        <>System is not found</>
+                        <h2>System is not found</h2>
                     )}
                 </div>
             </div>

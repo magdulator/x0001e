@@ -160,6 +160,18 @@ VYER SOM BEHÖVER:
 - login/register
 
 **/
+.widefind.card {
+  width: 50%;
+}
+
+.overview-system-text {
+  height:65px;
+  min-width: 130px;
+}
+.overview-text {
+  height:65px;
+  min-width: 130px;
+}
 
 @media (min-width: 2000px) { 
 
@@ -179,10 +191,14 @@ VYER SOM BEHÖVER:
     font-size: 1.4rem;
   }
 
-  .overview-system-text {
-    height:85px;
+  .overview-system-text{
+    height: 85px;
     padding-top: 25px;
-    min-width: 150px;
+  }
+  
+  .overview-text{
+    height:85px;
+    padding-top: 7px;
   }
 
   .system-card.card {
@@ -203,6 +219,5 @@ VYER SOM BEHÖVER:
   .widefind.card {
     width: 30%;
   }
-
 
  }

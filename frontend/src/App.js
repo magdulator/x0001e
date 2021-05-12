@@ -13,9 +13,10 @@ import {System} from './pages/system';
 import {SystemOverview} from './pages/system-overview';
 import Screensaver from './components/screensaver.component';
 import OverviewSpecific from "./services/overview-specific.component";
+import axios from 'axios';
+import EditOverviewSpecific from './pages/edit-overview-specific';
 
 const screensaver_time = 30000; //milliseconds until screensaver is active
-const availableSystems = ["widefind", "fibaro"]
 
 class App extends Component {
     constructor(props) {
@@ -26,10 +27,12 @@ class App extends Component {
         currentUser: auth.getCurrentUser(),
         currentRole: auth.isAdmin(),
         screensaverActive: false,
-        availableSystems: availableSystems,
+        availableSystems: [],
         };  
     }
-    componentDidMount() { 
+    componentDidMount() {
+        this.getSystems();
+
         this.timerID = setInterval(
             () => this.activateScreenSaver(),      
             screensaver_time      //Screen saver time 
@@ -37,6 +40,20 @@ class App extends Component {
    }
     componentWillUnmount() {
         clearInterval(this.timerID)
+    }
+
+    getSystems = async () => {
+        try {
+            const res = await axios.get(process.env.REACT_APP_API_URL+'/systems');
+            const empty = [];
+            res.data.forEach(function (item, index) {
+                empty[index] = item.systemName;
+              });
+            this.setState({availableSystems: empty})
+        }
+        catch(e) {
+            console.log(e);
+        }
     }
 
     activateScreenSaver() {
@@ -101,19 +118,31 @@ class App extends Component {
                           <>
                             <ChevronCompactRight size = "40" color="gray" className = "my-auto"></ChevronCompactRight>
                             <li className="nav-item my-auto text-center">
-                                <NavLink to={"/system/overview"} className="nav-link px-2 py-2 text-dark" activeClassName="active-link">
-                                    <h4 className="pt-2">SYSTEM <br></br> ÖVERBLICK</h4>
+                                <NavLink to={"/system/overview"} className="nav-link text-dark" activeClassName="active-link">
+                                    <h4 className="overview-text py-auto">SYSTEM <br></br> ÖVERBLICK</h4>
                                 </NavLink> 
                             </li>
                             {availableSystems.includes(pathname[3]) && (
                             <>
                                 <ChevronCompactRight size = "40" color="gray" className = "my-auto"></ChevronCompactRight>
                                 <li className="nav-item my-auto text-center">
-                                    <NavLink to={`/system/overview/${pathname[3]}`} className="nav-link px-2 py-2 text-dark" activeClassName="active-link">
-                                        <h4 className="overview-system-text">{pathname[3].toUpperCase()}</h4>
+                                    <NavLink to={`/system/overview/${pathname[3]}`} className="nav-link text-dark" activeClassName="active-link">
+                                        <h4 className="overview-system-text ">{pathname[3].toUpperCase()}</h4>
                                     </NavLink>
                                 </li>
+                                {currentRole && (
+                                    <>
+                                    <li className="nav-item ml-3 text-center">
+                        
+                                        <NavLink to={`/system/overview/${pathname[3]}/edit`} className="nav-link px-4 text-dark" activeClassName="active-link">
+                                            <PencilSquare size = "50"></PencilSquare><br></br>
+                                            <h4 className="pt-1">REDIGERA</h4>
+                                        </NavLink> 
+                                    </li>
+                                    </>
+                                )}
                             </>
+                            
                             )}
                         </>
                       )} 
@@ -172,6 +201,7 @@ class App extends Component {
                 <GuardedRoute path = "/register" component = {RegisterForm} auth = {auth.isAdmin()}/>
                 <GuardedRoute exact path = "/system/overview" component = {SystemOverview} auth = {auth.isAuth()}/>
                 <GuardedRoute exact path = "/system/overview/:systemName" component = {OverviewSpecific} auth = {auth.isAuth()}/>
+                <GuardedRoute exact path = "/system/overview/:systemName/edit" component = {EditOverviewSpecific} auth = {auth.isAdmin()}/>
           </Switch>
           </BrowserRouter>
           </>)}
