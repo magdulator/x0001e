@@ -7,7 +7,10 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const app = express();
-
+// app.enable('trust proxy')
+// app.use((req, res, next) => {
+//     req.secure ? next() : res.redirect('https://' + req.headers.host + req.url)
+// })
 //connect to database
 mongoose.connect(process.env.DB_CONNECT, {useNewUrlParser: true, useUnifiedTopology: true}, () =>
 console.log("Connected to database"));
@@ -28,8 +31,8 @@ console.log("Connected to database"));
   const router = require('./routes/routes.js');
   app.use('/api', router);
 
-  const testRoute = require('./routes/test.js');
-  app.use('/test', testRoute);
+  const systems = require('./routes/systems.js');
+  app.use('/api/systems', systems);
 
   const authRoute = require('./routes/auth');
   app.use('/api/users', authRoute);
