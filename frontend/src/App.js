@@ -5,7 +5,7 @@ import {LoginForm} from "./pages/login.component";
 import { BrowserRouter, Switch, Route, NavLink} from "react-router-dom";
 import auth from './services/auth';
 import RegisterForm from './pages/register.component';
-import {HouseDoorFill, PersonCircle, CameraReelsFill, ChevronCompactRight, PersonPlus, PencilSquare} from 'react-bootstrap-icons';
+import {HouseDoorFill, PersonCircle, CameraReelsFill, ChevronCompactRight, PersonPlus, PencilSquare, PlusSquare} from 'react-bootstrap-icons';
 import {ImageContainer} from './pages/image-container';
 import {ImageUpload} from './pages/upload-image';
 import GuardedRoute from './services/guarded-route';
@@ -15,6 +15,7 @@ import Screensaver from './components/screensaver.component';
 import OverviewSpecific from "./services/overview-specific.component";
 import axios from 'axios';
 import EditOverviewSpecific from './pages/edit-overview-specific';
+import AddSystemSpecific from './pages/add-system-specific';
 
 const screensaver_time = 30000; //milliseconds until screensaver is active
 
@@ -57,7 +58,7 @@ class App extends Component {
     }
 
     activateScreenSaver() {
-        this.setState({screensaverActive: false,})
+        this.setState({screensaverActive: true,})
         clearInterval(this.timerID)
     }
 
@@ -80,6 +81,7 @@ class App extends Component {
     render() {
         const {currentUser, currentRole, screensaverActive, availableSystems} = this.state;
         const pathname = window.location.pathname.split('/');
+        
         return (
             <div className = "App "  onClick = {this.inactivateScreenSaver}>
             {screensaverActive ? (<><Screensaver></Screensaver></>):(<>
@@ -107,13 +109,13 @@ class App extends Component {
                       </li>
                       <li className="nav-item ml-3 text-center  pl-3">
 
-                        <NavLink to={"/system"} className="nav-link px-4 text-dark" isActive ={() => pathname[1] === 'system'} activeClassName="active-link">
+                        <NavLink to = {"/system"} className="nav-link px-4 text-dark" isActive ={() => pathname[1] === 'system'} activeClassName="active-link">
                               <CameraReelsFill size = "50"></CameraReelsFill><br></br>
                               <h4 className="pt-1">SYSTEM</h4>
                           </NavLink> 
                       </li>
                       
-                      {(pathname[2] === 'overview' || pathname[2] === 'status') && (
+                      {((pathname[2] === 'overview' )) && (
                           // if pathname = /overview
                           <>
                             <ChevronCompactRight size = "40" color="gray" className = "my-auto"></ChevronCompactRight>
@@ -130,19 +132,7 @@ class App extends Component {
                                         <h4 className="overview-system-text ">{pathname[3].toUpperCase()}</h4>
                                     </NavLink>
                                 </li>
-                                {currentRole && (
-                                    <>
-                                    <li className="nav-item ml-3 text-center">
-                        
-                                        <NavLink to={`/system/overview/${pathname[3]}/edit`} className="nav-link px-4 text-dark" activeClassName="active-link">
-                                            <PencilSquare size = "50"></PencilSquare><br></br>
-                                            <h4 className="pt-1">REDIGERA</h4>
-                                        </NavLink> 
-                                    </li>
-                                    </>
-                                )}
                             </>
-                            
                             )}
                         </>
                       )} 
@@ -179,6 +169,25 @@ class App extends Component {
                         </NavLink> 
                     </li>
                     </>)}
+
+                    {((pathname[2] === 'overview')) && (<>
+                        <li className="nav-item ml-3 text-center">
+                            <NavLink to="/system/overview/create/new" className="nav-link px-2 text-dark" activeClassName="active-link">
+                                <PlusSquare size = "50"></PlusSquare><br></br>
+                                <h4 className="pt-1">NYTT SYSTEM</h4>
+                            </NavLink> 
+                        </li> 
+                    </>)}
+                    
+                    {((pathname[2] === 'overview') && availableSystems.includes(pathname[3])) && (<>
+                        
+                        <li className="nav-item ml-3 text-center">
+                            <NavLink to={`/system/overview/${pathname[3]}/edit`} className="nav-link px-4 text-dark" activeClassName="active-link">
+                                <PencilSquare size = "50"></PencilSquare><br></br>
+                                <h4 className="pt-1">REDIGERA</h4>
+                            </NavLink> 
+                        </li>            
+                    </>)}
                     <li className="nav-item ml-3 text-center">
                         
                         <NavLink to={"/register"} className="nav-link px-4 text-dark" activeClassName="active-link">
@@ -187,7 +196,6 @@ class App extends Component {
                         </NavLink> 
                     </li>
                 </ul>
-                
                 </>
                 )}
                         
@@ -202,6 +210,8 @@ class App extends Component {
                 <GuardedRoute exact path = "/system/overview" component = {SystemOverview} auth = {auth.isAuth()}/>
                 <GuardedRoute exact path = "/system/overview/:systemName" component = {OverviewSpecific} auth = {auth.isAuth()}/>
                 <GuardedRoute exact path = "/system/overview/:systemName/edit" component = {EditOverviewSpecific} auth = {auth.isAdmin()}/>
+                <GuardedRoute exact path = "/system/overview/create/new" component = {AddSystemSpecific} auth = {auth.isAdmin()}/>
+
           </Switch>
           </BrowserRouter>
           </>)}

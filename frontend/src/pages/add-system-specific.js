@@ -2,12 +2,13 @@ import axios from 'axios';
 import React from 'react';
 const pathname = window.location.pathname.split('/');
 
-export default class EditOverviewSpecific extends React.Component {
+export default class AddSystemSpecific extends React.Component {
     constructor(props) {
         super(props)
         this.state= {
             systems: [],
             system: pathname[3],
+            systemName: "",
             title: "",
             description: "",
             img: "",
@@ -58,14 +59,14 @@ export default class EditOverviewSpecific extends React.Component {
     }
 
     sendInfo = async () => {
-
+        const systemName = this.state.systemName
         const title = this.state.title;
         const description = this.state.description;
         const img = this.state.img;
         const exampleData = this.state.exampleData;
 
-        await axios.patch(process.env.REACT_APP_API_URL + `/systems/update/${this.state.system}`, {
-            title, description, img, exampleData
+        await axios.post(process.env.REACT_APP_API_URL + `/systems/create`, {
+            systemName, title, description, img, exampleData
         }).then(response => {
             if(response.data.token !== null) {
                 console.log(JSON.stringify(response.data))
@@ -81,10 +82,14 @@ export default class EditOverviewSpecific extends React.Component {
             <div className ="d-flex justify-content-center"> 
             <div className = "widefind card">
                 <div className = "card-body mx-3">
-                    {this.state.systems ? (
                     <form onSubmit = {this.handleSubmit}>
-                    <h2>Redigera systemet</h2>
+                    <h2>Lägg till nytt system</h2>
+                    <h5 className = "py-2">URL namn på systemet (ett ord):</h5>
+                    <div className = "input-group input-group-lg">
+                      <input name="systemName" type="text" className="form-control" value={this.state.systemName || ''} onChange={this.handleChange} aria-label="Recipient's username" aria-describedby="basic-addon2"/>
+                    </div> 
                     <h5 className = "py-2">Namn på systemet:</h5>
+
                     <div className = "input-group input-group-lg">
                       <input name="title" type="text" className="form-control" value={this.state.title || ''} onChange={this.handleChange} aria-label="Recipient's username" aria-describedby="basic-addon2"/>
                     </div> 
@@ -99,15 +104,13 @@ export default class EditOverviewSpecific extends React.Component {
                     </div> 
                     <h5 className = "py-2">Beskrivande text för datat:</h5>
                     <div className = "input-group input-group-lg">
-                      <textarea name="exampleData" className="form-control" value = {this.state.exampleData || ''} onChange={this.handleChange}/>
+                      <textarea name="exampleData" className="form-control" value = {this.state.exampleData || ''}  onChange={this.handleChange}/>
                     </div> 
                     <div className = "input-group input-group-lg">
                       <input type="submit" className="form-control" value= "Submit"/>
                     </div> 
                     </form>
-                    ):(
-                        <h2>Systemet finns inte i databasen</h2>
-                    )}
+                
                 </div>
             </div>
         </div>
