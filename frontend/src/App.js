@@ -175,7 +175,7 @@ class App extends Component {
                         <li className="nav-item text-center">
                             <NavLink to="/system/overview/create/new" className="nav-link" activeClassName="active-link">
                                 <PlusSquare className = "menu-icon" size = "50"></PlusSquare><br></br>
-                                <h4>NYTT SYSTEM</h4>
+                                <h4>LÄGG TILL</h4>
                             </NavLink> 
                         </li> 
                     </>)}

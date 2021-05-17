@@ -178,6 +178,7 @@ html, body,  #root, .App{
     .system-card.card {
       width: 250px;
       margin: 10px;
+      border-radius: 30px;
     }
   }
 
