@@ -1,3 +1,9 @@
+html, body,  #root, .App{
+  background-color: #2c2f3d;
+  height: 100%;
+}
+
+
 .navbar {
   background-color:#d1d1d1;
   overflow: hidden;
@@ -27,40 +33,15 @@
   display: none;
 }
 
-html {
-  height: 100%;
-  width: 100%;
-}
-body, #root, .App{
-  height: 100%;
-  width: 100%;
-}
-
 .main {
   margin-bottom: 212px;
 }
-
-
 
 .active-link {
   background-color: rgb(148, 148, 148);
   border-radius: 20px;
   color: black;
 }
-
-.card.mx-auto {
-  width: 600px;
-}
-
-body, html {
-  background-color: #2c2f3d;
-
-}
-
-.btn.btn-primary.btn-lg {
-  width: 100%;
-}
-
 
 .carousel-indicators li {
   background-color: white; 
@@ -69,11 +50,6 @@ body, html {
   border-radius: 50%;
   margin: 10px;
   margin-bottom: 20px;
-}
-.d-flex.justify-content-center {
-  display: flex;
-  align-items: stretch;
-  top: 0;
 }
 
 .editPic {
@@ -87,8 +63,7 @@ body, html {
   border: none;
   cursor: pointer;
   border-radius: 5px;
-  text-align: center;
-  
+  text-align: center; 
 }
 .editPic:hover{
   color:black;
@@ -105,203 +80,94 @@ body, html {
   height: 100%;
 }
 
-.system-card.card {
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-    width: 230px;
-    background-color:lightgray;
-    border-radius: 30px;
-    border-width: 3px;
-    border-color: rgb(117, 117, 117);
-}
-
-.status-icon{
-  margin-right: 0.4rem;
-}
-.d-flex.justify-content-center {
-  width: 100%;
-  margin: 0;
-}
-
-  input[type=radio] {
-    width: 15px;
-    height: 15px;
-    margin-right: 10px;
-}
-
 /**
-  screensaver
-*/
-
-.screensaver.carousel.slide {
-  position: absolute;
-    top: 0px;
-    bottom:0px;
-}
-
-.screensaver > .carousel-control-prev, .screensaver >.carousel-control-next {
-  display: none;
-}
-
-/**
-  image-container
-*/
-
-.carousel.slide {
-  position: absolute;
-    top: 0px;
-    bottom:150px;
-    width: 100%;
-}
-
-.carousel-inner {
-  height: 100%;
-}
-
-.carousel-item{
-  height: 100%;
-}
-
-.mx-auto{
-  max-height: 100%;
-  max-width: 100%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/**
-  system-overview
-*/
-
-.d-flex.justify-content-center.flex-wrap.overview {
-  background-color: lightgray;
-}
-
-.card.my-3.py-3 {
-  border-radius: 20px;
-}
-
-/*
-VYER SOM BEHÖVER:
-- SYSTEM 
-- SYSTEM OVERVIEW
-- UPLOAD
-- login/register
-
-**/
-.add-system.card {
-  width: 50%;
-}
-
-.overview-system-text {
-  height:65px;
-  min-width: 130px;
-}
-.overview-text {
-  height:65px;
-  min-width: 130px;
-}
-
-.specific-system.col-5{
-  width: 300px;
-}
-
-@media (min-width: 1000px) { 
-  .specific-system.col-5{
-    width: 300px;
-  }
-  .system-container {  
-    top: 40%;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    align-items: center;
-    display: table-cell;
-    vertical-align: middle;
-    position: static;
-    height: 100%;
-  }
-
-  .system-card.card {
-    float: left;
-
-  }
-  .navbar {
-    background-color:#d1d1d1;
-    overflow: hidden;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    margin: 0;
-    height: 150px;
-  }
-
-  .menu-icon {
-    display:inline-block;
-  }
-
-}
-.main {
-    margin-bottom: 150px;
-    display: table;
-    height: 70%;
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-}
-.test {
-  height: 400px;
-  margin: 10px;
-  background-color: white;
-}
-
-@media (min-width: 2000px) { 
-
-  /**
-  SYSTEM
+    screensaver
   */
-  h1 {
-    font-size: 3rem;
-  }
-  h2 {
-    font-size: 2.6rem;
-  }
-  h4 {
-    font-size: 2rem;
-  }
-  p, li {
-    font-size: 1.4rem;
-  }
-
-  .overview-system-text{
-    height: 85px;
-    padding-top: 25px;
+  
+  .screensaver.carousel.slide {
+    position: absolute;
+      top: 0px;
+      bottom:0px;
   }
   
-  .overview-text{
-    height:85px;
-    padding-top: 7px;
+  .screensaver > .carousel-control-prev, .screensaver >.carousel-control-next {
+    display: none;
+  }
+  
+  /**
+    image-container
+  */
+  
+  .carousel.slide {
+    position: absolute;
+    background-color: black;
+      top: 0px;
+      bottom:150px;
+      width: 100%;
+  }
+  
+  .carousel-inner {
+    height: 100%;
+  }
+  
+  .carousel-item{
+    height: 100%;
+  }
+  
+  .mx-auto{
+    max-height: 100%;
+    max-width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media (min-width: 1000px) {
+    .main {
+      box-sizing: border-box;
+      margin: 0;
+      min-height: 100%;
+      padding-bottom:150px;
+    } 
+    .navbar {
+      background-color:#d1d1d1;
+      overflow: hidden;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      margin: 0;
+      height: 150px;
+    }
+  
+    .menu-icon {
+      display:inline-block;
+    }
+
+    .system-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+    }
+
+    .system-card.card {
+      width: 250px;
+    }
   }
 
-  .system-card.card {
-    margin-right: 2rem;
-    width: 320px;
-    height: 380px;
-    padding: 0.2rem;
+  @media (min-width: 2000px) { 
+  
+    /**
+    SYSTEM
+    */
+    h1 {
+      font-size: 3rem;
+    }
+    h2 {
+      font-size: 2.6rem;
+    }
+    h4 {
+      font-size: 2rem;
+    }
+    p, li {
+      font-size: 1.4rem;
+    }
   }
-
-  .stop-icon {
-    width: 180px;
-    height: 180px;
-  }
-  .status-icon {
-    width: 40px;
-    height: 40px;
-  }
-
-  .add-system.card {
-    width: 30%;
-  }
-
- }
