@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 'use strict';
+mongoose.set('useFindAndModify', false);
 const systemSchema = new mongoose.Schema({
     systemName: {
         type: String,
