@@ -30,7 +30,9 @@ class System extends Component {
     render() {
         const {availableSystems} = this.state;
         return(
-            <div className = "system-container d-flex justify-content-center flex-wrap">
+            <div className = "main">
+
+            <div className = "system-container">
                 <div className="system-card card">
                     <a className="card-block stretched-link text-decoration-none text-dark" href ="system/overview">
                     <div className = "card-header py-0 pt-2 my-0 text-center" ><h4>System överblick</h4><p>Mer information <ArrowRight></ArrowRight></p></div>
@@ -66,6 +68,7 @@ class System extends Component {
                         <XOctagon className="stop-icon" size = "110" color="darkred"></XOctagon>
                     </div></a>
                 </div>
+            </div>
             </div>
         )
     }

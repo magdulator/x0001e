@@ -52,6 +52,7 @@ class ImageUpload extends Component {
     
     render() {
         return ( 
+        <div className = "main">
         <div className = "upload-container pb-5 pt-5 mb-5">
 	        
             <div className = " px-5 col-7">
@@ -88,6 +89,7 @@ class ImageUpload extends Component {
             
                 </form>
 	        </div><hr></hr>
+       </div>
        </div>
     )}
 }

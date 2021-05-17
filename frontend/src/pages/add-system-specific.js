@@ -79,8 +79,9 @@ export default class AddSystemSpecific extends React.Component {
 
     render() {
         return (
+            <div className = "main">
             <div className ="d-flex justify-content-center"> 
-            <div className = "widefind card">
+            <div className = "add-system card">
                 <div className = "card-body mx-3">
                     <form onSubmit = {this.handleSubmit}>
                     <h2>Lägg till nytt system</h2>
@@ -113,6 +114,7 @@ export default class AddSystemSpecific extends React.Component {
                 
                 </div>
             </div>
+        </div>
         </div>
         )
     }

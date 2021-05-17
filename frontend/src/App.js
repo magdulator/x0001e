@@ -16,6 +16,7 @@ import OverviewSpecific from "./services/overview-specific.component";
 import axios from 'axios';
 import EditOverviewSpecific from './pages/edit-overview-specific';
 import AddSystemSpecific from './pages/add-system-specific';
+import {Test} from './pages/test'
 
 const screensaver_time = 30000; //milliseconds until screensaver is active
 
@@ -58,7 +59,7 @@ class App extends Component {
     }
 
     activateScreenSaver() {
-        this.setState({screensaverActive: true,})
+        this.setState({screensaverActive: false,})
         clearInterval(this.timerID)
     }
 
@@ -89,46 +90,46 @@ class App extends Component {
             <BrowserRouter forceRefresh = {true}>
             
               <nav className="navbar navbar-expand-lg fixed-bottom justify-content-between">
-                  <ul className="navbar-nav mr-auto mt-2 mt-lg-0 py-2">
+                  <ul className=" navbar-nav">
                       
                       {currentUser ? (
                     // Logged in user
                       <>
-                      <li className="nav-item ml-3 text-center text-secondary ">
-                          <NavLink to={"/home"} className="nav-link px-5 text-dark py-auto" activeClassName="active-link">
-                              <HouseDoorFill size = "50"></HouseDoorFill><br></br>
-                              <h4 className="pt-1">HEM</h4>        
+                      <li className="nav-item text-center">
+                          <NavLink to={"/home"} className="nav-link" activeClassName="active-link">
+                              <HouseDoorFill className = "menu-icon" size = "50"></HouseDoorFill><br></br>
+                              <h4>HEM</h4>        
                           </NavLink>
                       </li>
                       
-                      <li className ="nav-item ml-3 text-center">
-                            <a href="/system" className="nav-link pl-3 text-dark" onClick={this.logOut}>
-                              <PersonCircle size = "50"></PersonCircle><br></br>
-                              <h4 className="pt-1">LOGGA UT</h4>
+                      <li className ="nav-item text-center">
+                            <a href="/system" className="nav-link" onClick={this.logOut}>
+                              <PersonCircle className = "menu-icon" size = "50"></PersonCircle><br></br>
+                              <h4>LOGGA UT</h4>
                           </a> 
                       </li>
-                      <li className="nav-item ml-3 text-center  pl-3">
+                      <li className="nav-item text-center">
 
-                        <NavLink to = {"/system"} className="nav-link px-4 text-dark" isActive ={() => pathname[1] === 'system'} activeClassName="active-link">
-                              <CameraReelsFill size = "50"></CameraReelsFill><br></br>
-                              <h4 className="pt-1">SYSTEM</h4>
+                        <NavLink to = {"/system"} className="nav-link" isActive ={() => pathname[1] === 'system'} activeClassName="active-link">
+                              <CameraReelsFill className = "menu-icon" size = "50"></CameraReelsFill><br></br>
+                              <h4 >SYSTEM</h4>
                           </NavLink> 
                       </li>
                       
                       {((pathname[2] === 'overview' )) && (
                           // if pathname = /overview
                           <>
-                            <ChevronCompactRight size = "40" color="gray" className = "my-auto"></ChevronCompactRight>
-                            <li className="nav-item my-auto text-center">
-                                <NavLink to={"/system/overview"} className="nav-link text-dark" activeClassName="active-link">
-                                    <h4 className="overview-text py-auto">SYSTEM <br></br> ÖVERBLICK</h4>
+                            <ChevronCompactRight className = "menu-icon" size = "40" color="gray" className = "my-auto"></ChevronCompactRight>
+                            <li className="nav-item text-center">
+                                <NavLink to={"/system/overview"} className="nav-link" activeClassName="active-link">
+                                    <h4 className="overview-text">SYSTEM <br></br> ÖVERBLICK</h4>
                                 </NavLink> 
                             </li>
                             {availableSystems.includes(pathname[3]) && (
                             <>
-                                <ChevronCompactRight size = "40" color="gray" className = "my-auto"></ChevronCompactRight>
-                                <li className="nav-item my-auto text-center">
-                                    <NavLink to={`/system/overview/${pathname[3]}`} className="nav-link text-dark" activeClassName="active-link">
+                                <ChevronCompactRight className = "menu-icon" size = "40" color="gray" className = "my-auto"></ChevronCompactRight>
+                                <li className="nav-item text-center">
+                                    <NavLink to={`/system/overview/${pathname[3]}`} className="nav-link" activeClassName="active-link">
                                         <h4 className="overview-system-text ">{pathname[3].toUpperCase()}</h4>
                                     </NavLink>
                                 </li>
@@ -140,16 +141,16 @@ class App extends Component {
                       ):(
                         // Not logged in
                       <>
-                      <li className="nav-item ml-3 text-center ">
-                          <NavLink to={"/home"} className="nav-link px-5 text-dark" activeClassName="active-link">
-                              <HouseDoorFill size = "50"></HouseDoorFill><br></br>
-                              <h4 className="pt-1">HEM</h4>        
+                      <li className="nav-itemtext-center ">
+                          <NavLink to={"/home"} className="nav-link" activeClassName="active-link">
+                              <HouseDoorFill className = "menu-icon" size = "50"></HouseDoorFill><br></br>
+                              <h4>HEM</h4>        
                           </NavLink>
                       </li>
-                      <li className="nav-item ml-3 text-center">
-                          <NavLink to={"/login"} className="nav-link px-4 text-dark " activeClassName="active-link">
-                              <PersonCircle size = "50"></PersonCircle><br></br>
-                              <h4 className="pt-1">LOGGA IN</h4>
+                      <li className="nav-item text-center">
+                          <NavLink to={"/login"} className="nav-link " activeClassName="active-link">
+                              <PersonCircle className = "menu-icon" size = "50"></PersonCircle><br></br>
+                              <h4>LOGGA IN</h4>
                           </NavLink>
                       </li>   
                       </>
@@ -158,41 +159,41 @@ class App extends Component {
               {currentRole && (
                   // If it is admin you can also register new
                 <>
-                <ul className = "navbar-nav mr-5">
+                <ul className = "navbar-nav">
 
                     {(pathname[1]==='home' || pathname[1] === 'upload') && (<>
-                        <li className="nav-item ml-3 text-center">
+                        <li className="nav-item text-center">
                         
-                        <NavLink to={"/upload"} className="nav-link px-4 text-dark" activeClassName="active-link">
-                            <PencilSquare size = "50"></PencilSquare><br></br>
-                            <h4 className="pt-1">REDIGERA</h4>
+                        <NavLink to={"/upload"} className="nav-link" activeClassName="active-link">
+                            <PencilSquare className = "menu-icon" size = "50"></PencilSquare><br></br>
+                            <h4>REDIGERA</h4>
                         </NavLink> 
                     </li>
                     </>)}
 
                     {((pathname[2] === 'overview')) && (<>
-                        <li className="nav-item ml-3 text-center">
-                            <NavLink to="/system/overview/create/new" className="nav-link px-2 text-dark" activeClassName="active-link">
-                                <PlusSquare size = "50"></PlusSquare><br></br>
-                                <h4 className="pt-1">NYTT SYSTEM</h4>
+                        <li className="nav-item text-center">
+                            <NavLink to="/system/overview/create/new" className="nav-link" activeClassName="active-link">
+                                <PlusSquare className = "menu-icon" size = "50"></PlusSquare><br></br>
+                                <h4>NYTT SYSTEM</h4>
                             </NavLink> 
                         </li> 
                     </>)}
                     
                     {((pathname[2] === 'overview') && availableSystems.includes(pathname[3])) && (<>
                         
-                        <li className="nav-item ml-3 text-center">
-                            <NavLink to={`/system/overview/${pathname[3]}/edit`} className="nav-link px-4 text-dark" activeClassName="active-link">
-                                <PencilSquare size = "50"></PencilSquare><br></br>
-                                <h4 className="pt-1">REDIGERA</h4>
+                        <li className="nav-item text-center">
+                            <NavLink to={`/system/overview/${pathname[3]}/edit`} className="nav-link" activeClassName="active-link">
+                                <PencilSquare className = "menu-icon" size = "50"></PencilSquare><br></br>
+                                <h4>REDIGERA</h4>
                             </NavLink> 
                         </li>            
                     </>)}
-                    <li className="nav-item ml-3 text-center">
+                    <li className="nav-item text-center">
                         
-                        <NavLink to={"/register"} className="nav-link px-4 text-dark" activeClassName="active-link">
-                            <PersonPlus size = "50"></PersonPlus><br></br>
-                            <h4 className="pt-1">NY PROFIL</h4>
+                        <NavLink to={"/register"} className="nav-link" activeClassName="active-link">
+                            <PersonPlus className = "menu-icon" size = "50"></PersonPlus><br></br>
+                            <h4>NY PROFIL</h4>
                         </NavLink> 
                     </li>
                 </ul>
@@ -211,6 +212,8 @@ class App extends Component {
                 <GuardedRoute exact path = "/system/overview/:systemName" component = {OverviewSpecific} auth = {auth.isAuth()}/>
                 <GuardedRoute exact path = "/system/overview/:systemName/edit" component = {EditOverviewSpecific} auth = {auth.isAdmin()}/>
                 <GuardedRoute exact path = "/system/overview/create/new" component = {AddSystemSpecific} auth = {auth.isAdmin()}/>
+                <GuardedRoute exact path = "/test" component = {Test} auth = {auth.isAdmin()}/>
+
 
           </Switch>
           </BrowserRouter>

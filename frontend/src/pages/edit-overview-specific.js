@@ -79,7 +79,7 @@ export default class EditOverviewSpecific extends React.Component {
     render() {
         return (
             <div className ="d-flex justify-content-center"> 
-            <div className = "widefind card">
+            <div className = "add-system card">
                 <div className = "card-body mx-3">
                     {this.state.systems ? (
                     <form onSubmit = {this.handleSubmit}>

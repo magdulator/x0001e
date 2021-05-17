@@ -31,6 +31,7 @@ class SystemOverview extends Component {
     render() {
         const {availableSystems} = this.state;
         return(
+            <div className = "main">
             <div className = "d-flex justify-content-center flex-wrap overview text-center py-5">
                 <h1 className="w-100">Klicka på ett system för att läsa mer om det</h1>
                 <div className="w-100"></div>
@@ -38,7 +39,7 @@ class SystemOverview extends Component {
                 <div  className="row w-50">
                 {availableSystems.length > 0 && (
                     availableSystems.map(system => (
-                        <div key = {system.title} className="col-5">
+                        <div key = {system.title} className="specific-system col-5">
                         
                                 <div className="w-100 card my-3 py-3">
                                     <a className="w-100 card-block stretched-link text-decoration-none" href ={`overview/${system.systemName}`}>
@@ -50,7 +51,7 @@ class SystemOverview extends Component {
                     ))
                 )}
                 </div>
-                                       
+                </div>                    
             </div>
             
         )
