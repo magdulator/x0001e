@@ -53,7 +53,7 @@ class ImageUpload extends Component {
     render() {
         return ( 
         <div className = "main">
-        <div className = "upload-container pb-5 pt-5 mb-5">
+            <div className = "upload-container d-flex justify-content-center flex-wrap overview text-center py-3">
 	        
             <div className = " px-5 col-7">
                 <h4>Uppladdade bilder</h4><hr></hr>
@@ -73,9 +73,9 @@ class ImageUpload extends Component {
                 <h4>Ladda upp en ny bild</h4><hr></hr>
 	            <form method="post" action="#" id="#">  
               
-                <div className="form-group">
+                <div className="form-group-lg">
                 <label>Filformat: png / jpg / jpeg  </label>
-                <div className = "input-group mb-3">
+                <div className = "input-group-lg mb-3">
                     <input type="file" name="file" onChange={this.onChangeHandler} className="form-control py-3"/>
                 </div>
                 {this.state.preview && (
@@ -85,7 +85,7 @@ class ImageUpload extends Component {
                 )}
                 
                 </div>
-                <button type="button" className="btn btn-success btn-block py-3 px-3" onClick={this.onClickHandler}>Ladda upp</button>
+                <button type="button" className="btn-lg btn-success btn-block my-3  py-3 px-2" onClick={this.onClickHandler}>Ladda upp</button>
             
                 </form>
 	        </div><hr></hr>

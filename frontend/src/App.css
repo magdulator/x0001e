@@ -31,6 +31,11 @@ html, body,  #root, .App{
 
 .menu-icon {
   display: none;
+  color: rgb(20, 20, 34);
+}
+
+.menu-text {
+  color: rgb(20, 20, 34);
 }
 
 .main {
@@ -121,7 +126,19 @@ html, body,  #root, .App{
     margin-left: auto;
     margin-right: auto;
   }
-  @media (min-width: 1000px) {
+
+  .specific-system.col-4 {
+    float:left;
+  }
+
+  .system-overview-h1{
+    color:white;
+  }
+
+  .system-text {
+    color: black;
+  }
+  @media (min-width: 800px) {
     .navbar-nav {
       padding: 0;
       margin: 0;
@@ -167,7 +184,7 @@ html, body,  #root, .App{
       margin-top: 20px;
       line-height: 2.2rem;
     }
-
+    
     .system-container {
       display: flex;
       flex-direction: row;
@@ -179,6 +196,17 @@ html, body,  #root, .App{
       width: 250px;
       margin: 10px;
       border-radius: 30px;
+    }
+    .system-overview {
+      background-color: gray;
+    }
+
+    .system-overview-h1{
+      color:rgb(46, 46, 46);
+    }
+
+    .specific {
+      width: 50%;
     }
   }
 

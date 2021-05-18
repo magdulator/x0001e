@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import {Link} from "react-router-dom";
 import axios from 'axios';
 
 class SystemOverview extends Component {
@@ -32,18 +31,17 @@ class SystemOverview extends Component {
         const {availableSystems} = this.state;
         return(
             <div className = "main">
-            <div className = "d-flex justify-content-center flex-wrap overview text-center py-5">
-                <h1 className="w-100">Klicka på ett system för att läsa mer om det</h1>
-                <div className="w-100"></div>
+            <div className = "system-overview d-flex justify-content-center flex-wrap overview text-center py-5">
+                <h1 className="system-overview-h1 w-100">Klicka på ett system för att läsa mer om det</h1>
                 <hr></hr>
-                <div  className="row w-50">
+                <div  className="row w-70">
                 {availableSystems.length > 0 && (
                     availableSystems.map(system => (
-                        <div key = {system.title} className="specific-system col-5">
+                        <div key = {system.title} className="specific-system col-lg-4">
                         
                                 <div className="w-100 card my-3 py-3">
                                     <a className="w-100 card-block stretched-link text-decoration-none" href ={`overview/${system.systemName}`}>
-                                    <div className = "w-100 card-body text-center">
+                                    <div className = "system-text w-100 card-body text-center">
                                         <h2 >{system.title}</h2>
                                     </div></a>
                                 </div>

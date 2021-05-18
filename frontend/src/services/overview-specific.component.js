@@ -36,8 +36,8 @@ export default class OverviewSpecific extends React.Component {
     render() {
         return (
             <div className = "main">
-            <div className ="d-flex justify-content-center"> 
-            <div className = "add-system  card">
+            <div className ="specific d-flex justify-content-center"> 
+            <div className = "specific-system card">
                 <div className = "card-body mx-3">
                     {this.state.systems ? (
                     <>

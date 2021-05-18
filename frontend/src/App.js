@@ -16,7 +16,6 @@ import OverviewSpecific from "./services/overview-specific.component";
 import axios from 'axios';
 import EditOverviewSpecific from './pages/edit-overview-specific';
 import AddSystemSpecific from './pages/add-system-specific';
-import {Test} from './pages/test'
 
 const screensaver_time = 30000; //milliseconds until screensaver is active
 
@@ -98,37 +97,37 @@ class App extends Component {
                       <li className="nav-item text-center">
                           <NavLink to={"/home"} className="nav-link" activeClassName="active-link">
                               <HouseDoorFill className = "menu-icon" size = "50"></HouseDoorFill><br></br>
-                              <h4>HEM</h4>        
+                              <h4 className = "menu-text">HEM</h4>        
                           </NavLink>
                       </li>
                       
                       <li className ="nav-item text-center">
                             <a href="/system" className="nav-link" onClick={this.logOut}>
                               <PersonCircle className = "menu-icon" size = "50"></PersonCircle><br></br>
-                              <h4>LOGGA UT</h4>
+                              <h4 className = "menu-text">LOGGA UT</h4>
                           </a> 
                       </li>
                       <li className="nav-item text-center">
 
                         <NavLink to = {"/system"} className="nav-link" isActive ={() => pathname[1] === 'system'} activeClassName="active-link">
                               <CameraReelsFill className = "menu-icon" size = "50"></CameraReelsFill><br></br>
-                              <h4 >SYSTEM</h4>
+                              <h4 className = "menu-text">SYSTEM</h4>
                           </NavLink> 
                       </li>
                       
-                      {((pathname[2] === 'overview' )) && (
+                      {(pathname[2] === 'overview' ) && (
                           // if pathname = /overview
                           <>
-                            <ChevronCompactRight className = "menu-icon" size = "40" color="gray" className = "my-auto"></ChevronCompactRight>
-                            <li className="nav-item text-center">
+                            <ChevronCompactRight className = "menu-icon my-auto" size = "40" color="gray"></ChevronCompactRight>
+                            <li className="submenu nav-item text-center">
                                 <NavLink to={"/system/overview"} className="nav-link" activeClassName="active-link">
                                     <h4 className="overview-text">SYSTEM <br></br> ÖVERBLICK</h4>
                                 </NavLink> 
                             </li>
                             {availableSystems.includes(pathname[3]) && (
                             <>
-                                <ChevronCompactRight className = "menu-icon" size = "40" color="gray" className = "my-auto"></ChevronCompactRight>
-                                <li className="nav-item text-center">
+                                <ChevronCompactRight className = "menu-icon my-auto" size = "40" color="gray"></ChevronCompactRight>
+                                <li className="submenu nav-item text-center">
                                     <NavLink to={`/system/overview/${pathname[3]}`} className="nav-link" activeClassName="active-link">
                                         <h4 className="overview-system-text ">{pathname[3].toUpperCase()}</h4>
                                     </NavLink>
@@ -144,13 +143,13 @@ class App extends Component {
                       <li className="nav-itemtext-center ">
                           <NavLink to={"/home"} className="nav-link" activeClassName="active-link">
                               <HouseDoorFill className = "menu-icon" size = "50"></HouseDoorFill><br></br>
-                              <h4>HEM</h4>        
+                              <h4 className = "menu-text">HEM</h4>        
                           </NavLink>
                       </li>
                       <li className="nav-item text-center">
                           <NavLink to={"/login"} className="nav-link " activeClassName="active-link">
                               <PersonCircle className = "menu-icon" size = "50"></PersonCircle><br></br>
-                              <h4>LOGGA IN</h4>
+                              <h4 className = "menu-text">LOGGA IN</h4>
                           </NavLink>
                       </li>   
                       </>
@@ -166,7 +165,7 @@ class App extends Component {
                         
                         <NavLink to={"/upload"} className="nav-link" activeClassName="active-link">
                             <PencilSquare className = "menu-icon" size = "50"></PencilSquare><br></br>
-                            <h4>REDIGERA</h4>
+                            <h4 className = "menu-text">REDIGERA</h4>
                         </NavLink> 
                     </li>
                     </>)}
@@ -175,7 +174,7 @@ class App extends Component {
                         <li className="nav-item text-center">
                             <NavLink to="/system/overview/create/new" className="nav-link" activeClassName="active-link">
                                 <PlusSquare className = "menu-icon" size = "50"></PlusSquare><br></br>
-                                <h4>LÄGG TILL</h4>
+                                <h4 className = "menu-text">LÄGG TILL</h4>
                             </NavLink> 
                         </li> 
                     </>)}
@@ -185,7 +184,7 @@ class App extends Component {
                         <li className="nav-item text-center">
                             <NavLink to={`/system/overview/${pathname[3]}/edit`} className="nav-link" activeClassName="active-link">
                                 <PencilSquare className = "menu-icon" size = "50"></PencilSquare><br></br>
-                                <h4>REDIGERA</h4>
+                                <h4 className = "menu-text">REDIGERA</h4>
                             </NavLink> 
                         </li>            
                     </>)}
@@ -193,7 +192,7 @@ class App extends Component {
                         
                         <NavLink to={"/register"} className="nav-link" activeClassName="active-link">
                             <PersonPlus className = "menu-icon" size = "50"></PersonPlus><br></br>
-                            <h4>NY PROFIL</h4>
+                            <h4 className = "menu-text">NY PROFIL</h4>
                         </NavLink> 
                     </li>
                 </ul>
@@ -212,7 +211,6 @@ class App extends Component {
                 <GuardedRoute exact path = "/system/overview/:systemName" component = {OverviewSpecific} auth = {auth.isAuth()}/>
                 <GuardedRoute exact path = "/system/overview/:systemName/edit" component = {EditOverviewSpecific} auth = {auth.isAdmin()}/>
                 <GuardedRoute exact path = "/system/overview/create/new" component = {AddSystemSpecific} auth = {auth.isAdmin()}/>
-                <GuardedRoute exact path = "/test" component = {Test} auth = {auth.isAdmin()}/>
 
 
           </Switch>
