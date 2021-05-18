@@ -13,38 +13,10 @@ export default class AddSystemSpecific extends React.Component {
             description: "",
             img: "",
             exampleData: "",
+            errorMessage: "",
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-    }
-    
-
-    componentDidMount(){
-        this.getSystemInfo();
-    }
-
-    getSystems = async () => {
-        try {
-            const res = await axios.get(process.env.REACT_APP_API_URL+'/systems');
-            return res.data;
-        }
-        catch(e) {
-            console.log(e);
-        }
-    }
-
-    getSystemInfo = async () => {
-        try {
-            const res = await axios.get(process.env.REACT_APP_API_URL + `/systems/${this.state.system}`)
-            
-            this.setState({title: res.data.title,
-                        description: res.data.description,
-                        img: res.data.img,
-                        exampleData: res.data.exampleData,
-                        });
-        } catch (e) {
-            console.log(e);
-        }
     }
 
     handleChange(event) { 
@@ -71,8 +43,11 @@ export default class AddSystemSpecific extends React.Component {
             if(response.data.token !== null) {
                 console.log(JSON.stringify(response.data))
             }
-        }).catch((err) => {
-            console.log(err)
+        }).catch((e) => {
+            if (e.response && e.response.data) {
+                // Dispatch an action here
+                this.setState({errorMessage: e.response.data.message});
+            } 
         });
     }
 
@@ -109,7 +84,11 @@ export default class AddSystemSpecific extends React.Component {
                     </div> 
                     <div className = "input-group input-group-lg">
                       <input type="submit" className="form-control" value= "Submit"/>
+                      
                     </div> 
+
+                    { this.state.errorMessage &&
+                            <h3 className="error"> { this.state.errorMessage } </h3> }
                     </form>
                 
                 </div>

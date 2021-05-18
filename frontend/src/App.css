@@ -184,6 +184,9 @@ html, body,  #root, .App{
       margin-top: 20px;
       line-height: 2.2rem;
     }
+    .overview-system-text {
+      line-height: 105px;
+    }
     
     .system-container {
       display: flex;
@@ -199,6 +202,7 @@ html, body,  #root, .App{
     }
     .system-overview {
       background-color: gray;
+      width: 100%;
     }
 
     .system-overview-h1{
@@ -207,6 +211,9 @@ html, body,  #root, .App{
 
     .specific {
       width: 50%;
+    }
+    .system-row {
+      width: 70%;
     }
   }
 
