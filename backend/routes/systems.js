@@ -19,7 +19,10 @@ router.post('/create', async(req, res) => {
 
     //check if system already exists in db
     const systemExists = await Systems.findOne({ systemName : req.body.systemName});
-    if(systemExists) return res.status(400).send("system already exists");
+    if(systemExists) return res.status(400).send({message: "URL name already exists"});
+
+    const titleExists = await Systems.findOne({ title : req.body.title});
+    if(titleExists) return res.status(400).send({message: "Title already exists"});
 
     const system = new Systems({
         title: req.body.title,
@@ -32,7 +35,7 @@ router.post('/create', async(req, res) => {
         const savedSystem = await system.save();
         return res.send(savedSystem.systemName + " registered");
     } catch(err) {
-        return res.status(400).send(err);
+        return res.status(401).send(err);
     }
 });
 

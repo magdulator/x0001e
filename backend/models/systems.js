@@ -6,13 +6,15 @@ const systemSchema = new mongoose.Schema({
         type: String,
         required: true,
         min: 3,
-        max: 255
+        max: 255,
+        unique: true
     },
     title: {
         type: String,
         required: true,
         min: 3,
         max: 255,
+        unique: true
     },
     description: {
         type: String,
