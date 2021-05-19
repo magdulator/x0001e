@@ -16,16 +16,17 @@ class ImageUpload extends Component {
 
       getImages = async () => {
         try{
-            const res = await axios.get(process.env.REACT_APP_API_URL + '/images/');
-            if(!res.data.files) {
+            const res = await axios.get(process.env.REACT_APP_API_URL + '/images/presentation/all');
+            if(!res.data) {
                 return;
             } else {
-                this.setState({images: res.data.files});
+                this.setState({images: res.data.images});
             } 
         } catch(err) {
             console.log(err.message);
         }
     }
+    
     
 
       onChangeHandler=event=>{
@@ -49,6 +50,11 @@ class ImageUpload extends Component {
         }); 
         window.location.reload(false);
     }
+
+    cololr = (active) => {
+        const color = active ? 'green' : 'red';
+        return color;
+    }
     
     render() {
         return ( 
@@ -60,9 +66,10 @@ class ImageUpload extends Component {
             {this.state.images.length > 0 ? (
                 this.state.images.map(image => (
                 <img
-                    key = {image}
+                    key = {image.path}
                     className = 'img-thumbnail mx-1 my-1'
-                    src = {process.env.REACT_APP_API_URL +'/images/' +image}
+                    style = {{background: this.cololr(image.active)}}
+                    src = {process.env.REACT_APP_API_URL +'/images/' +image.path}
                     alt="First slide"
                 />))):
                  <p>Inga bilder har blivit Uppladdade</p>

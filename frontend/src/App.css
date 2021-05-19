@@ -215,6 +215,10 @@ html, body,  #root, .App{
     .system-row {
       width: 70%;
     }
+
+    .img-thumbnail.mx-1.my-1{
+      background-color: green;
+    }
   }
 
   @media (min-width: 2000px) { 

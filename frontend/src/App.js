@@ -45,7 +45,7 @@ class App extends Component {
 
     getSystems = async () => {
         try {
-            const res = await axios.get(process.env.REACT_APP_API_URL+'/systems');
+            const res = await axios.get(process.env.REACT_APP_API_URL+'/systems/presentation');
             const empty = [];
             res.data.forEach(function (item, index) {
                 empty[index] = item.systemName;

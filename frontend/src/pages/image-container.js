@@ -15,7 +15,7 @@ const ImageContainer = ({newImage}) => {
 
     const getImages = async () => {
         try{
-            const res = await axios.get(process.env.REACT_APP_API_URL + '/images/');
+            const res = await axios.get(process.env.REACT_APP_API_URL + '/images/presentation/active');
             if(!res.data.files) {
                 return;
             } else {
