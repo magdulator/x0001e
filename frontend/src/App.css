@@ -251,8 +251,30 @@ html, body,  #root, .App{
       left: 16px;
     }
 
-    .add-system {
+    .add-system, .register {
       width: 50%;
+    }
+
+    input[type='radio'] { 
+      transform: scale(2); 
+
+    }
+    .form-check {
+      float:left;
+      margin: 5px;
+      margin-left: 40px;
+    }
+
+    .radio-container{
+      float: none;
+      margin-bottom: 30px;
+      height: 15px;
+    }
+
+    .check-label {
+      padding-left: 10px;
+      line-height: 20px;
+      font-size: 1.2rem;
     }
   }
 
