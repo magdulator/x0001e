@@ -11,15 +11,18 @@ export default class RegisterForm extends Component {
             initialValues={{
                 email: '',
                 password: '',
-                picked: ''
+                picked: '',
+                status: false
             }}
             validationSchema ={Yup.object().shape( {
                 email: Yup.string().email(<div className = "alert alert-danger">Email invalid</div>).required(<div className = "alert alert-danger">Email is required</div>),
                 password: Yup.string().min(3, <div className = "alert alert-danger">Password needs to be at least 6 characters</div>).required(<div className = "alert alert-danger">Password is required</div>)
             })}
             onSubmit={ async values  => {
-                await auth.register("hej", values.email, values.password, values.picked)
-                window.location.reload();
+                const success = await auth.register("username", values.email, values.password, values.picked);
+                if (success) {
+                    values.status = true;
+                }
             }}
             validator={() => ({})}>
                 { props => (
@@ -59,11 +62,16 @@ export default class RegisterForm extends Component {
                                 </div>
                                 <div className = "form-group">
                                     <button
-                                    className = "btn btn-primary btn-lg mt-3 py-2"
+                                    className = "btn btn-primary btn-lg btn-block my-3 py-3 px-2"
                                     type="submit"
                                     disabled={props.isSubmitting}> <h4>REGISTRERA ANVÄNDARE</h4>
                                     </button>
                                 </div> 
+                                {props.values.status  && (
+                                    <div className = "alert alert-success" role="alert">
+                                        <h5>Användare är registrerad</h5>
+                                    </div>
+                                )}
                             </form>
                         </div>
                     </div>
