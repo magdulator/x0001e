@@ -39,13 +39,11 @@ export default class AddSystemSpecific extends React.Component {
             systemName, title, description, img, exampleData
         }).then(response => {
             if(response.data !== null) {
-                this.setState({success: true})
-                console.log(JSON.stringify(response.data))
+                this.setState({success: response.data.message, errorMessage: ""})
             }
         }).catch((e) => {
             if (e.response && e.response.data) {
-                // Dispatch an action here
-                this.setState({errorMessage: e.response.data.message});
+                this.setState({errorMessage: e.response.data.message, success: ""});
             } 
         });
     }
@@ -53,54 +51,53 @@ export default class AddSystemSpecific extends React.Component {
     render() {
         return (
             <div className = "main">
-            <div className ="d-flex justify-content-center w-100"> 
-            <div className = "add-system card">
-                <div className = "card-body mx-3">
-                    <form onSubmit = {this.handleSubmit}>
-                    <h2>Lägg till nytt system</h2>
-                    <h5 className = "py-2">URL namn på systemet (ett ord):</h5>
-                    <div className = "input-group input-group-lg">
-                      <input name="systemName" type="text" className="form-control" value={this.state.systemName || ''} onChange={this.handleChange} aria-label="Recipient's username" aria-describedby="basic-addon2"/>
-                    </div> 
-                    <h5 className = "py-2">Namn på systemet:</h5>
+                <div className ="d-flex justify-content-center w-100"> 
+                    <div className = "add-system card">
+                        <div className = "card-body mx-3">
+                            <form onSubmit = {this.handleSubmit}>
+                                <h2>Lägg till nytt system</h2>
+                                <h5 className = "py-2">URL namn på systemet (ett ord):</h5>
+                                <div className = "input-group input-group-lg">
+                                    <input name="systemName" type="text" className="form-control" value={this.state.systemName || ''} onChange={this.handleChange} aria-label="Recipient's username" aria-describedby="basic-addon2"/>
+                                </div> 
+                                <h5 className = "py-2">Namn på systemet:</h5>
 
-                    <div className = "input-group input-group-lg">
-                      <input name="title" type="text" className="form-control" value={this.state.title || ''} onChange={this.handleChange} aria-label="Recipient's username" aria-describedby="basic-addon2"/>
-                    </div> 
-                    <h5 className = "py-2">Beskrivning av systemet:</h5>
+                                <div className = "input-group input-group-lg">
+                                    <input name="title" type="text" className="form-control" value={this.state.title || ''} onChange={this.handleChange} aria-label="Recipient's username" aria-describedby="basic-addon2"/>
+                                </div> 
+                                <h5 className = "py-2">Beskrivning av systemet:</h5>
 
-                    <div className = "input-group input-group-lg">
-                      <textarea name="description" className="form-control" value = {this.state.description || ''} onChange={this.handleChange}/>
-                    </div>
-                    <h5 className = "py-2">Bild på exempeldata:</h5>  
-                    <div className = "input-group input-group-lg">
-                      <input name="img" type = "text" className="form-control" value = {this.state.img || ''} onChange={this.handleChange}/>
-                    </div> 
-                    <h5 className = "py-2">Beskrivande text för datat:</h5>
-                    <div className = "input-group input-group-lg">
-                      <textarea name="exampleData" className="form-control" value = {this.state.exampleData || ''}  onChange={this.handleChange}/>
-                    </div> 
-                    <div className = "input-group input-group-lg my-2">
-                      <input type="submit" className="btn-lg btn-primary btn-block my-3 py-3 px-2" value= "Skapa system"/>
-                      
-                    </div> 
+                                <div className = "input-group input-group-lg">
+                                    <textarea name="description" className="form-control" value = {this.state.description || ''} onChange={this.handleChange}/>
+                                </div>
+                                <h5 className = "py-2">Bild på exempeldata:</h5>  
+                                <div className = "input-group input-group-lg">
+                                    <input name="img" type = "text" className="form-control" value = {this.state.img || ''} onChange={this.handleChange}/>
+                                </div> 
+                                <h5 className = "py-2">Beskrivande text för datat:</h5>
+                                <div className = "input-group input-group-lg">
+                                    <textarea name="exampleData" className="form-control" value = {this.state.exampleData || ''}  onChange={this.handleChange}/>
+                                </div> 
+                                <div className = "input-group input-group-lg my-2">
+                                    <input type="submit" className="btn-lg btn-primary btn-block my-3 py-3 px-2" value= "Skapa system"/>
+                                </div> 
 
-                    { this.state.errorMessage &&
-                        <div class="alert alert-danger" role="alert">
-                            <p className="error"> { this.state.errorMessage } </p> 
-                        </div>
-                    }
-                     {this.state.success  && (
-                        <div className = "alert alert-success" role="alert">
-                            <h5>System tillagt</h5>
-                        </div>
-                    )} 
-                    </form>
+                                { this.state.errorMessage &&
+                                    <div className="alert alert-danger" role="alert">
+                                        <p className="error"> { this.state.errorMessage } </p> 
+                                    </div>
+                                }
+                                {this.state.success  && (
+                                    <div className = "alert alert-success" role="alert">
+                                        <h5>{this.state.success}</h5>
+                                    </div>
+                                )} 
+                            </form>
                 
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        </div>
         )
     }
 }

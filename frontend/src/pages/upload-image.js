@@ -11,7 +11,7 @@ class ImageUpload extends Component {
             deleteMode: false,
             deleteModeText: "Radera bilder",
             errorMessage: "",
-            success: false,
+            successText: ""
           }
        this.getImages();
        this.toggleActive = this.toggleActive.bind(this);
@@ -45,10 +45,10 @@ class ImageUpload extends Component {
         await axios.post(process.env.REACT_APP_API_URL + '/images/upload/', date, {headers: {
             'Content-type' : 'form-data'
         }}).then(res => { 
-            this.setState({success: true, errorMessage: ""});
+            this.setState({successText: res.data.message, errorMessage: ""});
         }).catch((err) => {
             if (err.response && err.response.data) {
-                this.setState({errorMessage: err.response.data.message, success:false});
+                this.setState({errorMessage: err.response.data.message, successText: ""});
             }
         });
     }
@@ -79,7 +79,7 @@ class ImageUpload extends Component {
             }
         }).catch((err) => {
             if (err.response && err.response.data) {
-                this.setState({errorMessage: err.response.data.message, success: false});
+                this.setState({errorMessage: err.response.data.message, successText: ""});
             }        
         });
     }
@@ -104,9 +104,8 @@ class ImageUpload extends Component {
                 
                     {this.state.images.length > 0 ? (
                     this.state.images.map(image => (
-                    <div className= "picture-con">
+                    <div className= "picture-con" key = {image.path}>
                         <img
-                            key = {image.path}
                             className = 'img-thumbnail mx-2 my-1'
                             style = {{background: this.cololr(image.active)}}
                             src = {process.env.REACT_APP_API_URL +'/images/' +image.path}
@@ -125,10 +124,9 @@ class ImageUpload extends Component {
                     {this.state.images.length > 0 ? (
                 
                     this.state.images.map(image => (
-                    <div className = "text-image-container">
+                    <div className = "text-image-container" key = {image.path + "1"}>
                         <div className="picture-text">RADERA</div>
                             <img
-                                key = {image.path}
                                 className = 'delete-mode img-thumbnail mx-2 my-1'
                                 style = {{background: this.cololr(image.active)}}
                                 src = {process.env.REACT_APP_API_URL +'/images/' +image.path}
@@ -162,13 +160,13 @@ class ImageUpload extends Component {
                 </form>
                 <button type="button" className = "btn-lg btn-danger my-3 py-3 px-2" onClick ={this.deleteMode}>{this.state.deleteModeText}</button>
                 { this.state.errorMessage &&
-                <div class="alert alert-danger" role="alert">
+                <div className="alert alert-danger" role="alert">
                     <p className="error"> { this.state.errorMessage } </p> 
                 </div>
                 }
-                {this.state.success  && (
+                {this.state.successText  && (
                     <div className = "alert alert-success" role="alert">
-                        <h5>Filen är uppladdad</h5>
+                        <h5>{this.state.successText}</h5>
                     </div>
                 )} 
 	        </div>

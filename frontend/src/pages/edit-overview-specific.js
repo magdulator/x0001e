@@ -68,11 +68,10 @@ export default class EditOverviewSpecific extends React.Component {
             title, description, img, exampleData
         }).then(response => {
             if(response.data !== null) {
-                this.setState({success: true})
-                console.log(JSON.stringify(response.data))
+                this.setState({success: response.data.message})
             }
         }).catch((e) => {
-            this.setState({errorMessage: e.response.data.message});
+            this.setState({errorMessage: e.response.data.message, success: ""});
         });
     }
 
@@ -105,13 +104,13 @@ export default class EditOverviewSpecific extends React.Component {
                                     <input type="submit" className="btn-lg btn-primary btn-block my-3 py-3 px-2" value= "Uppdatera system"/>
                                 </div>
                                 { this.state.errorMessage &&
-                                <div class="alert alert-danger" role="alert">
+                                <div className="alert alert-danger" role="alert">
                                     <p className="error"> { this.state.errorMessage } </p> 
                                 </div>
                                 }
                                 {this.state.success  && (
                                     <div className = "alert alert-success" role="alert">
-                                        <h5>System uppdaterat</h5>
+                                        <h5>{this.state.success}</h5>
                                     </div>
                                 )} 
                             </form>
