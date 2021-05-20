@@ -15,8 +15,8 @@ class Screensaver extends Component {
 
       getImages = async () => {
         try{
-            const res = await axios.get(process.env.REACT_APP_API_URL + '/images/');
-            if(!res.data.files) {
+            const res = await axios.get(process.env.REACT_APP_API_URL + '/images/screensaver/all');
+            if(!res.data) {
                 return;
             } else {
                 this.setState({images: res.data.files});
@@ -25,6 +25,7 @@ class Screensaver extends Component {
             console.log(err.message);
         }
     }
+    
 
     configureImage = image => {
         return  process.env.REACT_APP_API_URL +'/images/' +image;

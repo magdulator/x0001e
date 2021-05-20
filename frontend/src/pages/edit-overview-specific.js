@@ -17,6 +17,7 @@ export default class EditOverviewSpecific extends React.Component {
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.deleteSystem = this.deleteSystem.bind(this);
     }
     componentDidMount(){
         this.getSystemInfo();
@@ -46,6 +47,19 @@ export default class EditOverviewSpecific extends React.Component {
         }
     }
 
+    deleteSystem = async () => {
+
+            await axios.post(process.env.REACT_APP_API_URL + `/systems/delete/${this.state.system}`)
+            .then(response => {
+                if(response.data !== null) {
+                    this.setState({success: response.data.message, errorMessage: ""})
+                    window.location.replace('/system/overview')
+                }
+            }).catch((e) => {
+                this.setState({errorMessage: e.response.data.message, success: ""});
+            });
+    }
+
     handleChange(event) { 
         const target = event.target;
         const name = target.name;
@@ -68,7 +82,7 @@ export default class EditOverviewSpecific extends React.Component {
             title, description, img, exampleData
         }).then(response => {
             if(response.data !== null) {
-                this.setState({success: response.data.message})
+                this.setState({success: response.data.message, errorMessage: ""})
             }
         }).catch((e) => {
             this.setState({errorMessage: e.response.data.message, success: ""});
@@ -113,6 +127,10 @@ export default class EditOverviewSpecific extends React.Component {
                                         <h5>{this.state.success}</h5>
                                     </div>
                                 )} 
+                                <button
+                                className = 'btn-lg btn-danger btn-block my-3 py-3 px-2'
+                                onClick = {()=>this.deleteSystem()}>Radera systemet</button>
+                            
                             </form>
                             ):(
                             <h2>Systemet finns inte i databasen</h2>

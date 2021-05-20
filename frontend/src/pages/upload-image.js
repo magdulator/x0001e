@@ -8,6 +8,7 @@ class ImageUpload extends Component {
             selectedFile: null,
             preview: null,
             images: [],
+            screenImages: [],
             deleteMode: false,
             deleteModeText: "Radera bilder",
             errorMessage: "",
