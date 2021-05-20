@@ -76,54 +76,52 @@ export default class EditOverviewSpecific extends React.Component {
         });
     }
 
-
     render() {
         return (
             <div className = "main">
-            <div className ="edit-system d-flex justify-content-center"> 
-            <div className = "card w-100">
-                <div className = "card-body mx-3">
-                    {this.state.systems ? (
-                    <form onSubmit = {this.handleSubmit}>
-                    <h2>Redigera systemet</h2>
-                    <h5 className = "py-2">Namn på systemet:</h5>
-                    <div className = "input-group input-group-lg">
-                      <input name="title" type="text" className="form-control" value={this.state.title || ''} onChange={this.handleChange} aria-label="Recipient's username" aria-describedby="basic-addon2"/>
-                    </div> 
-                    <h5 className = "py-2">Beskrivning av systemet:</h5>
-
-                    <div className = "input-group input-group-lg">
-                      <textarea name="description" className="form-control" value = {this.state.description || ''} onChange={this.handleChange}/>
-                    </div>
-                    <h5 className = "py-2">Bild på exempeldata:</h5>  
-                    <div className = "input-group input-group-lg">
-                      <input name="img" type = "text" className="form-control" value = {this.state.img || ''} onChange={this.handleChange}/>
-                    </div> 
-                    <h5 className = "py-2">Beskrivande text för datat:</h5>
-                    <div className = "input-group input-group-lg">
-                      <textarea name="exampleData" className="form-control" value = {this.state.exampleData || ''} onChange={this.handleChange}/>
-                    </div> 
-                    <div className = "input-group input-group-lg my-2">
-                      <input type="submit" className="btn-lg btn-primary btn-block my-3 py-3 px-2" value= "Uppdatera system"/>
-                    </div>
-                    { this.state.errorMessage &&
-                        <div class="alert alert-danger" role="alert">
-                            <p className="error"> { this.state.errorMessage } </p> 
+                <div className ="edit-system d-flex justify-content-center"> 
+                    <div className = "card w-100">
+                        <div className = "card-body mx-3">
+                            {this.state.systems ? (
+                            <form onSubmit = {this.handleSubmit}>
+                                <h2>Redigera systemet</h2>
+                                <h5 className = "py-2">Namn på systemet:</h5>
+                                <div className = "input-group input-group-lg">
+                                    <input name="title" type="text" className="form-control" value={this.state.title || ''} onChange={this.handleChange} aria-label="Recipient's username" aria-describedby="basic-addon2"/>
+                                </div> 
+                                <h5 className = "py-2">Beskrivning av systemet:</h5>
+                                <div className = "input-group input-group-lg">
+                                    <textarea name="description" className="form-control" value = {this.state.description || ''} onChange={this.handleChange}/>
+                                </div>
+                                <h5 className = "py-2">Bild på exempeldata:</h5>  
+                                <div className = "input-group input-group-lg">
+                                    <input name="img" type = "text" className="form-control" value = {this.state.img || ''} onChange={this.handleChange}/>
+                                </div> 
+                                <h5 className = "py-2">Beskrivande text för datat:</h5>
+                                <div className = "input-group input-group-lg">
+                                    <textarea name="exampleData" className="form-control" value = {this.state.exampleData || ''} onChange={this.handleChange}/>
+                                </div> 
+                                <div className = "input-group input-group-lg my-2">
+                                    <input type="submit" className="btn-lg btn-primary btn-block my-3 py-3 px-2" value= "Uppdatera system"/>
+                                </div>
+                                { this.state.errorMessage &&
+                                <div class="alert alert-danger" role="alert">
+                                    <p className="error"> { this.state.errorMessage } </p> 
+                                </div>
+                                }
+                                {this.state.success  && (
+                                    <div className = "alert alert-success" role="alert">
+                                        <h5>System uppdaterat</h5>
+                                    </div>
+                                )} 
+                            </form>
+                            ):(
+                            <h2>Systemet finns inte i databasen</h2>
+                            )}
                         </div>
-                    }
-                    {this.state.success  && (
-                        <div className = "alert alert-success" role="alert">
-                            <h5>System uppdaterat</h5>
-                        </div>
-                    )} 
-                    </form>
-                    ):(
-                        <h2>Systemet finns inte i databasen</h2>
-                    )}
+                    </div>
                 </div>
             </div>
-        </div>
-        </div>
         )
     }
 }
