@@ -55,7 +55,7 @@ export default class AddSystemSpecific extends React.Component {
     render() {
         return (
             <div className = "main">
-            <div className ="d-flex justify-content-center"> 
+            <div className ="d-flex justify-content-center w-100"> 
             <div className = "add-system card">
                 <div className = "card-body mx-3">
                     <form onSubmit = {this.handleSubmit}>
@@ -82,13 +82,16 @@ export default class AddSystemSpecific extends React.Component {
                     <div className = "input-group input-group-lg">
                       <textarea name="exampleData" className="form-control" value = {this.state.exampleData || ''}  onChange={this.handleChange}/>
                     </div> 
-                    <div className = "input-group input-group-lg">
-                      <input type="submit" className="form-control" value= "Submit"/>
+                    <div className = "input-group input-group-lg my-2">
+                      <input type="submit" className="btn-lg btn-primary btn-block my-3 py-3 px-2" value= "Skapa system"/>
                       
                     </div> 
 
                     { this.state.errorMessage &&
-                            <h3 className="error"> { this.state.errorMessage } </h3> }
+                        <div class="alert alert-danger" role="alert">
+                            <p className="error"> { this.state.errorMessage } </p> 
+                        </div>
+                    }
                     </form>
                 
                 </div>

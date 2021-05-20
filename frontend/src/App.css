@@ -138,6 +138,17 @@ html, body,  #root, .App{
   .system-text {
     color: black;
   }
+
+  .file-input {
+    background-color: lightgray;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+  }
+
+  .add-system {
+    width: 100%;
+  }
   @media (min-width: 800px) {
     .navbar-nav {
       padding: 0;
@@ -218,6 +229,30 @@ html, body,  #root, .App{
 
     .img-thumbnail.mx-1.my-1{
       background-color: green;
+    }
+
+    .picture-con {
+      float: left;
+    }
+
+    .text-image-container{
+      position: relative;
+      text-align: center;
+      color: white;
+      cursor: pointer;
+      float: left;
+    }
+    .picture-text {
+      font-size: 2rem;
+      background-color: black;
+      opacity: 0.6;
+      position: absolute;
+      top: 8px;
+      left: 16px;
+    }
+
+    .add-system {
+      width: 50%;
     }
   }
 
