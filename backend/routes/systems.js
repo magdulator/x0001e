@@ -22,7 +22,7 @@ router.post('/create', async(req, res) => {
     if(systemExists) return res.status(400).send({message: "URL name already exists"});
 
     const titleExists = await Systems.findOne({ title : req.body.title});
-    if(titleExists) return res.status(400).send({message: "Title already exists"});
+    if(titleExists) return res.status(400).json({message: "Title already exists"});
 
     const system = new Systems({
         title: req.body.title,
