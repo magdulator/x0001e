@@ -61,5 +61,17 @@ router.get('/', async(req,res) => {
     }
 });
 
+router.post('/delete/:systemName', async (req, res) => {
+    try {
+        const del = await Systems.deleteOne({systemName: req.params.systemName})
+        if(!del) return res.status(400).json({message: "Inget system med namn: " + req.params.systemName});
+        return res.status(200).json({message: 'Systemet är raderat'});
+      } catch (err) {
+        return res.status(400).json({message: "Gick ej radera"});
+      }
+    
+});
+
+
 
 module.exports = router;
