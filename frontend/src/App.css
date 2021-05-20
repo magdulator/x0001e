@@ -251,7 +251,7 @@ html, body,  #root, .App{
       left: 16px;
     }
 
-    .add-system, .register {
+    .add-system, .register, .login {
       width: 50%;
     }
 
