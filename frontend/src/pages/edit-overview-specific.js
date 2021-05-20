@@ -12,12 +12,12 @@ export default class EditOverviewSpecific extends React.Component {
             description: "",
             img: "",
             exampleData: "",
+            errorMessage: "",
+            success: ""
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    
-
     componentDidMount(){
         this.getSystemInfo();
     }
@@ -67,19 +67,21 @@ export default class EditOverviewSpecific extends React.Component {
         await axios.patch(process.env.REACT_APP_API_URL + `/systems/update/${this.state.system}`, {
             title, description, img, exampleData
         }).then(response => {
-            if(response.data.token !== null) {
+            if(response.data !== null) {
+                this.setState({success: true})
                 console.log(JSON.stringify(response.data))
             }
-        }).catch((err) => {
-            console.log(err)
+        }).catch((e) => {
+            this.setState({errorMessage: e.response.data.message});
         });
     }
 
 
     render() {
         return (
-            <div className ="d-flex justify-content-center"> 
-            <div className = "add-system card">
+            <div className = "main">
+            <div className ="edit-system d-flex justify-content-center"> 
+            <div className = "card w-100">
                 <div className = "card-body mx-3">
                     {this.state.systems ? (
                     <form onSubmit = {this.handleSubmit}>
@@ -101,15 +103,26 @@ export default class EditOverviewSpecific extends React.Component {
                     <div className = "input-group input-group-lg">
                       <textarea name="exampleData" className="form-control" value = {this.state.exampleData || ''} onChange={this.handleChange}/>
                     </div> 
-                    <div className = "input-group input-group-lg">
-                      <input type="submit" className="form-control" value= "Submit"/>
-                    </div> 
+                    <div className = "input-group input-group-lg my-2">
+                      <input type="submit" className="btn-lg btn-primary btn-block my-3 py-3 px-2" value= "Uppdatera system"/>
+                    </div>
+                    { this.state.errorMessage &&
+                        <div class="alert alert-danger" role="alert">
+                            <p className="error"> { this.state.errorMessage } </p> 
+                        </div>
+                    }
+                    {this.state.success  && (
+                        <div className = "alert alert-success" role="alert">
+                            <h5>System uppdaterat</h5>
+                        </div>
+                    )} 
                     </form>
                     ):(
                         <h2>Systemet finns inte i databasen</h2>
                     )}
                 </div>
             </div>
+        </div>
         </div>
         )
     }

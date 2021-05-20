@@ -1,19 +1,17 @@
 import axios from 'axios';
 import React from 'react';
-const pathname = window.location.pathname.split('/');
 
 export default class AddSystemSpecific extends React.Component {
     constructor(props) {
         super(props)
         this.state= {
-            systems: [],
-            system: pathname[3],
             systemName: "",
             title: "",
             description: "",
             img: "",
             exampleData: "",
             errorMessage: "",
+            success: "",
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -40,7 +38,8 @@ export default class AddSystemSpecific extends React.Component {
         await axios.post(process.env.REACT_APP_API_URL + `/systems/create`, {
             systemName, title, description, img, exampleData
         }).then(response => {
-            if(response.data.token !== null) {
+            if(response.data !== null) {
+                this.setState({success: true})
                 console.log(JSON.stringify(response.data))
             }
         }).catch((e) => {
@@ -50,7 +49,6 @@ export default class AddSystemSpecific extends React.Component {
             } 
         });
     }
-
 
     render() {
         return (
@@ -92,6 +90,11 @@ export default class AddSystemSpecific extends React.Component {
                             <p className="error"> { this.state.errorMessage } </p> 
                         </div>
                     }
+                     {this.state.success  && (
+                        <div className = "alert alert-success" role="alert">
+                            <h5>System tillagt</h5>
+                        </div>
+                    )} 
                     </form>
                 
                 </div>

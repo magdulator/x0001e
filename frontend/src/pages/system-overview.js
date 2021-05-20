@@ -37,7 +37,7 @@ class SystemOverview extends Component {
                 <div  className="system-row row">
                 {availableSystems.length > 0 && (
                     availableSystems.map(system => (
-                        <div key = {system.title} className="specific-system col-lg">
+                        <div key = {system.title} className="specific-system col-4">
                         
                                 <div className="card my-3 py-3">
                                     <a className="card-block stretched-link text-decoration-none" href ={`overview/${system.systemName}`}>

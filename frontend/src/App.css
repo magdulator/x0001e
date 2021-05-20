@@ -127,8 +127,14 @@ html, body,  #root, .App{
     margin-right: auto;
   }
 
-  .specific-system.col-4 {
-    float:left;
+  .system-row{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .specific-system {
+    
+    min-width: 100%;
   }
 
   .system-overview-h1{
@@ -251,7 +257,7 @@ html, body,  #root, .App{
       left: 16px;
     }
 
-    .add-system, .register, .login {
+    .add-system, .register, .login, .edit-system {
       width: 50%;
     }
 
@@ -275,6 +281,10 @@ html, body,  #root, .App{
       padding-left: 10px;
       line-height: 20px;
       font-size: 1.2rem;
+    }
+
+    .specific-system {
+      min-width: 30%;
     }
   }
 
