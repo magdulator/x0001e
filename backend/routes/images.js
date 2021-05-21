@@ -22,15 +22,17 @@ const uploads = multer({storage});
 router.post('/upload', uploads.single('image'), async(req, res) => {
     try {
         if(req.file.path) {
+            console.log(req.body.pictype)
             const img = req.file.path;
             const clean = path.basename(img)
             const image = new Image({
                 path: clean,
                 active: req.body.active,
                 nameSystem: req.body.nameSystem,
-                type: req.body.type,
+                type: req.body.pictype,
             });
             try {
+                console.log(image)
                 const savedImage = await image.save();
                 return res.status(200).json({message: savedImage.path + " image registered"});
                 
@@ -43,19 +45,15 @@ router.post('/upload', uploads.single('image'), async(req, res) => {
     }
 })
 
-router.get('/', (req, res) => {
-    const uploads = path.join('uploads');
-    fs.readdir(uploads, (err, files) => {
-        if(err) {
-            return res.status(400).json({message: err})
-        }
-        if(files.length === 0) {
-            return res.status(400).json({message: "Inga filer uppladdade"});
-        }
-        return res.status(200).json({files})
-    })
+router.get('/all', async(req, res) => {
+    try {
+        const images = await Image.find({}).select({path:1, type:1, active: 1});
+        if(!images) return res.status(400).json({message: "Inga bilder uppladdade"});
+        return res.status(200).json({images})         
+    } catch(err) {
+        return res.status(400).json({message: err});
+    }   
 })
-
 
 
 router.get('/presentation/active', async(req, res) => {
@@ -72,15 +70,20 @@ router.get('/presentation/active', async(req, res) => {
     }   
 })
 
-router.get('/presentation/all', async(req, res) => {
-        try {
-            const images = await Image.find({type: "presentation"}).select({path:1, active: 1});
-            if(!images) return res.status(400).json({message: "Inga bilder uppladdade"});
-            return res.status(200).json({images})         
-        } catch(err) {
-            return res.status(400).json({message: err});
-        }   
+router.get('/screensaver/active', async(req, res) => {
+    try {
+        const images = await Image.find({ active : true, type: "screensaver"}).select('path -_id');
+        if(!images) return res.status(400).json({message: "Inga bilder uppladdade"});
+        const files = [];
+        images.forEach(file =>
+            files.push(file.path)
+        )
+        return res.status(200).json({files})            
+    } catch(err) {
+        return res.status(400).json({message: err});
+    }   
 })
+
 
 router.patch('/update/:path', async(req, res) => {
     const imagePath = {path: req.params.path};
@@ -106,8 +109,7 @@ router.post('/delete/:imagename', async (req, res) => {
             return res.status(200).json({message: 'Bild är raderad'});
           } catch (err) {
             return res.status(400).json({message: err});
-          }
-        
+          }    
     }
 })
 

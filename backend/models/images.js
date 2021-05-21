@@ -23,7 +23,7 @@ const imageSchema = new mongoose.Schema({
     },
     type: {
         type: String,
-        enum : ['presentation', 'systemdata'],
+        enum : ['presentation', 'screensaver'],
         default: 'presentation'
     }
 })
