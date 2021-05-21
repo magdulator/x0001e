@@ -11,7 +11,8 @@ class ImageUpload extends Component {
             deleteMode: false,
             pictureText: "",
             errorMessage: "",
-            successText: ""
+            successText: "",
+            selectedOption: "presentation"
           }
        this.getImages();
        this.deleteOrUpdate = this.deleteOrUpdate.bind(this);
@@ -31,29 +32,36 @@ class ImageUpload extends Component {
         }
     }
 
-    onChangeHandler=event=>{
+    onChangeHandler = (event) => {
         this.setState({
             selectedFile: event.target.files[0],
             preview: URL.createObjectURL(event.target.files[0]),
-            loaded: 0,
         });
     }
 
+    onValueChange = (event) => {
+        this.setState({
+          selectedOption: event.target.value
+        });
+      }
+
     onClickHandler = async () => {
+        const type = this.state.selectedOption;
         const date = new FormData() 
         date.append('image', this.state.selectedFile)
+        date.append('pictype', type)
         await axios.post(process.env.REACT_APP_API_URL + '/images/upload/', date, {headers: {
             'Content-type' : 'form-data'
         }}).then(res => { 
             this.setState({successText: res.data.message, errorMessage: ""});
         }).catch((err) => {
             if (err.response && err.response.data) {
-                this.setState({errorMessage: err.response.data.message, successText: ""});
+                this.setState({successText: "", errorMessage: err.response.data.message});
             }
         });
     }
 
-    cololr = (active) => {
+    switchColor = (active) => {
         const color = active ? 'green' : 'red';
         return color;
     }
@@ -94,23 +102,27 @@ class ImageUpload extends Component {
     }
     
     render() {
+        console.log(this.state.selectedOption)
         return ( 
         <div className = "main">
             <div className = "upload-container d-flex justify-content-center flex-wrap overview text-center py-3">
-            <div className = " px-5 col-7">
+                <div className = " px-2 col-lg-7">
                 <h4>Uppladdade bilder</h4>
                
                 <p>Klicka på en bild för att {this.state.deleteMode? "radera den" : "aktivera eller inaktivera den"}</p><hr></hr>
-                
+                <div className = "row">
+                <h4 className = "mx-auto pb-2">Bilder till startsidan</h4>
+                    <div className = "px-auto w-100"></div>
                 {this.state.images.length > 0 ? (
                     this.state.images.map(image => (
-                    <div>
+                        <>
                         {image.type === 'presentation' && (
-                        <div>
+                        <div className = "col-lg-3">
+
                             <div className= "text-image-container" key = {image.path}>
                                 <img
-                                    className = 'img-thumbnail mx-2 my-1'
-                                    style = {{background: this.cololr(image.active)}}
+                                    className = 'img-thumbnail my-1 mx-2'
+                                    style = {{background: this.switchColor(image.active)}}
                                     src = {process.env.REACT_APP_API_URL +'/images/' +image.path}
                                     onClick = {()=>this.deleteOrUpdate(image.active, image.path)}
                                     alt="First slide"
@@ -119,20 +131,28 @@ class ImageUpload extends Component {
                             </div>
                         </div>
                         )}
-                    </div>
+                        </>
                     ))):
                     <p>Inga bilder har blivit Uppladdade</p>
                     }
+                    </div>
+                    <hr></hr>
+                    <div className = "row text-center">
+
+                    <h4 className = "mx-auto pb-2">Bilder till skärmsläckare</h4>
+                    <div className = "px-auto w-100"></div>
+
                     {this.state.images.length > 0 && (
                     this.state.images.map(image => (
-                    <div>
+                        <>
+                        
                         {image.type === 'screensaver' && (
-                        <div>
-                            <h4>Screensaver</h4>
+                            <div className = "col-lg-3 ">
+
                             <div className= "text-image-container" key = {image.path}>
                                 <img
-                                    className = 'img-thumbnail mx-2 my-1'
-                                    style = {{background: this.cololr(image.active)}}
+                                    className = 'img-thumbnail  my-1 mx-2'
+                                    style = {{background: this.switchColor(image.active)}}
                                     src = {process.env.REACT_APP_API_URL +'/images/' +image.path}
                                     onClick = {()=>this.deleteOrUpdate(image.active, image.path)}
                                     alt="First slide"
@@ -141,10 +161,12 @@ class ImageUpload extends Component {
                             </div>
                         </div>
                         )}
-                    </div>
+                    </>
+                    
                 )))}
+                </div>
             </div>
-            <div className="card px-3 py-3 col-4">
+            <div className="upload card px-3 py-3 col-lg-4">
                 <h4>Ladda upp en ny bild</h4><hr></hr>
 	            <form method="post" action="#" id="#">  
               
@@ -158,14 +180,28 @@ class ImageUpload extends Component {
                             <img className="preview" src={this.state.preview} alt="" height = "50px" />
                         </div>
                         )}
-                
+                         <div className = "radio-container">  
+                            <div className = "form-check py-2">
+                                <input className = 'form-check-input' type="radio" value="presentation" checked={this.state.selectedOption === "presentatin"}  onChange = {this.onValueChange}/>
+                                <label className ="check-label" htmlFor="1">
+                                    Startsida
+                                </label>                      
+                            </div>
+                            <div className = "form-check py-2">
+                                <input className='form-check-input' type="radio" value="screensaver" checked={this.state.selectedOption === "screensaver"}  onChange = {this.onValueChange}/>
+                                <label className ="check-label" htmlFor="2">
+                                    Skärmsläckare
+                                </label> 
+                            </div>
+                        </div>
+                            {this.state.selectedOption}
                     </div>
                     <button type="button" className="btn-lg btn-success btn-block my-3 py-3 px-2" onClick={this.onClickHandler}>Ladda upp</button>
                 </form>
                 <button type="button" className = "btn-lg btn-danger my-3 py-3 px-2" onClick ={this.deleteMode}>{!this.state.deleteMode ? 'Radera' : 'Aktivera / Inaktivera'}</button>
                 { this.state.errorMessage &&
                 <div className="alert alert-danger" role="alert">
-                    <p className="error"> { this.state.errorMessage } </p> 
+                    <p className="error"> {this.state.errorMessage } </p> 
                 </div>
                 }
                 {this.state.successText  && (

@@ -74,8 +74,8 @@ html, body,  #root, .App{
   color:black;
 }
 
-.img-thumbnail {
-  height: 120px;
+.upload {
+  width: 100%;
 }
 
 .upload-container{
@@ -86,7 +86,7 @@ html, body,  #root, .App{
 }
 
 /**
-    screensaver
+    screensavers
   */
   
   .screensaver.carousel.slide {
@@ -231,10 +231,6 @@ html, body,  #root, .App{
     }
     .system-row {
       width: 70%;
-    }
-
-    .img-thumbnail.mx-1.my-1{
-      background-color: green;
     }
 
     .picture-con {
