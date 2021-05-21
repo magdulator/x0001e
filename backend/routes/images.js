@@ -84,6 +84,17 @@ router.get('/screensaver/active', async(req, res) => {
     }   
 })
 
+router.get('/:nameSystem', async(req, res) => {
+    try {
+        const image = await Image.findOne({type: "systemdata", nameSystem : req.params.nameSystem});
+        if(!image) return res.status(400).json({message: "Bilden finns inte"});
+
+        return res.status(200).json({image});
+                   
+    } catch(err) {
+        return res.status(400).json({message: err});
+    }   
+})
 
 router.patch('/update/:path', async(req, res) => {
     const imagePath = {path: req.params.path};

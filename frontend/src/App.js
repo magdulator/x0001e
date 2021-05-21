@@ -89,7 +89,7 @@ class App extends Component {
             <BrowserRouter forceRefresh = {true}>
             
               <nav className="navbar navbar-expand-lg fixed-bottom justify-content-between">
-                  <ul className=" navbar-nav">
+                  <ul className=" navbar-nav ml-3">
                       
                       {currentUser ? (
                     // Logged in user
@@ -118,7 +118,7 @@ class App extends Component {
                       {(pathname[2] === 'overview' ) && (
                           // if pathname = /overview
                           <>
-                            <ChevronCompactRight className = "menu-icon my-auto" size = "40" color="gray"></ChevronCompactRight>
+                            <ChevronCompactRight className = "menu-icon my-auto mx-0" size = "40" color="gray"></ChevronCompactRight>
                             <li className="submenu nav-item text-center">
                                 <NavLink to={"/system/overview"} className="nav-link" activeClassName="active-link">
                                     <h4 className="overview-text">SYSTEM <br></br> ÖVERBLICK</h4>
@@ -126,7 +126,7 @@ class App extends Component {
                             </li>
                             {availableSystems.includes(pathname[3]) && (
                             <>
-                                <ChevronCompactRight className = "menu-icon my-auto" size = "40" color="gray"></ChevronCompactRight>
+                                <ChevronCompactRight className = "menu-icon my-auto mx-0" size = "40" color="gray"></ChevronCompactRight>
                                 <li className="submenu nav-item text-center">
                                     <NavLink to={`/system/overview/${pathname[3]}`} className="nav-link" activeClassName="active-link">
                                         <h4 className="overview-system-text ">{pathname[3].toUpperCase()}</h4>
@@ -140,7 +140,7 @@ class App extends Component {
                       ):(
                         // Not logged in
                       <>
-                      <li className="nav-itemtext-center ">
+                      <li className="nav-item text-center ">
                           <NavLink to={"/home"} className="nav-link" activeClassName="active-link">
                               <HouseDoorFill className = "menu-icon" size = "50"></HouseDoorFill><br></br>
                               <h4 className = "menu-text">HEM</h4>        
@@ -158,7 +158,7 @@ class App extends Component {
               {currentRole && (
                   // If it is admin you can also register new
                 <>
-                <ul className = "navbar-nav">
+                <ul className = "navbar-nav mr-3">
 
                     {(pathname[1]==='home' || pathname[1] === 'upload') && (<>
                         <li className="nav-item text-center">

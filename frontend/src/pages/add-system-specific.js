@@ -12,6 +12,7 @@ export default class AddSystemSpecific extends React.Component {
             exampleData: "",
             errorMessage: "",
             success: "",
+            selectedFile: null
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -40,11 +41,37 @@ export default class AddSystemSpecific extends React.Component {
         }).then(response => {
             if(response.data !== null) {
                 this.setState({success: response.data.message, errorMessage: ""})
+                this.uploadImage(systemName)
             }
         }).catch((e) => {
             if (e.response && e.response.data) {
                 this.setState({errorMessage: e.response.data.message, success: ""});
             } 
+        });
+    }
+
+    uploadImage = async (systemName) => {
+        const type = 'systemdata';
+        const fileName = type + this.state.selectedFile.name;
+        const date = new FormData() 
+        date.append('image', this.state.selectedFile, fileName)
+        date.append('pictype', type)
+        date.append('nameSystem', systemName);
+        await axios.post(process.env.REACT_APP_API_URL + '/images/upload/', date, {headers: {
+            'Content-type' : 'form-data'
+        }}).then(res => { 
+            this.setState({successText: res.data.message, errorMessage: ""});
+        }).catch((err) => {
+            if (err.response && err.response.data) {
+                this.setState({successText: "", errorMessage: err.response.data.message});
+            }
+        });
+    }
+
+    onChangeHandler = (event) => {
+        this.setState({
+            selectedFile: event.target.files[0],
+            preview: URL.createObjectURL(event.target.files[0]),
         });
     }
 
@@ -71,9 +98,9 @@ export default class AddSystemSpecific extends React.Component {
                                     <textarea name="description" className="form-control" value = {this.state.description || ''} onChange={this.handleChange}/>
                                 </div>
                                 <h5 className = "py-2">Bild på exempeldata:</h5>  
-                                <div className = "input-group input-group-lg">
-                                    <input name="img" type = "text" className="form-control" value = {this.state.img || ''} onChange={this.handleChange}/>
-                                </div> 
+                                <div className = "input-group-lg mb-3">
+                                    <input type="file" name="file" onChange={this.onChangeHandler} className="file-input"/>
+                                </div>
                                 <h5 className = "py-2">Beskrivande text för datat:</h5>
                                 <div className = "input-group input-group-lg">
                                     <textarea name="exampleData" className="form-control" value = {this.state.exampleData || ''}  onChange={this.handleChange}/>

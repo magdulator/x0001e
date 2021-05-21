@@ -68,6 +68,7 @@ class ImageUpload extends Component {
     }
 
     deleteOrUpdate = async(act, path) => {
+        console.log(this.state.deleteMode)
         if(this.state.deleteMode) {
             await axios.post(process.env.REACT_APP_API_URL + `/images/delete/${path}`, {
             }).then(response => {
@@ -178,13 +179,13 @@ class ImageUpload extends Component {
                                     )}
                                     <div className = "radio-container">  
                                         <div className = "form-check py-2">
-                                            <input className = 'form-check-input' type="radio" value="presentation" checked={this.state.selectedOption === "presentatin"}  onChange = {this.onValueChange}/>
+                                            <input className = 'form-check-input' name ="1" type="radio" value="presentation" checked={this.state.selectedOption === "presentation"}  onChange = {this.onValueChange}/>
                                             <label className ="check-label" htmlFor="1">
                                                 Startsida
                                             </label>                      
                                         </div>
                                         <div className = "form-check py-2">
-                                            <input className='form-check-input' type="radio" value="screensaver" checked={this.state.selectedOption === "screensaver"}  onChange = {this.onValueChange}/>
+                                            <input className='form-check-input' name="2" type="radio" value="screensaver" checked={this.state.selectedOption === "screensaver"}  onChange = {this.onValueChange}/>
                                             <label className ="check-label" htmlFor="2">
                                                 Skärmsläckare
                                             </label> 
