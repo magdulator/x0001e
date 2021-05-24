@@ -155,6 +155,10 @@ html, body,  #root, .App{
   .add-system {
     width: 100%;
   }
+
+  .status {
+    height: 50px;
+  }
   @media (min-width: 800px) {
     .navbar-nav {
       padding: 0;
@@ -301,4 +305,51 @@ html, body,  #root, .App{
     p, li {
       font-size: 1.4rem;
     }
+
+    .navbar {
+      height: 200px;
+    }
+
+    .nav-item.text-center{
+      width: 190px;
+      padding: 10px;
+      height: 160px;
+    }
+ 
+    .overview-text {
+      margin-top: 25px;
+      line-height: 2.4rem;
+    }
+    .overview-system-text {
+      line-height: 125px;
+    }
+
+    .carousel-indicators li {
+      background-color: white; 
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+      margin: 20px;
+      margin-bottom: 70px;
+    }
+
+    .system-card.card {
+      width: 300px;
+      margin: 20px;
+      padding: 10px;
+    }
+
+    .specific{
+      width: 40%;
+    }
+
+    .add-system, .register, .login, .edit-system {
+      width: 30%;
+    }
+    .system-overview>h1 {
+      padding-bottom: 40px;
+    }
+
+
+    
   }

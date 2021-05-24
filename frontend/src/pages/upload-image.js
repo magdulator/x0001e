@@ -133,7 +133,7 @@ class ImageUpload extends Component {
                             )}
                             </>
                         ))):
-                        <p>Inga bilder har blivit Uppladdade</p>
+                        <p className = "px-5">Inga bilder har blivit Uppladdade</p>
                         }
                         </div>
                         <hr></hr>

@@ -16,6 +16,7 @@ import OverviewSpecific from "./services/overview-specific.component";
 import axios from 'axios';
 import EditOverviewSpecific from './pages/edit-overview-specific';
 import AddSystemSpecific from './pages/add-system-specific';
+import SystemStatus from './pages/system-status';
 
 const screensaver_time = 30000; //milliseconds until screensaver is active
 
@@ -211,6 +212,8 @@ class App extends Component {
                 <GuardedRoute exact path = "/system/overview/:systemName" component = {OverviewSpecific} auth = {auth.isAuth()}/>
                 <GuardedRoute exact path = "/system/overview/:systemName/edit" component = {EditOverviewSpecific} auth = {auth.isAdmin()}/>
                 <GuardedRoute exact path = "/system/overview/create/new" component = {AddSystemSpecific} auth = {auth.isAdmin()}/>
+                <GuardedRoute exact path = "/system/status" component = {SystemStatus} auth = {auth.isAuth()}/>
+
 
 
           </Switch>

@@ -51,21 +51,25 @@ export default class AddSystemSpecific extends React.Component {
     }
 
     uploadImage = async (systemName) => {
-        const type = 'systemdata';
-        const fileName = type + this.state.selectedFile.name;
-        const date = new FormData() 
-        date.append('image', this.state.selectedFile, fileName)
-        date.append('pictype', type)
-        date.append('nameSystem', systemName);
-        await axios.post(process.env.REACT_APP_API_URL + '/images/upload/', date, {headers: {
-            'Content-type' : 'form-data'
-        }}).then(res => { 
-            this.setState({successText: res.data.message, errorMessage: ""});
-        }).catch((err) => {
-            if (err.response && err.response.data) {
-                this.setState({successText: "", errorMessage: err.response.data.message});
-            }
-        });
+        try {
+            const type = 'systemdata';
+            const fileName = type + this.state.selectedFile.name;
+            const date = new FormData() 
+            date.append('image', this.state.selectedFile, fileName)
+            date.append('pictype', type)
+            date.append('nameSystem', systemName);
+            await axios.post(process.env.REACT_APP_API_URL + '/images/upload/', date, {headers: {
+                'Content-type' : 'form-data'
+            }}).then(res => { 
+                this.setState({successText: res.data.message, errorMessage: ""});
+            }).catch((err) => {
+                if (err.response && err.response.data) {
+                    this.setState({successText: "", errorMessage: err.response.data.message});
+                }
+            });
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     onChangeHandler = (event) => {
@@ -105,10 +109,12 @@ export default class AddSystemSpecific extends React.Component {
                                 <div className = "input-group input-group-lg">
                                     <textarea name="exampleData" className="form-control" value = {this.state.exampleData || ''}  onChange={this.handleChange}/>
                                 </div> 
-                                <div className = "input-group input-group-lg my-2">
-                                    <input type="submit" className="btn-lg btn-primary btn-block my-3 py-3 px-2" value= "Skapa system"/>
+                                <div className = "form-group">
+                                    <button
+                                        className = "btn btn-primary btn-lg btn-block my-3 py-3 px-2" type="submit"> <h4>REGISTRERA SYSTEM</h4>
+                                    </button>
                                 </div> 
-
+                             
                                 { this.state.errorMessage &&
                                     <div className="alert alert-danger" role="alert">
                                         <p className="error"> { this.state.errorMessage } </p> 
