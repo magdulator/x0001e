@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import axios from 'axios';
-import {ArrowRight, RecordFill} from 'react-bootstrap-icons';
+import {ArrowRight} from 'react-bootstrap-icons';
 
 export default class SystemStatus extends Component {
     constructor(props) {
@@ -22,7 +22,7 @@ export default class SystemStatus extends Component {
             res.data.forEach(function (item, index) {
                 const title = item.title;
                 const systemName = item.systemName
-                var hej = {systemName, title, status:"", statusText: "Ingen interaktion med riktig data än"}
+                var hej = {systemName, title, status:"red", statusText: "Inte kopplad till riktig data"}
                 empty[index] = hej;
               });
             this.setState({availableSystems: empty})
@@ -44,7 +44,7 @@ export default class SystemStatus extends Component {
                 for (var i = 0; i < res.data.length; i++) {
                     if(res.data[i].properties.dead) {
                         statusColor = 'yellow';
-                        statText = 'Problem med en eller flera sensorer'
+                        statText = 'Problem: en / flera sensorer'
                         break; 
                     }
                 }
@@ -71,18 +71,27 @@ export default class SystemStatus extends Component {
             return(
             <div className = "main">
     
-                <div className = "system-container">
+                <div className = "system-container d-flex justify-content-center flex-wrap text-center py-5">
                 {this.state.availableSystems.length > 0 ? (
                     this.state.availableSystems.map(system => (                    
                     <div className="system-card card" key={system.systemName}>
                         <a className="card-block stretched-link text-decoration-none text-dark" href ="system/overview">
                         <div className = "card-header py-0 pt-2 my-0 text-center" ><h4>{system.title}</h4><p>Mer information <ArrowRight></ArrowRight></p></div>
-                        <div className = "card-body px-0">
-                            <ul className= "list-unstyled pl-3 my-0">
-                                <li className ="status"><RecordFill size="40" viewBox = "1 1 14 14" color="red" className="status-icon mr-3 float-left"></RecordFill><p className = "d-inline ">{system.statusText}</p></li>
-                                <li className ="status"><RecordFill size="40" viewBox = "1 1 14 14" color="yellow" className="status-icon mr-3 float-left"></RecordFill><p className ="d-inline"></p></li>
-                                <li className ="status"><RecordFill size="40" viewBox = "1 1 14 14" color="green" className="status-icon mr-3 float-left"></RecordFill><p className ="d-inline"></p></li>
-                            </ul>
+                        <div className = "card-body px-0 ">
+                            <ul className= "status-list pl-3">
+                            <li className ="status my-2">
+                                    <span className="red-dot float-left mr-2"></span>
+                                    <p className="jo">{system.status==='red'? system.statusText : ''}</p>
+                                </li>
+                                <li className ="status my-2">
+                                <span className="yellow-dot float-left mr-2"></span>
+                                    <p className ="jo">{system.status==='yellow'? system.statusText : ''}</p>
+                                </li>
+                                <li className ="status my-2">
+                                <span className="green-dot float-left mr-2"></span>
+                                    <p className ="jo">{system.status==='green'? system.statusText : ''}</p>
+                                </li>
+                            </ul>   
                         </div>
                         </a>
                     </div>
