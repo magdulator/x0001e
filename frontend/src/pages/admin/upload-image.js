@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import axios from 'axios';
+import images from '../../services/images';
 
 class ImageUpload extends Component {
     constructor(props) {
@@ -20,16 +20,12 @@ class ImageUpload extends Component {
     }
 
     getImages = async () => {
-        try{
-            const res = await axios.get(process.env.REACT_APP_API_URL + '/images/all');
-            if(!res.data) {
-                return;
-            } else {
-                this.setState({images: res.data.images});
-            } 
-        } catch(err) {
-            console.log(err.message);
+
+        const res = await images.getImages();
+        if(!res) {
+            return;
         }
+        this.setState({images: res});
     }
 
     onChangeHandler = (event) => {
@@ -46,20 +42,8 @@ class ImageUpload extends Component {
       }
 
     onClickHandler = async () => {
-        const type = this.state.selectedOption;
-        const fileName = type + this.state.selectedFile.name;
-        const date = new FormData() 
-        date.append('image', this.state.selectedFile, fileName)
-        date.append('pictype', type)
-        await axios.post(process.env.REACT_APP_API_URL + '/images/upload/', date, {headers: {
-            'Content-type' : 'form-data'
-        }}).then(res => { 
-            this.setState({successText: res.data.message, errorMessage: ""});
-        }).catch((err) => {
-            if (err.response && err.response.data) {
-                this.setState({successText: "", errorMessage: err.response.data.message});
-            }
-        });
+        const res = await images.uploadImage(this.state.selectedFile, '', this.state.selectedOption);   
+        this.setState({successText: res[0], errorMessage: res[1]});
     }
 
     switchColor = (active) => {
@@ -68,30 +52,18 @@ class ImageUpload extends Component {
     }
 
     deleteOrUpdate = async(act, path) => {
-        console.log(this.state.deleteMode)
         if(this.state.deleteMode) {
-            await axios.post(process.env.REACT_APP_API_URL + `/images/delete/${path}`, {
-            }).then(response => {
-                if(response.data !== null) {
-                    this.getImages();
-                }
-            }).catch((err) => {
-                if (err.response && err.response.data) {
-                    this.setState({errorMessage: err.response.data.message, successText: ""});
-                }        
-            });
+            const res = await images.deleteImage(path);
+            if(res[0]) {
+                this.getImages();   
+            }
         }
         else {
             const active = !act
-            await axios.patch(process.env.REACT_APP_API_URL + `/images/update/${path}`, {
-                active
-            }).then(response => {
-                if(response.data !== null) {
-                    this.getImages();
-                }
-            }).catch((err) => {
-                console.log(err)
-            });
+            const res = await images.updateImage(active, path)
+            if(res[0]) {
+                this.getImages()
+            }
         }
     }
 
