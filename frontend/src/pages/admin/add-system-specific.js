@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React from 'react';
+import images from '../../services/images';
+import systems from '../../services/systems';
 
 export default class AddSystemSpecific extends React.Component {
     constructor(props) {
@@ -35,41 +37,16 @@ export default class AddSystemSpecific extends React.Component {
         const description = this.state.description;
         const img = this.state.img;
         const exampleData = this.state.exampleData;
-
-        await axios.post(process.env.REACT_APP_API_URL + `/systems/create`, {
-            systemName, title, description, img, exampleData
-        }).then(response => {
-            if(response.data !== null) {
-                this.setState({success: response.data.message, errorMessage: ""})
-                this.uploadImage(systemName)
-            }
-        }).catch((e) => {
-            if (e.response && e.response.data) {
-                this.setState({errorMessage: e.response.data.message, success: ""});
-            } 
-        });
+        const res = await systems.createSystem(systemName, title, description, img, exampleData);
+        if(res[0]) {
+            this.uploadImage(systemName)
+        }
+        this.setState({success: res[0], errorMessage: res[1]});
     }
 
     uploadImage = async (systemName) => {
-        try {
-            const type = 'systemdata';
-            const fileName = type + this.state.selectedFile.name;
-            const date = new FormData() 
-            date.append('image', this.state.selectedFile, fileName)
-            date.append('pictype', type)
-            date.append('nameSystem', systemName);
-            await axios.post(process.env.REACT_APP_API_URL + '/images/upload/', date, {headers: {
-                'Content-type' : 'form-data'
-            }}).then(res => { 
-                this.setState({successText: res.data.message, errorMessage: ""});
-            }).catch((err) => {
-                if (err.response && err.response.data) {
-                    this.setState({successText: "", errorMessage: err.response.data.message});
-                }
-            });
-        } catch (err) {
-            console.log(err)
-        }
+        const res = await images.uploadImage(this.state.selectedFile, systemName, 'systemdata')
+        this.setState({success: res[0], errorMessage: res[1]});
     }
 
     onChangeHandler = (event) => {

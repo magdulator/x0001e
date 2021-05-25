@@ -15,7 +15,9 @@ class Systems {
             return empty
         }
         catch(e) {
-            console.log(e);
+            if (e.response && e.response.data) {
+                return e;
+            }
         }
     }
 
@@ -25,7 +27,9 @@ class Systems {
             return res.data;
         }
         catch(e) {
-            return e
+            if (e.response && e.response.data) {
+                return e;
+            }
         }
     }
 
@@ -35,7 +39,9 @@ class Systems {
             return res;
         
         } catch (e) {
-            return e
+            if (e.response && e.response.data) {
+                return e;
+            }
         }
     }
 
@@ -45,7 +51,9 @@ class Systems {
             return [res.data.message, ""]
         
         } catch (e) {
-            return["", e.response.data.message];
+            if (e.response && e.response.data) {
+                return["", e.response.data.message];
+            }
         }
     }
 
@@ -57,9 +65,23 @@ class Systems {
             return [res.data.message, ""]
         
         } catch (e) {
-            return["", e.response.data.message];
+            if (e.response && e.response.data) {
+                return["", e.response.data.message];
+            }
         }
+    }
 
+    createSystem = async(systemName, title, description, img, exampleData) => {
+        try {
+            const res = await axios.post(process.env.REACT_APP_API_URL + '/systems/create', {
+                systemName, title, description, img, exampleData
+            })
+            return [res.data.message, ""]
+        } catch (e) {
+            if (e.response && e.response.data) {
+                return["", e.response.data.message];
+            }
+        }
     }
 }
 export default new Systems();

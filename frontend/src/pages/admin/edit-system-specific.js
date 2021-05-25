@@ -62,7 +62,6 @@ export default class EditOverviewSpecific extends React.Component {
         const img = this.state.img;
         const exampleData = this.state.exampleData;
         const res = await systems.sendInfo(system, title, description, img, exampleData);
-        console.log(res)
         this.setState({success: res[0], errorMessage: res[1]});
     }
 
