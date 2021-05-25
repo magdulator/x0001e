@@ -17,6 +17,19 @@ class Images {
         }
     }
 
+    getActive = async () => {
+        try{
+            const res = await axios.get(process.env.REACT_APP_API_URL + '/images/presentation/active');
+            if(!res.data.files) {
+                return;
+            } else {
+                return(res.data.files);
+            } 
+        } catch(err) {
+            console.log(err.message);
+        }
+    }
+
     uploadImage = async (file, systemName, type) => {
         try {
             const fileName = type + file.name;

@@ -1,11 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import { useHistory } from "react-router-dom";
 import {PencilSquare, ChevronDoubleRight, ChevronDoubleLeft} from 'react-bootstrap-icons';
-
-import axios from 'axios';
+import imagess from '../../services/images';
 import Carousel from 'react-bootstrap/Carousel';
 import auth from '../../services/auth';
-
 
 const PresentationView = ({newImage}) => {
 
@@ -14,21 +12,16 @@ const PresentationView = ({newImage}) => {
     const [images, setImages] = useState([]);
 
     const getImages = async () => {
-        try{
-            const res = await axios.get(process.env.REACT_APP_API_URL + '/images/presentation/active');
-            if(!res.data.files) {
+            const res = await imagess.getActive();
+            if(!res) {
                 return;
             } else {
-                setImages(res.data.files);
+                setImages(res);
             } 
-        } catch(err) {
-            console.log(err.message);
-        }
     }
     useEffect(()=> {
         getImages();
     }, [newImage]);
-
 
     const configureImage = image => {
         return  process.env.REACT_APP_API_URL +'/images/' +image;
