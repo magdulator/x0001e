@@ -17,9 +17,8 @@ export default class SystemStatus extends Component {
     }
 
     getSystems = async () => {
-        const syst = await systems.getSystems()
+        const syst = await systems.getSystemsStatus()
         this.setState({availableSystems: syst})
-        
     }
 
     timedRequests = async () => {
