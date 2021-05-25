@@ -34,7 +34,7 @@ export default class AddSystemSpecific extends React.Component {
         const systemName = this.state.systemName
         const title = this.state.title;
         const description = this.state.description;
-        const img = this.state.img;
+        const img = 'systemdata' + this.state.selectedFile.name;
         const exampleData = this.state.exampleData;
         const res = await systems.createSystem(systemName, title, description, img, exampleData);
         if(res[0]) {

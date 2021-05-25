@@ -1,4 +1,5 @@
 import systems from '../../services/systems';
+import images from '../../services/images';
 import React from 'react';
 const pathname = window.location.pathname.split('/');
 
@@ -13,7 +14,8 @@ export default class EditOverviewSpecific extends React.Component {
             img: "",
             exampleData: "",
             errorMessage: "",
-            success: ""
+            success: "",
+            image: "",
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,6 +24,12 @@ export default class EditOverviewSpecific extends React.Component {
     }
     componentDidMount(){
         this.getSystemInfo();
+        this.getImage();
+    }
+
+    getImage = async () => {
+        const res = await images.getSystemImage(this.state.system);
+        this.setState({image: res})
     }
 
     getSystems = async () => {
@@ -41,7 +49,7 @@ export default class EditOverviewSpecific extends React.Component {
     deleteSystem = async () => {
         const res = await systems.deleteSystem(this.state.system);
         this.setState({success: res[0], errorMessage: res[1]})
-        //window.location.replace('/system/overview')
+        window.location.replace('/system/overview')
     }
 
     handleChange(event) { 
@@ -82,7 +90,13 @@ export default class EditOverviewSpecific extends React.Component {
                                 <div className = "input-group input-group-lg">
                                     <textarea name="description" className="form-control" value = {this.state.description || ''} onChange={this.handleChange}/>
                                 </div>
-                                <h5 className = "py-2">Bild på exempeldata:</h5>  
+                                <h5 className = "py-2">Bild på exempeldata:</h5>
+                                {this.state.image && (
+                                <img
+                                        className = 'img-thumbnail my-1 mx-2'
+                                        src = {process.env.REACT_APP_API_URL +'/images/' +this.state.image.path}
+                                        alt="First slide"
+                                    />  )}
                                 <div className = "input-group input-group-lg">
                                     <input name="img" type = "text" className="form-control" value = {this.state.img || ''} onChange={this.handleChange}/>
                                 </div> 

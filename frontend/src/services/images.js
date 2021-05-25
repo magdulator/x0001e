@@ -17,6 +17,19 @@ class Images {
         }
     }
 
+    getSystemImage = async (systemName) => {
+        try{
+            const res = await axios.get(process.env.REACT_APP_API_URL + `/images/system/${systemName}`);
+            if(!res.data.image) {
+                return;
+            } else {
+                return(res.data.image);
+            } 
+        } catch(err) {
+            return; 
+        }
+    }
+
     getActive = async () => {
         try{
             const res = await axios.get(process.env.REACT_APP_API_URL + '/images/presentation/active');
