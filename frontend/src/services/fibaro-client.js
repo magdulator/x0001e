@@ -15,24 +15,16 @@ class Fibaro {
                     if(res.data[i].properties.dead) {
                         statusColor = 'yellow';
                         statText = 'Problem: en / flera sensorer'
-                        break; 
+                        return [statusColor, statText]; 
                     }
                 }
+                return [statusColor, statText]; 
             }
+        return [statusColor, statText]; 
         } catch (e) {
-            console.log(e)
+            return(e)
         }
-        for (var n = 0; n<this.state.availableSystems.length; n++) {
-            if(this.state.availableSystems[n].systemName === 'fibaro') {
-                let availableSystems = [...this.state.availableSystems];
-                let item = {...availableSystems[n]};
-                item.status = statusColor;
-                item.statusText = statText;
-                availableSystems[n] = item;
-                this.setState({availableSystems});
-                break;
-            }
-        }     
+            
     }
 }
 export default new Fibaro();

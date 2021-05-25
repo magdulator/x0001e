@@ -4,10 +4,10 @@ import {PencilSquare, ChevronDoubleRight, ChevronDoubleLeft} from 'react-bootstr
 
 import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
-import auth from '../services/auth';
+import auth from '../../services/auth';
 
 
-const ImageContainer = ({newImage}) => {
+const PresentationView = ({newImage}) => {
 
     let history = useHistory();
 
@@ -71,4 +71,4 @@ const ImageContainer = ({newImage}) => {
     )
 }
 
-export {ImageContainer}
+export {PresentationView}

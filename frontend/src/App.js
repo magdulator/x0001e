@@ -1,22 +1,22 @@
 import React, {Component} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import {LoginForm} from "./pages/login.component";
+import {LoginForm} from "./pages/public/login.component";
 import { BrowserRouter, Switch, Route, NavLink} from "react-router-dom";
 import auth from './services/auth';
-import RegisterForm from './pages/register.component';
+import RegisterForm from './pages/admin/register.component';
 import {HouseDoorFill, PersonCircle, CameraReelsFill, ChevronCompactRight, PersonPlus, PencilSquare, PlusSquare} from 'react-bootstrap-icons';
-import {ImageContainer} from './pages/image-container';
-import {ImageUpload} from './pages/upload-image';
+import {PresentationView} from './pages/public/presentation-view';
+import {ImageUpload} from './pages/admin/upload-image';
 import GuardedRoute from './services/guarded-route';
-import {System} from './pages/system';
-import {SystemOverview} from './pages/system-overview';
+import {System} from './pages/user/system';
+import {SystemOverview} from './pages/user/system-overview';
 import Screensaver from './components/screensaver.component';
 import OverviewSpecific from "./services/overview-specific.component";
 import axios from 'axios';
-import EditOverviewSpecific from './pages/edit-overview-specific';
-import AddSystemSpecific from './pages/add-system-specific';
-import SystemStatus from './pages/system-status';
+import EditOverviewSpecific from './pages/admin/edit-system-specific';
+import AddSystemSpecific from './pages/admin/add-system-specific';
+import SystemStatus from './pages/user/system-status';
 
 const screensaver_time = 30000; //milliseconds until screensaver is active
 
@@ -204,7 +204,7 @@ class App extends Component {
           <Switch>
                 <Route path = "/login" component={LoginForm}/>
                 <Route path = "/register" component={RegisterForm} />
-                <Route path = "/home" component = {ImageContainer} />
+                <Route path = "/home" component = {PresentationView} />
                 <GuardedRoute exact path = "/system" component = {System} auth ={auth.isAuth()}/>
                 <GuardedRoute path = "/upload" component = {ImageUpload} auth = {auth.isAdmin()}/>
                 <GuardedRoute path = "/register" component = {RegisterForm} auth = {auth.isAdmin()}/>

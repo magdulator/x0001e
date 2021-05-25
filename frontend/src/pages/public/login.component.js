@@ -1,5 +1,5 @@
     import React from "react";
-    import auth from '../services/auth';
+    import auth from '../../services/auth';
     import { Formik,ErrorMessage} from 'formik';
     import { useHistory } from "react-router-dom";
     import * as Yup from 'yup';

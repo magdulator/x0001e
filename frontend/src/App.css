@@ -128,6 +128,16 @@ html, body,  #root, .App{
     margin-right: auto;
   }
 
+  .system-card.card {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .system-title {
+    font-size: 1.3rem;
+    padding: 5px;
+  }
+
   .system-row{
     display: flex;
     flex-direction: row;
@@ -256,8 +266,8 @@ html, body,  #root, .App{
     }
 
     .system-card.card {
-      width: 270px;
-      margin: 10px;
+      width: 290px;
+      margin: 15px;
       border-radius: 30px;
     }
     .system-overview {
@@ -373,7 +383,7 @@ html, body,  #root, .App{
     }
 
     .system-card.card {
-      width: 300px;
+      width: 320px;
       margin: 20px;
       padding: 10px;
     }

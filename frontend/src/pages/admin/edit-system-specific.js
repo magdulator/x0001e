@@ -1,4 +1,4 @@
-import axios from 'axios';
+import systems from '../../services/systems';
 import React from 'react';
 const pathname = window.location.pathname.split('/');
 
@@ -18,46 +18,30 @@ export default class EditOverviewSpecific extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.deleteSystem = this.deleteSystem.bind(this);
+        this.sendInfo = this.sendInfo.bind(this)
     }
     componentDidMount(){
         this.getSystemInfo();
     }
 
     getSystems = async () => {
-        try {
-            const res = await axios.get(process.env.REACT_APP_API_URL+'/systems');
-            return res.data;
-        }
-        catch(e) {
-            console.log(e);
-        }
+        const res = await systems.getSystems();
+        return res;
     }
 
     getSystemInfo = async () => {
-        try {
-            const res = await axios.get(process.env.REACT_APP_API_URL + `/systems/${this.state.system}`)
-            
-            this.setState({title: res.data.title,
-                        description: res.data.description,
-                        img: res.data.img,
-                        exampleData: res.data.exampleData,
-                        });
-        } catch (e) {
-            console.log(e);
-        }
+        const res = await systems.getSystemInfo(this.state.system);            
+        this.setState({title: res.data.title,
+                    description: res.data.description,
+                    img: res.data.img,
+                    exampleData: res.data.exampleData,
+        });
     }
 
     deleteSystem = async () => {
-
-            await axios.post(process.env.REACT_APP_API_URL + `/systems/delete/${this.state.system}`)
-            .then(response => {
-                if(response.data !== null) {
-                    this.setState({success: response.data.message, errorMessage: ""})
-                    window.location.replace('/system/overview')
-                }
-            }).catch((e) => {
-                this.setState({errorMessage: e.response.data.message, success: ""});
-            });
+        const res = await systems.deleteSystem(this.state.system);
+        this.setState({success: res[0], errorMessage: res[1]})
+        //window.location.replace('/system/overview')
     }
 
     handleChange(event) { 
@@ -72,21 +56,14 @@ export default class EditOverviewSpecific extends React.Component {
     }
 
     sendInfo = async () => {
-
+        const system = this.state.system;
         const title = this.state.title;
         const description = this.state.description;
         const img = this.state.img;
         const exampleData = this.state.exampleData;
-
-        await axios.patch(process.env.REACT_APP_API_URL + `/systems/update/${this.state.system}`, {
-            title, description, img, exampleData
-        }).then(response => {
-            if(response.data !== null) {
-                this.setState({success: response.data.message, errorMessage: ""})
-            }
-        }).catch((e) => {
-            this.setState({errorMessage: e.response.data.message, success: ""});
-        });
+        const res = await systems.sendInfo(system, title, description, img, exampleData);
+        console.log(res)
+        this.setState({success: res[0], errorMessage: res[1]});
     }
 
     render() {
