@@ -16,11 +16,15 @@ export default class EditOverviewSpecific extends React.Component {
             errorMessage: "",
             success: "",
             image: "",
+            selectedFile: null,
+            preview: ""
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.deleteSystem = this.deleteSystem.bind(this);
-        this.sendInfo = this.sendInfo.bind(this)
+        this.sendInfo = this.sendInfo.bind(this);
+        this.uploadImage = this.uploadImage.bind(this);
+        this.deleteImage = this.deleteImage.bind(this);
     }
     componentDidMount(){
         this.getSystemInfo();
@@ -29,7 +33,7 @@ export default class EditOverviewSpecific extends React.Component {
 
     getImage = async () => {
         const res = await images.getSystemImage(this.state.system);
-        this.setState({image: res})
+        this.setState({image: res});
     }
 
     getSystems = async () => {
@@ -48,6 +52,7 @@ export default class EditOverviewSpecific extends React.Component {
 
     deleteSystem = async () => {
         const res = await systems.deleteSystem(this.state.system);
+        this.deleteImage(this.state.system)
         this.setState({success: res[0], errorMessage: res[1]})
         window.location.replace('/system/overview')
     }
@@ -63,14 +68,44 @@ export default class EditOverviewSpecific extends React.Component {
         event.preventDefault();
     }
 
+    onChangeHandler = (event) => {
+        this.setState({
+            selectedFile: event.target.files[0],
+            preview: URL.createObjectURL(event.target.files[0]),
+        });
+    }
+
     sendInfo = async () => {
         const system = this.state.system;
         const title = this.state.title;
         const description = this.state.description;
-        const img = this.state.img;
         const exampleData = this.state.exampleData;
-        const res = await systems.sendInfo(system, title, description, img, exampleData);
+        const res = await systems.sendInfo(system, title, description, exampleData);
         this.setState({success: res[0], errorMessage: res[1]});
+        if(this.state.selectedFile) {
+            this.deleteImage(system)
+            this.uploadImage(system);
+            this.setState({selectedFile: null})
+
+        }
+    }
+
+    deleteImage = async () => {
+        if(this.state.image) {
+            await images.deleteImage(this.state.image.path);
+            this.setState({image: ""})
+        }
+
+    }
+
+    uploadImage = async (systemName) => {
+        const res = await images.uploadImage(this.state.selectedFile, systemName, 'systemdata')
+        if(res[0]) {
+            this.getImage();
+            this.setState({selectedFile: null})
+
+        }
+        this.setState({errorMessage: res[1]});
     }
 
     render() {
@@ -92,14 +127,17 @@ export default class EditOverviewSpecific extends React.Component {
                                 </div>
                                 <h5 className = "py-2">Bild på exempeldata:</h5>
                                 {this.state.image && (
-                                <img
+                                <><img
                                         className = 'img-thumbnail my-1 mx-2'
                                         src = {process.env.REACT_APP_API_URL +'/images/' +this.state.image.path}
                                         alt="First slide"
-                                    />  )}
-                                <div className = "input-group input-group-lg">
-                                    <input name="img" type = "text" className="form-control" value = {this.state.img || ''} onChange={this.handleChange}/>
-                                </div> 
+                                /> 
+                                <button className = 'btn-lg btn-danger my-2 py-2 px-2' onClick = {()=>this.deleteImage()}> Radera bild</button></>)}
+                                <h5 className = "py-2">Ersätt bild:</h5>
+
+                                <div className = "input-group-lg mb-3">
+                                    <input type="file" name="file" onChange={this.onChangeHandler} className="file-input"/>
+                                </div>
                                 <h5 className = "py-2">Beskrivande text för datat:</h5>
                                 <div className = "input-group input-group-lg">
                                     <textarea name="exampleData" className="form-control" value = {this.state.exampleData || ''} onChange={this.handleChange}/>
@@ -120,7 +158,6 @@ export default class EditOverviewSpecific extends React.Component {
                                 <button
                                 className = 'btn-lg btn-danger btn-block my-3 py-3 px-2'
                                 onClick = {()=>this.deleteSystem()}>Radera systemet</button>
-                            
                             </form>
                             ):(
                             <h2>Systemet finns inte i databasen</h2>

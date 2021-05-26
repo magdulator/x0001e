@@ -34,10 +34,10 @@ export default class AddSystemSpecific extends React.Component {
         const systemName = this.state.systemName
         const title = this.state.title;
         const description = this.state.description;
-        const img = 'systemdata' + this.state.selectedFile.name;
+        
         const exampleData = this.state.exampleData;
-        const res = await systems.createSystem(systemName, title, description, img, exampleData);
-        if(res[0]) {
+        const res = await systems.createSystem(systemName, title, description, exampleData);
+        if(res[0] && this.state.selectedFile) {
             this.uploadImage(systemName)
         }
         this.setState({success: res[0], errorMessage: res[1]});
@@ -45,7 +45,7 @@ export default class AddSystemSpecific extends React.Component {
 
     uploadImage = async (systemName) => {
         const res = await images.uploadImage(this.state.selectedFile, systemName, 'systemdata')
-        this.setState({success: res[0], errorMessage: res[1]});
+        this.setState({errorMessage: res[1]});
     }
 
     onChangeHandler = (event) => {
