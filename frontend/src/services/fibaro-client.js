@@ -31,11 +31,16 @@ class Fibaro {
             const res = await axios.get(process.env.REACT_APP_API_URL+'/fibaro/getAll');
             if(res.status === 200) {
                 //gå vidare och kolla 
+                var attributes;
+                var sensors = [];
                 res.data.forEach((item, index) => {
                     if(item.properties.dead){
-                        console.log(item.properties.deadReason + " " + index)
+                        const type = item.type.split('.');
+                        attributes = {name: item.name, type: type[2], reason: item.properties.deadReason};
+                        sensors.push(attributes)
                     }
                 })
+                return(sensors)
             } 
     
         } catch (e) {

@@ -48,19 +48,20 @@ export default class SystemStatus extends Component {
                 {this.state.availableSystems.length > 0 ? (
                     this.state.availableSystems.map(system => (                    
                     <div className="system-card card" key={system.systemName}>
-                        <a className="card-block stretched-link text-decoration-none text-dark" href ="system/overview">
+                        <a className="card-block stretched-link text-decoration-none text-dark"  href ={`status/${system.systemName}`}>
                         <div className = "card-header py-0 pt-2 my-0 text-center" ><h4>{system.title}</h4><p>Mer information <ArrowRight></ArrowRight></p></div>
                         <div className = "card-body px-0 ">
                             <ul className= "status-list pl-3">
-                                <li className ="status my-2">
+                                <li className ="status my-0">
+
                                     <span className="red-dot float-left mr-3"></span>
                                     <p className="jo">{system.status==='red'? system.statusText : ''}</p>
                                 </li>
-                                <li className ="status my-2">
+                                <li className ="status my-3">
                                 <span className="yellow-dot float-left mr-3"></span>
                                     <p className ="jo">{system.status==='yellow'? system.statusText : ''}</p>
                                 </li>
-                                <li className ="status my-2">
+                                <li className ="status my-3">
                                 <span className="green-dot float-left mr-3"></span>
                                     <p className ="jo">{system.status==='green'? system.statusText : ''}</p>
                                 </li>

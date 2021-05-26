@@ -1,6 +1,6 @@
 import React from 'react';
-import images from '../services/images';
-import systems from '../services/systems';
+import images from '../../services/images';
+import systems from '../../services/systems';
 
 const pathname = window.location.pathname.split('/');
 
@@ -42,13 +42,11 @@ export default class OverviewSpecific extends React.Component {
                             {this.state.image && 
                             (<>
                             <p>Exempel data från systemet:</p>
-
                             <img
                                 className = 'img-thumbnail my-1 mx-2'
                                 src = {process.env.REACT_APP_API_URL +'/images/' +this.state.image.path}
                                 alt="First slide"
                             /> </>)}
-                        <p>{this.state.systems.img}</p>
                         <p>{this.state.systems.exampleData}</p>
                         </>
                         ):(

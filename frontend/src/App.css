@@ -208,6 +208,16 @@ html, body,  #root, .App{
     height: 100%;
   }
 
+  .fibaro-text{
+    font-size: 1.2rem;
+    line-height: 2.6rem;
+    margin-left: 20px;
+  }
+
+  .sensor-info {
+    background-color: lightgray;
+    border-radius: 10px;
+  }
   @media (min-width: 800px) {
     .navbar-nav {
       padding: 0;

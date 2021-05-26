@@ -12,11 +12,12 @@ import GuardedRoute from './services/guarded-route';
 import {System} from './pages/user/system';
 import {SystemOverview} from './pages/user/system-overview';
 import Screensaver from './components/screensaver.component';
-import OverviewSpecific from "./services/overview-specific.component";
+import OverviewSpecific from "./pages/user/overview-specific.component";
 import axios from 'axios';
 import EditOverviewSpecific from './pages/admin/edit-system-specific';
 import AddSystemSpecific from './pages/admin/add-system-specific';
 import SystemStatus from './pages/user/system-status';
+import FibaroStatus from './pages/user/fibaro-status';
 
 const screensaver_time = 30000; //milliseconds until screensaver is active
 
@@ -136,7 +137,28 @@ class App extends Component {
                             </>
                             )}
                         </>
-                      )} 
+                      )}
+                      {(pathname[2] === 'status' ) && (
+                          // if pathname = /status
+                          <>
+                            <ChevronCompactRight className = "menu-icon my-auto mx-0" size = "40" color="gray"></ChevronCompactRight>
+                            <li className="submenu nav-item text-center">
+                                <NavLink to={"/system/status"} className="nav-link" activeClassName="active-link">
+                                    <h4 className="overview-text">SYSTEM <br></br> STATUS</h4>
+                                </NavLink> 
+                            </li>
+                            {availableSystems.includes(pathname[3]) && (
+                            <>
+                                <ChevronCompactRight className = "menu-icon my-auto mx-0" size = "40" color="gray"></ChevronCompactRight>
+                                <li className="submenu nav-item text-center">
+                                    <NavLink to={`/system/status/${pathname[3]}`} className="nav-link" activeClassName="active-link">
+                                        <h4 className="overview-system-text ">{pathname[3].toUpperCase()}</h4>
+                                    </NavLink>
+                                </li>
+                            </>
+                            )}
+                            </>
+                        )} 
                       </>
                       ):(
                         // Not logged in
@@ -213,6 +235,8 @@ class App extends Component {
                 <GuardedRoute exact path = "/system/overview/:systemName/edit" component = {EditOverviewSpecific} auth = {auth.isAdmin()}/>
                 <GuardedRoute exact path = "/system/overview/create/new" component = {AddSystemSpecific} auth = {auth.isAdmin()}/>
                 <GuardedRoute exact path = "/system/status" component = {SystemStatus} auth = {auth.isAuth()}/>
+                <GuardedRoute exact path = "/system/status/:systemName" component = {FibaroStatus} auth = {auth.isAuth()}/>
+
 
 
 
