@@ -16,4 +16,24 @@ router.get('/fibaro/nodes/:roomID', (fibaro.getRoomNodes));
 
 router.get('/widefind', (widefind.wide));
 
+
+var returnRouter = function(io) {
+    router.get('/', function(req, res, next) {
+        res.render('index', {
+            title: 'Express'
+        });
+    });
+
+    router.post('/message', function(req, res) {
+        console.log("Post request hit.");
+        // res.contentType('text/xml');
+        console.log(appjs);
+        io.sockets.emit("display text", req);
+        // res.send('<Response><Sms>'+req.body+'</Sms></Response>');
+    });
+
+    return router;
+}
+
+
  module.exports = router;

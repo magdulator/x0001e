@@ -41,6 +41,7 @@ exports.wide = (req, res) => {
             jsonMess = JSON.parse(jsonMess)
             if(jsonMess.message.includes('REPORT')) {
                 console.log(jsonMess.message);
+                res.write(jsonMess.message);
             }
 
         }
@@ -48,5 +49,6 @@ exports.wide = (req, res) => {
 
     function mqtt_close() {
 	    console.log("Close MQTT");
+        res.end();  
     }
 }

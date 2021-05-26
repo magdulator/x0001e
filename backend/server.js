@@ -13,7 +13,7 @@ const app = express();
 // })
 //connect to database
 mongoose.connect(process.env.DB_CONNECT, {useNewUrlParser: true, useUnifiedTopology: true}, () =>
-console.log("Connected to database"));
+console.log("Connected to database"));  
 
   app.use(cors());
   //app.use(express.json());
@@ -28,8 +28,6 @@ console.log("Connected to database"));
     res.json({ message: "Testytest" });
   });
   
-  const router = require('./routes/routes.js');
-  app.use('/api', router);
 
   const systems = require('./routes/systems.js');
   app.use('/api/systems', systems);
@@ -42,8 +40,11 @@ console.log("Connected to database"));
 
   // set port, listen for requests
   const PORT = process.env.PORT || 5000;
-  app.listen(PORT, () => {
+  let server = app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
   });
 
-  
+  let io = require('socket.io')(server);
+  io.use(cors());
+  const hej = (require("./routes/sockerRoute.js")(io));
+  app.use('/api/test', hej);

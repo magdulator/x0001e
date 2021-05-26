@@ -22,7 +22,6 @@ const uploads = multer({storage});
 router.post('/upload', uploads.single('image'), async(req, res) => {
     try {
         if(req.file.path) {
-            console.log(req.body.pictype)
             const img = req.file.path;
             const clean = path.basename(img)
             const image = new Image({
@@ -32,12 +31,11 @@ router.post('/upload', uploads.single('image'), async(req, res) => {
                 type: req.body.pictype,
             });
             try {
-                console.log(image)
                 const savedImage = await image.save();
                 return res.status(200).json({message: savedImage.path + " image registered"});
                 
             } catch(err) {
-                return res.status(401).json({message: "Kan inte ladda upp"});
+                return res.status(400).json({message: "Kan inte ladda upp"});
             }
         }
     } catch(err) {
@@ -84,7 +82,7 @@ router.get('/screensaver/active', async(req, res) => {
     }   
 })
 
-router.get('/:nameSystem', async(req, res) => {
+router.get('/system/:nameSystem', async(req, res) => {
     try {
         const image = await Image.findOne({type: "systemdata", nameSystem : req.params.nameSystem});
         if(!image) return res.status(400).json({message: "Bilden finns inte"});
