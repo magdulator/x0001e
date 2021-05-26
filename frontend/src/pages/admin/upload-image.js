@@ -44,6 +44,7 @@ class ImageUpload extends Component {
     onClickHandler = async () => {
         const res = await images.uploadImage(this.state.selectedFile, '', this.state.selectedOption);   
         this.setState({successText: res[0], errorMessage: res[1]});
+        this.getImages();
     }
 
     switchColor = (active) => {
