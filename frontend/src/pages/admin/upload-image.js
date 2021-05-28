@@ -167,6 +167,7 @@ class ImageUpload extends Component {
                                 </div>
                                 <button type="button" className="btn-lg btn-success btn-block my-3 py-3 px-2" onClick={this.onClickHandler}>Ladda upp</button>
                             </form>
+                            <p>Klicka på knappen för att kunna radera bilder:</p>
                             <button type="button" className = "btn-lg btn-danger my-3 py-3 px-2" onClick ={this.deleteMode}>{!this.state.deleteMode ? 'Radera' : 'Aktivera / Inaktivera'}</button>
                             { this.state.errorMessage &&
                             <div className="alert alert-danger" role="alert">

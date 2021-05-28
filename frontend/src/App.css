@@ -145,7 +145,7 @@ html, body,  #root, .App{
 
   .specific-system {
     
-    min-width: 100%;
+    min-width: 30%;
   }
 
   .system-overview-h1{
@@ -175,7 +175,6 @@ html, body,  #root, .App{
     margin: 5px;
     height: 30px;
 }
-
 
 
     .red-dot, .green-dot, .yellow-dot{
@@ -369,6 +368,10 @@ html, body,  #root, .App{
       font-size: 1.4rem;
     }
 
+    .main {
+      padding-bottom: 200px;
+    }
+    
     .navbar {
       height: 200px;
     }
@@ -397,7 +400,7 @@ html, body,  #root, .App{
     }
 
     .system-card.card {
-      width: 320px;
+      width: 380px;
       margin: 20px;
       padding: 10px;
     }
@@ -412,6 +415,11 @@ html, body,  #root, .App{
     .system-overview>h1 {
       padding-bottom: 40px;
     }
+    .system-title {
+      font-size: 1.8rem;
+      padding: 8px;
+    }
+  
 
 
     

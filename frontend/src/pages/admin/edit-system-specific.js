@@ -80,6 +80,7 @@ export default class EditOverviewSpecific extends React.Component {
         const title = this.state.title;
         const description = this.state.description;
         const exampleData = this.state.exampleData;
+        console.log (exampleData)
         const res = await systems.sendInfo(system, title, description, exampleData);
         this.setState({success: res[0], errorMessage: res[1]});
         if(this.state.selectedFile) {

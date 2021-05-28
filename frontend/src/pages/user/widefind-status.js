@@ -32,7 +32,7 @@ export default class WidefindStatus extends React.Component {
             });
         });
         this.state.socket.on('disconnect', () => {
-            this.setState({StatusText: 'Inte uppkopplad', statusColor: 'red'});
+            this.setState({statusText: 'Inte uppkopplad', statusColor: 'red'});
         });
    }
     componentWillUnmount() {
@@ -41,7 +41,7 @@ export default class WidefindStatus extends React.Component {
     getSystemInfo = async () => { 
         const res = await systemss.getSystemInfo(this.state.system);
         if (res) {
-        this.setState({systems: res.data});
+            this.setState({systems: res.data});
         } 
     }
 

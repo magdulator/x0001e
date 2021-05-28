@@ -57,10 +57,10 @@ class Systems {
         }
     }
 
-    sendInfo = async(system, title, description, img, exampleData) => {
+    sendInfo = async(system, title, description, exampleData) => {
         try {
             const res = await axios.patch(process.env.REACT_APP_API_URL + `/systems/update/${system}`, {
-                title, description, img, exampleData
+                system,title, description, exampleData
             })
             return [res.data.message, ""]
         
