@@ -3,6 +3,9 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
+const widefind = require('./controllers/widefind');
+
+
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -28,6 +31,8 @@ console.log("Connected to database"));
     res.json({ message: "Testytest" });
   });
   
+  const routes = require('./routes/routes.js');
+  app.use('/api', routes);
 
   const systems = require('./routes/systems.js');
   app.use('/api/systems', systems);
@@ -44,7 +49,12 @@ console.log("Connected to database"));
     console.log(`Server is running on port ${PORT}.`);
   });
 
-  let io = require('socket.io')(server);
-  io.use(cors());
-  const hej = (require("./routes/sockerRoute.js")(io));
-  app.use('/api/test', hej);
+  //MAYBE USE SOCKETS
+   let io = require('socket.io')(server);
+
+   io.on('connection', function(socket){
+      socket.on('widefind', (data) => {
+        widefind.wide(socket);
+     });
+  });
+ 
