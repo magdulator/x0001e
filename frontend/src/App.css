@@ -342,8 +342,12 @@ html, body,  #root, .App{
       font-size: 1.2rem;
     }
 
-    .specific-system {
-      min-width: 30%;
+    .specific-status {
+      width: 100%;
+    }
+
+    .specific-system-status {
+      width: 50%;
     }
   }
 

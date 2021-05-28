@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import fibaro from '../../services/fibaro-client';
 import systems from '../../services/systems';
+import socketClient from 'socket.io-client';
+
 
 import {ArrowRight, XOctagon} from 'react-bootstrap-icons'
 class System extends Component {
@@ -8,30 +10,63 @@ class System extends Component {
         super(props);
         this.state = {  
         availableSystems: [],
+        socket : socketClient ('http://130.240.114.29:5000/')
         };  
+        
     }
 
     componentDidMount() {
         this.getSystems();
         this.timedRequests();
+        this.timerID = setInterval(
+            () => this.timedRequests(),      
+            2000
+        );
+        this.state.socket.on('connect', () => {
+            this.state.socket.emit('widefind')
+        });
+        this.state.socket.on('disconnect', () => {
+            this.setState({StatusText: 'Inte uppkopplad', statusColor: 'red'});
+        });
+
+        
     }
 
     getSystems = async () => {
         const syst = await systems.getSystemsStatus()
         this.setState({availableSystems: syst})
-        
     }
 
     timedRequests = async () => {
         const fib = await fibaro.fibaroStatus();
-        const statusColor = fib[0];
-        const statText = fib[1]
+
+        //tanke: om det inte kommer ett new message från widefind på 10 sekunder sätts den oaktiv
+        var timer;
+        let wideStatus = 'Aktiv';
+        let wideColor = 'green'; 
+
+        this.state.socket.on('new-message', data => {
+            clearTimeout(timer);
+            timer = setTimeout(function() {
+                wideStatus = 'Inga koordinater skickas';    //DESSA SÄTTS INTE
+                wideColor = 'yellow';
+            }, 10000);
+        });
+
         for (var n = 0; n<this.state.availableSystems.length; n++) {
+            if(this.state.availableSystems[n].systemName === 'widefind') {
+                let availableSystems = [...this.state.availableSystems];
+                let item = {...availableSystems[n]};
+                item.status = wideColor;
+                item.statusText = wideStatus;
+                availableSystems[n] = item;
+                this.setState({availableSystems});
+            }
             if(this.state.availableSystems[n].systemName === 'fibaro') {
                 let availableSystems = [...this.state.availableSystems];
                 let item = {...availableSystems[n]};
-                item.status = statusColor;
-                item.statusText = statText;
+                item.status = fib[0];
+                item.statusText = fib[1];
                 availableSystems[n] = item;
                 this.setState({availableSystems});
                 break;

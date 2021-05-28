@@ -1,22 +1,23 @@
-import React, {useEffect, useState} from "react";
-
-import socketIOClient from 'socket.io-client';
+import React from "react";
+import socketClient from 'socket.io-client';
 
     export function Test() {
-        const [response, setResponse] = useState("");
-      
-        useEffect(() => {
-          const socket = socketIOClient(process.env.REACT_APP_API_URL+'/api/test/widefind');
-          socket.on("FromAPI", data => {
-            setResponse(data);
-            console.log("hej")
-          });
-      
-        }, []);
+        
+        var socket = socketClient ('http://130.240.114.29:5000/');
+        console.log(socket)
+        socket.on('connect', () => {
+            console.log(socket)
+            socket.emit('widefind')
+            socket.on('new-message', data => {
+                console.log(data)
+                // Do something with message
+            });
+            console.log(`I'm connected with the back-end`);
+        });
+       
       
         return (
           <p>
-            It's <time dateTime={response}>{response}</time>
-          </p>
+            It's </p>
         );
       }
