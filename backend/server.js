@@ -50,7 +50,11 @@ console.log("Connected to database"));
   });
 
   //MAYBE USE SOCKETS
-   let io = require('socket.io')(server);
+   let io = require('socket.io')(server, {
+     cors : {
+       origin: 'http://localhost:3000',
+       methods: ["GET", "POST"]     }
+   });
 
    io.on('connection', function(socket){
       socket.on('widefind', (data) => {
