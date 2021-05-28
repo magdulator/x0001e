@@ -91,8 +91,8 @@ class ImageUpload extends Component {
                             this.state.images.map(image => (
                             <>
                             {image.type === 'presentation' && (
-                            <div className = "col-lg-3">
-                                <div className= "text-image-container" key = {image.path}>
+                            <div className = "col-lg-3" key = {image.path}>
+                                <div className= "text-image-container" >
                                     <img
                                         className = 'img-thumbnail my-1 mx-2'
                                         style = {{background: this.switchColor(image.active)}}
@@ -117,9 +117,9 @@ class ImageUpload extends Component {
                                 this.state.images.map(image => (
                                 <>
                                 {image.type === 'screensaver' && (
-                                <div className = "col-lg-3 ">
+                                <div className = "col-lg-3 " key = {image.path + '1'}>
 
-                                    <div className= "text-image-container" key = {image.path}>
+                                    <div className= "text-image-container" >
                                         <img
                                             className = 'img-thumbnail  my-1 mx-2'
                                             style = {{background: this.switchColor(image.active)}}

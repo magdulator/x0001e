@@ -191,6 +191,11 @@ html, body,  #root, .App{
     border-color: #C42C3B;
     box-shadow: 0px 0px 4px 2px #C9404D;
   }
+  .jo {
+    width: 80%;
+    height: 20px;
+  }
+  
 
   .yellow-dot {
     background-color: #c9c440;
@@ -203,9 +208,7 @@ html, body,  #root, .App{
     border-color: #2cc44a;
     box-shadow: 0px 0px 4px 2px #57c940;
   }
-  .jo {
-    height: 100%;
-  }
+
 
   .fibaro-text{
     font-size: 1.2rem;
@@ -419,8 +422,16 @@ html, body,  #root, .App{
       font-size: 1.8rem;
       padding: 8px;
     }
-  
-
+    
+    .red-dot, .green-dot, .yellow-dot{
+      width: 30px;
+      height: 30px;
+    }
+    .jo {
+      width: 80%;
+      height: 35px;
+    }
+    
 
     
   }

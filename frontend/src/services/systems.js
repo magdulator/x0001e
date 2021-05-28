@@ -71,10 +71,10 @@ class Systems {
         }
     }
 
-    createSystem = async(systemName, title, description, img, exampleData) => {
+    createSystem = async(systemName, title, description, exampleData) => {
         try {
             const res = await axios.post(process.env.REACT_APP_API_URL + '/systems/create', {
-                systemName, title, description, img, exampleData
+                systemName, title, description, exampleData
             })
             return [res.data.message, ""]
         } catch (e) {

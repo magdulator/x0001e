@@ -15,7 +15,7 @@ class Screensaver extends Component {
 
       getImages = async () => {
         try{
-            const res = await axios.get(process.env.REACT_APP_API_URL + '/images/screensaver/all');
+            const res = await axios.get(process.env.REACT_APP_API_URL + '/images/screensaver/active');
             if(!res.data) {
                 return;
             } else {

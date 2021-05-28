@@ -17,16 +17,38 @@ export default class SystemStatus extends Component {
     componentDidMount() {
         this.getSystems();
         this.timedRequests();
-        this.timerID = setInterval(
-            () => this.timedRequests(),      
-            2000
-        );
+       
         this.state.socket.on('connect', () => {
             this.state.socket.emit('widefind')
         });
         this.state.socket.on('disconnect', () => {
             this.setState({StatusText: 'Inte uppkopplad', statusColor: 'red'});
         });
+
+        var timer;
+        let wideStatus = 'Aktiv';
+        let wideColor = 'green'; 
+
+        this.state.socket.on('new-message', data => {
+            wideStatus = 'Aktiv';
+            wideColor = 'green';
+            clearTimeout(timer);
+            timer = setTimeout(function() {
+                wideStatus = 'Inga koordinater skickas';
+                wideColor = 'yellow';
+            }, 10000);
+        });
+
+        this.state.socket.on('disconnect', data => {
+            wideStatus = 'Inte uppkopplad';
+            wideColor = 'red';
+        })
+
+
+        this.timerID = setInterval(
+            () => this.timedRequests(wideStatus, wideColor),      
+            2000
+        );
 
         
     }
@@ -36,21 +58,8 @@ export default class SystemStatus extends Component {
         this.setState({availableSystems: syst})
     }
 
-    timedRequests = async () => {
+    timedRequests = async (wideStatus, wideColor) => {
         const fib = await fibaro.fibaroStatus();
-
-        //tanke: om det inte kommer ett new message från widefind på 10 sekunder sätts den oaktiv
-        var timer;
-        let wideStatus = 'Aktiv';
-        let wideColor = 'green'; 
-
-        this.state.socket.on('new-message', data => {
-            clearTimeout(timer);
-            timer = setTimeout(function() {
-                wideStatus = 'Inga koordinater skickas';    //DESSA SÄTTS INTE
-                wideColor = 'yellow';
-            }, 10000);
-        });
 
         for (var n = 0; n<this.state.availableSystems.length; n++) {
             if(this.state.availableSystems[n].systemName === 'widefind') {
@@ -85,17 +94,17 @@ export default class SystemStatus extends Component {
                         <div className = "card-header py-0 pt-2 my-0 text-center" ><h4>{system.title}</h4><p>Mer information <ArrowRight></ArrowRight></p></div>
                         <div className = "card-body px-0 ">
                             <ul className= "status-list pl-3">
-                                <li className ="status my-0">
+                                <li className ="row my-3">
 
-                                    <span className="red-dot float-left mr-3"></span>
+                                    <span className="red-dot float-left mx-3"></span>
                                     <p className="jo">{system.status==='red'? system.statusText : ''}</p>
                                 </li>
-                                <li className ="status my-3">
-                                <span className="yellow-dot float-left mr-3"></span>
+                                <li className ="row my-3">
+                                <span className="yellow-dot float-left mx-3"></span>
                                     <p className ="jo">{system.status==='yellow'? system.statusText : ''}</p>
                                 </li>
-                                <li className ="status my-3">
-                                <span className="green-dot float-left mr-3"></span>
+                                <li className ="row my-3">
+                                <span className="green-dot float-left mx-3"></span>
                                     <p className ="jo">{system.status==='green'? system.statusText : ''}</p>
                                 </li>
                             </ul>   

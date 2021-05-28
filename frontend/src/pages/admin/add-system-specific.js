@@ -36,11 +36,16 @@ export default class AddSystemSpecific extends React.Component {
         const description = this.state.description;
         
         const exampleData = this.state.exampleData;
-        const res = await systems.createSystem(systemName, title, description, exampleData);
-        if(res[0] && this.state.selectedFile) {
-            this.uploadImage(systemName)
+        var letterNumber = /^[0-9a-zA-Z]+$/;
+        if(systemName.match(letterNumber)) {
+            const res = await systems.createSystem(systemName, title, description, exampleData);
+            if(res[0] && this.state.selectedFile) {
+                this.uploadImage(systemName)
+            }
+            this.setState({success: res[0], errorMessage: res[1]});
+        } else {
+            this.setState({success: '', errorMessage: 'URL namn kan bara vara siffror och bokstäver'})
         }
-        this.setState({success: res[0], errorMessage: res[1]});
     }
 
     uploadImage = async (systemName) => {
