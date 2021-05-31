@@ -1,6 +1,5 @@
 import React from 'react';
 import systemss from '../../services/systems';
-import widefind from '../../services/widefind-client';
 import socketClient from 'socket.io-client';
 
 
@@ -43,11 +42,6 @@ export default class WidefindStatus extends React.Component {
         if (res) {
             this.setState({systems: res.data});
         } 
-    }
-
-    timedRequests = async () => {
-        const wide = await widefind.widefindCoordinates();
-        this.setState({statusText: wide[1], statusColor:wide[0], coordinates: wide[2]});      
     }
 
     render() {

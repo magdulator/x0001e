@@ -20,8 +20,6 @@ import SystemStatus from './pages/user/system-status';
 import FibaroStatus from './pages/user/fibaro-status';
 import WidefindStatus from './pages/user/widefind-status';
 
-import {Test} from './pages/user/test';
-
 const screensaver_time = 30000; //milliseconds until screensaver is active
 
 class App extends Component {
@@ -239,12 +237,6 @@ class App extends Component {
                 <GuardedRoute exact path = "/system/status" component = {SystemStatus} auth = {auth.isAuth()}/>
                 <GuardedRoute exact path = "/system/status/fibaro" component = {FibaroStatus} auth = {auth.isAuth()}/>
                 <GuardedRoute exact path = "/system/status/widefind" component = {WidefindStatus} auth = {auth.isAuth()}/>
-
-                <GuardedRoute exact path = "/test" component = {Test} auth = {auth.isAuth()}/>
-
-
-
-
           </Switch>
           </BrowserRouter>
           </>)}
